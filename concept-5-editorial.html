@@ -1,0 +1,1267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Passu — The Honest French Program</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+<style>
+/* ============ RESET / TOKENS ============ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --teal:#21b6b6;
+  --teal-deep:#188888;
+  --teal-soft:#e7f7f7;
+  --teal-tint:#f2fbfb;
+  --teal-mid:#cdeeee;
+  --rose:#e11d48;
+  --ink:#212529;
+  --muted:#6b7280;
+  --muted-2:#374151;
+  --hair:#e5e7eb;
+  --paper:#ffffff;
+}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{
+  font-family:'Montserrat',system-ui,sans-serif;
+  color:var(--ink);
+  background:var(--paper);
+  font-size:16px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+}
+img,svg{max-width:100%;display:block}
+a{color:inherit}
+ul{list-style:none}
+::selection{background:var(--teal-soft);color:var(--ink)}
+:focus-visible{outline:2px solid var(--teal);outline-offset:3px;border-radius:2px}
+.wrap{max-width:1100px;margin:0 auto;padding:0 28px}
+.tnum{font-variant-numeric:tabular-nums lining-nums}
+.tl{color:var(--teal);font-style:normal}
+
+/* ============ SCROLL PROGRESS ============ */
+.progress{
+  position:fixed;top:0;left:0;right:0;height:3px;z-index:120;
+  background:transparent;pointer-events:none;
+}
+.progress i{
+  display:block;height:100%;background:var(--teal);
+  transform-origin:0 50%;transform:scaleX(0);
+}
+
+/* ============ HEADER ============ */
+.site-head{
+  position:sticky;top:0;z-index:100;
+  background:rgba(255,255,255,.94);
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--hair);
+}
+.site-head .wrap{
+  display:flex;align-items:center;justify-content:space-between;
+  height:64px;gap:24px;
+}
+.logo{
+  font-weight:900;font-size:23px;letter-spacing:-0.02em;
+  text-decoration:none;line-height:1;display:flex;align-items:baseline;gap:12px;
+}
+.logo b{font-weight:900}
+.logo .dot{color:var(--teal)}
+.logo small{
+  font-size:8.5px;font-weight:700;letter-spacing:.22em;color:var(--muted);
+  text-transform:uppercase;white-space:nowrap;
+}
+.main-nav{display:flex;align-items:center;gap:26px}
+.main-nav a{
+  font-size:13px;font-weight:600;text-decoration:none;color:var(--muted-2);
+  padding:4px 0;position:relative;white-space:nowrap;
+}
+.main-nav a::after{
+  content:"";position:absolute;left:0;right:100%;bottom:0;height:2px;
+  background:var(--teal);transition:right .25s ease;
+}
+.main-nav a:hover{color:var(--ink)}
+.main-nav a:hover::after{right:0}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  font-family:inherit;font-weight:800;font-size:14px;letter-spacing:.01em;
+  background:var(--ink);color:#fff;text-decoration:none;
+  padding:13px 26px;border:none;border-radius:8px;cursor:pointer;
+  transition:background .25s ease,transform .2s ease;
+}
+.btn:hover{background:var(--teal-deep);transform:translateY(-1px)}
+.btn--head{padding:10px 20px;font-size:13px;white-space:nowrap}
+.btn--light{background:#fff;color:var(--ink)}
+.btn--light:hover{background:var(--teal-soft);color:var(--ink)}
+.nav-toggle{display:none}
+.burger{display:none;cursor:pointer;padding:8px;margin-right:-8px}
+.burger svg{width:24px;height:24px;stroke:var(--ink);stroke-width:2;fill:none;stroke-linecap:round}
+.mobile-nav{display:none}
+
+/* ============ CHAPTER RAIL ============ */
+.rail{
+  position:fixed;right:16px;top:50%;transform:translateY(-50%);
+  z-index:90;display:flex;flex-direction:column;gap:11px;
+}
+.rail a{
+  display:flex;align-items:center;gap:8px;text-decoration:none;
+  color:var(--muted);font-size:10px;font-weight:800;letter-spacing:.08em;
+  font-variant-numeric:tabular-nums;
+}
+.rail a::before{
+  content:"";width:14px;height:2px;background:currentColor;
+  transition:width .25s ease;
+}
+.rail a .rt{
+  max-width:0;overflow:hidden;white-space:nowrap;opacity:0;
+  font-size:9px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;
+  transition:max-width .3s ease,opacity .3s ease;
+}
+.rail a:hover{color:var(--ink)}
+.rail a:hover .rt{max-width:110px;opacity:1}
+.rail a.active{color:var(--rose)}
+.rail a.active::before{width:22px}
+.rail a.active .rt{max-width:110px;opacity:1}
+@media (max-width:1219px){.rail{display:none}}
+
+/* ============ REVEAL MOTION ============ */
+@media (prefers-reduced-motion: no-preference){
+  .reveal{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+  .d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}
+  .scribble path{stroke-dasharray:600;stroke-dashoffset:600;transition:stroke-dashoffset 1.2s ease .8s}
+  .in .scribble path{stroke-dashoffset:0}
+  .sig-path{stroke-dasharray:520;stroke-dashoffset:520;transition:stroke-dashoffset 1.5s ease .3s}
+  .in .sig-path{stroke-dashoffset:0}
+}
+
+/* ============ HERO ============ */
+.hero{padding:64px 0 72px}
+.dateline{
+  display:flex;flex-wrap:wrap;gap:6px 18px;
+  font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--muted);border-bottom:1px solid var(--hair);padding-bottom:14px;
+  margin-bottom:56px;font-variant-numeric:tabular-nums;
+}
+.dateline span:first-child{color:var(--ink)}
+.kicker{
+  color:var(--rose);font-size:12px;font-weight:800;letter-spacing:.28em;
+  text-transform:uppercase;margin-bottom:26px;display:flex;align-items:center;gap:14px;
+}
+.kicker::before{content:"";width:34px;height:2px;background:var(--rose)}
+.hero h1{
+  font-size:clamp(2.5rem, 8.6vw, 6rem);
+  font-weight:900;line-height:1.02;letter-spacing:-0.035em;
+  max-width:17ch;text-wrap:balance;margin-bottom:34px;
+}
+.circled{position:relative;white-space:nowrap}
+.circled .scribble{
+  position:absolute;left:-5%;top:-14%;width:110%;height:130%;
+  overflow:visible;pointer-events:none;
+}
+.circled .scribble path{
+  fill:none;stroke:var(--rose);stroke-width:3.2;stroke-linecap:round;
+  vector-effect:non-scaling-stroke;
+}
+.hero .dek{
+  font-size:clamp(1.05rem,1.6vw,1.25rem);font-weight:500;color:var(--muted-2);
+  max-width:56ch;line-height:1.7;margin-bottom:40px;
+}
+.hero .dek strong{font-weight:800;color:var(--ink)}
+.masthead{
+  display:flex;flex-wrap:wrap;
+  border-top:2px solid var(--ink);border-bottom:1px solid var(--hair);
+  margin-bottom:40px;
+}
+.masthead li{
+  flex:1 1 auto;padding:16px 22px 16px 0;margin-right:22px;
+  border-right:1px solid var(--hair);
+  font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--muted);line-height:1.5;
+}
+.masthead li:last-child{border-right:none;margin-right:0;padding-right:0}
+.masthead b{
+  display:block;font-size:22px;font-weight:900;color:var(--ink);
+  letter-spacing:-0.01em;font-variant-numeric:tabular-nums;
+}
+.masthead b i{font-style:normal;color:var(--teal)}
+.cta-row{display:flex;align-items:center;gap:28px;flex-wrap:wrap}
+.link-quiet{
+  font-size:14px;font-weight:700;color:var(--teal-deep);text-decoration:none;
+  border-bottom:2px solid var(--teal-mid);padding-bottom:2px;
+  transition:border-color .25s ease;
+}
+.link-quiet:hover{border-color:var(--teal)}
+
+/* ============ CHAPTERS (shared) ============ */
+.chapter{padding:86px 0 92px}
+.chapter-head{
+  border-top:4px solid var(--ink);padding-top:22px;margin-bottom:52px;
+  display:grid;grid-template-columns:auto 1fr auto;gap:10px 34px;align-items:baseline;
+}
+.ch-no{
+  color:var(--rose);font-weight:800;font-size:15px;letter-spacing:.1em;
+  font-variant-numeric:tabular-nums;
+}
+.ch-title{
+  font-size:clamp(1.9rem,4.4vw,3.15rem);font-weight:900;
+  letter-spacing:-0.025em;line-height:1.08;text-wrap:balance;
+}
+.ch-dek{
+  font-style:italic;font-weight:500;color:var(--muted);font-size:15px;
+  max-width:30ch;text-align:right;line-height:1.55;justify-self:end;
+}
+.foot-note{
+  margin-top:36px;font-size:13px;color:var(--muted);line-height:1.7;max-width:64ch;
+}
+.foot-note .ast{color:var(--rose);font-weight:800;margin-right:6px}
+
+/* ============ 01 ROADMAP ============ */
+.lvl-row{
+  display:grid;grid-template-columns:128px 1fr auto;gap:6px 36px;
+  align-items:center;padding:26px 0;border-bottom:1px solid var(--hair);
+}
+.lvl-row:first-of-type{border-top:1px solid var(--hair)}
+.lvl-num{
+  font-size:78px;font-weight:900;line-height:.9;letter-spacing:-0.02em;
+  color:var(--teal-mid);font-variant-numeric:tabular-nums;
+  transition:color .3s ease;
+}
+@supports (-webkit-text-stroke: 2px black){
+  .lvl-num{color:transparent;-webkit-text-stroke:2.5px var(--ink);transition:color .3s ease,-webkit-text-stroke-color .3s ease}
+  .lvl-row:hover .lvl-num{color:var(--teal);-webkit-text-stroke-color:var(--teal)}
+}
+.lvl-row:hover .lvl-num{color:var(--teal)}
+.lvl-main{min-width:0}
+.lvl-name{
+  display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+  font-size:21px;font-weight:800;letter-spacing:-0.01em;margin-bottom:4px;
+}
+.badge{
+  font-size:10.5px;font-weight:800;letter-spacing:.1em;
+  border:1.5px solid var(--ink);border-radius:999px;padding:3px 10px;
+  line-height:1.4;white-space:nowrap;
+}
+.badge--teal{border-color:var(--teal);color:var(--teal-deep)}
+.lvl-desc{color:var(--muted);font-size:15.5px;max-width:56ch}
+.lvl-tag{
+  font-size:9.5px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--teal-deep);border:1.5px solid var(--teal-mid);border-radius:999px;
+  padding:5px 12px;white-space:nowrap;justify-self:end;
+}
+
+/* ============ 02 EXPERIENCES ============ */
+.duo{display:grid;grid-template-columns:1fr 1px 1fr;gap:0;align-items:start}
+.duo-rule{background:var(--hair);align-self:stretch}
+.duo-col{padding:0 44px}
+.duo-col:first-child{padding-left:0}
+.duo-col:last-child{padding-right:0}
+.plan-label{
+  font-size:11px;font-weight:800;letter-spacing:.26em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:14px;display:flex;align-items:center;gap:12px;
+}
+.plan-label::after{content:"";flex:1;height:1px;background:var(--hair)}
+.plan-price{
+  font-size:clamp(3rem,5.4vw,4.1rem);font-weight:900;letter-spacing:-0.03em;
+  line-height:1;font-variant-numeric:tabular-nums;margin-bottom:6px;
+}
+.plan-price sub{
+  font-size:15px;font-weight:600;color:var(--muted);vertical-align:baseline;letter-spacing:0;
+}
+.plan-cap{
+  font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--muted-2);margin-bottom:20px;
+}
+.plan-cap b{color:var(--ink);font-weight:900}
+.plan-copy{font-size:15.5px;color:var(--muted-2);line-height:1.7;max-width:44ch}
+.plan-copy em{font-style:italic;font-weight:600;color:var(--ink)}
+.plan-promise{
+  margin-top:20px;padding-left:18px;border-left:3px solid var(--teal);
+  font-size:15px;font-weight:600;line-height:1.6;color:var(--ink);max-width:40ch;
+}
+.plan-promise i{font-style:italic;color:var(--teal-deep)}
+.both-strip{
+  margin-top:56px;border-top:2px solid var(--ink);padding-top:22px;
+  display:grid;grid-template-columns:auto 1fr;gap:12px 40px;align-items:baseline;
+}
+.both-strip h3{
+  font-size:11px;font-weight:800;letter-spacing:.24em;text-transform:uppercase;
+  color:var(--muted);white-space:nowrap;
+}
+.both-list{display:flex;flex-wrap:wrap;gap:10px 0}
+.both-list li{
+  font-size:14px;font-weight:600;color:var(--muted-2);
+  padding-right:20px;margin-right:20px;border-right:1px solid var(--hair);
+  line-height:1.5;
+}
+.both-list li:last-child{border-right:none;margin-right:0;padding-right:0}
+.both-list b{color:var(--ink);font-weight:800}
+
+/* ============ 03 PATHS ============ */
+.paths{display:grid;grid-template-columns:repeat(3,1fr);gap:44px}
+.path{border-top:2px solid var(--ink);padding-top:20px}
+.path .pn{
+  font-size:13px;font-weight:800;color:var(--teal);letter-spacing:.1em;
+  font-variant-numeric:tabular-nums;display:block;margin-bottom:14px;
+}
+.path h3{font-size:22px;font-weight:800;letter-spacing:-0.01em;line-height:1.25;margin-bottom:4px}
+.path .fr{
+  font-size:12.5px;font-style:italic;font-weight:600;color:var(--teal-deep);
+  display:block;margin-bottom:12px;
+}
+.path p{font-size:14.5px;color:var(--muted);line-height:1.7}
+
+/* ============ 04 TOOLS ============ */
+.tools-grid{display:grid;grid-template-columns:1fr 360px;gap:64px;align-items:start}
+.tool-row{
+  display:grid;grid-template-columns:64px 1fr;gap:20px;align-items:baseline;
+  padding:22px 0;border-bottom:1px solid var(--hair);
+}
+.tool-row:first-child{border-top:1px solid var(--hair)}
+.tool-row .tn{
+  font-size:15px;font-weight:800;color:var(--teal);letter-spacing:.08em;
+  font-variant-numeric:tabular-nums;
+}
+.tool-row h3{font-size:18.5px;font-weight:800;letter-spacing:-0.01em;margin-bottom:4px}
+.tool-row p{font-size:14.5px;color:var(--muted);line-height:1.65;max-width:52ch}
+.tool-row p em{font-style:italic;font-weight:600;color:var(--ink)}
+.tools-fig{
+  background:var(--teal-tint);border:1px solid var(--teal-mid);border-radius:14px;
+  padding:38px 34px 26px;position:sticky;top:96px;
+}
+.tools-fig svg{width:100%;height:auto}
+.fig-cap{
+  margin-top:20px;font-size:10px;font-weight:800;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--teal-deep);text-align:center;
+}
+
+/* ============ 05 TRIAL ============ */
+.trial-grid{display:grid;grid-template-columns:1.25fr .9fr;gap:60px;align-items:center}
+.steps{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.step{
+  padding:26px 26px 26px 0;border-bottom:1px solid var(--hair);
+}
+.step:nth-child(odd){border-right:1px solid var(--hair);padding-right:32px}
+.step:nth-child(even){padding-left:32px}
+.step:nth-child(1),.step:nth-child(2){border-top:1px solid var(--hair)}
+.step .sn{
+  font-size:30px;font-weight:900;letter-spacing:-0.02em;line-height:1;
+  font-variant-numeric:tabular-nums;display:block;margin-bottom:12px;
+}
+.step .sn i{font-style:normal;color:var(--teal)}
+.step h3{font-size:16.5px;font-weight:800;margin-bottom:4px;letter-spacing:-0.01em}
+.step p{font-size:13.5px;color:var(--muted);line-height:1.6}
+.trial-fig{text-align:center}
+.trial-fig svg{width:min(100%,340px);height:auto;margin:0 auto}
+.trial-note{
+  margin-top:22px;font-size:13.5px;font-style:italic;color:var(--muted);line-height:1.65;
+}
+.trial-note b{font-style:normal;font-weight:800;color:var(--ink)}
+.trial-cta{margin-top:44px;display:flex;align-items:center;gap:28px;flex-wrap:wrap}
+
+/* ============ 06 STUDENTS ============ */
+.quotes{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.quotes blockquote{
+  position:relative;padding:46px 40px 34px 0;border-bottom:1px solid var(--hair);
+}
+.quotes blockquote:nth-child(odd){border-right:1px solid var(--hair)}
+.quotes blockquote:nth-child(even){padding-left:40px;padding-right:0}
+.quotes blockquote:nth-child(1),.quotes blockquote:nth-child(2){border-top:1px solid var(--hair)}
+.quotes .qm{
+  position:absolute;top:14px;left:0;font-size:72px;font-weight:900;
+  color:var(--teal);line-height:1;opacity:.85;pointer-events:none;
+}
+.quotes blockquote:nth-child(even) .qm{left:40px}
+.quotes p{
+  font-size:clamp(1.05rem,1.7vw,1.3rem);font-weight:600;line-height:1.5;
+  letter-spacing:-0.01em;margin:44px 0 20px;text-wrap:pretty;
+}
+.quotes p i{font-style:italic;color:var(--teal-deep)}
+.quotes footer{
+  font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--muted);display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+}
+.quotes footer b{color:var(--ink)}
+.quotes footer::before{content:"";width:22px;height:2px;background:var(--rose)}
+
+/* ============ 07 PRICING ============ */
+.rate-card{max-width:840px;margin:0 auto}
+.rate-h{
+  display:flex;align-items:baseline;justify-content:space-between;gap:20px;
+  font-size:11px;font-weight:800;letter-spacing:.24em;text-transform:uppercase;
+  color:var(--muted);border-bottom:2px solid var(--ink);padding-bottom:12px;
+}
+.rate-h .ast{color:var(--rose)}
+.rate-row{
+  display:flex;align-items:baseline;gap:18px;padding:26px 0;
+  border-bottom:1px solid var(--hair);
+}
+.rate-row .rname{font-size:21px;font-weight:800;letter-spacing:-0.01em;white-space:nowrap}
+.rate-row .rsub{font-size:12.5px;font-weight:600;color:var(--muted);white-space:nowrap}
+.rate-row .lead{
+  flex:1;border-bottom:2px dotted var(--hair);transform:translateY(-6px);min-width:40px;
+}
+.rate-row .rprice{
+  font-size:clamp(2rem,3.6vw,2.7rem);font-weight:900;letter-spacing:-0.03em;
+  font-variant-numeric:tabular-nums;line-height:1;white-space:nowrap;
+}
+.rate-row .rprice sub{font-size:13px;font-weight:600;color:var(--muted);letter-spacing:0}
+.spec-h{
+  margin-top:48px;font-size:11px;font-weight:800;letter-spacing:.24em;
+  text-transform:uppercase;color:var(--muted);
+  border-bottom:2px solid var(--ink);padding-bottom:12px;
+}
+.spec-row{
+  display:flex;align-items:baseline;gap:18px;padding:15px 0;
+  border-bottom:1px solid var(--hair);font-size:14.5px;
+}
+.spec-row .sname{font-weight:700;white-space:nowrap}
+.spec-row .lead{flex:1;border-bottom:2px dotted var(--hair);transform:translateY(-4px);min-width:30px}
+.spec-row .sval{
+  font-weight:600;color:var(--muted-2);text-align:right;
+  font-variant-numeric:tabular-nums;
+}
+.spec-row .sval b{color:var(--ink);font-weight:800}
+.rate-notes{margin-top:30px;display:grid;gap:8px}
+.rate-notes p{font-size:13px;color:var(--muted);line-height:1.65}
+.rate-notes .ast{color:var(--rose);font-weight:800;margin-right:6px}
+.rate-cta{margin-top:40px;display:flex;justify-content:center}
+
+/* ============ 08 FAQ ============ */
+.faq{max-width:840px;margin:0 auto}
+.faq details{border-bottom:1px solid var(--hair)}
+.faq details:first-of-type{border-top:1px solid var(--hair)}
+.faq summary{
+  display:grid;grid-template-columns:56px 1fr 24px;gap:18px;align-items:baseline;
+  padding:24px 0;cursor:pointer;list-style:none;
+}
+.faq summary::-webkit-details-marker{display:none}
+.faq .qn{
+  font-size:12px;font-weight:800;color:var(--rose);letter-spacing:.08em;
+  font-variant-numeric:tabular-nums;
+}
+.faq summary h3{font-size:17.5px;font-weight:800;letter-spacing:-0.01em;line-height:1.4}
+.faq .plus{
+  width:20px;height:20px;align-self:center;position:relative;flex-shrink:0;
+  transition:transform .3s ease;
+}
+.faq .plus::before,.faq .plus::after{
+  content:"";position:absolute;background:var(--ink);left:50%;top:50%;
+}
+.faq .plus::before{width:16px;height:2px;transform:translate(-50%,-50%)}
+.faq .plus::after{width:2px;height:16px;transform:translate(-50%,-50%)}
+.faq details[open] .plus{transform:rotate(45deg)}
+.faq details[open] .plus::before,.faq details[open] .plus::after{background:var(--teal-deep)}
+.faq .ans{
+  padding:0 44px 28px 74px;font-size:15px;color:var(--muted-2);line-height:1.75;max-width:72ch;
+}
+.faq .ans b{font-weight:800;color:var(--ink)}
+.faq .ans i{font-style:italic;color:var(--teal-deep)}
+.faq summary:hover h3{color:var(--teal-deep)}
+
+/* ============ 09 PROMISES (MANIFESTO) ============ */
+.chapter--ink{
+  background:var(--ink);color:#fff;
+  padding:96px 0 104px;margin-top:8px;
+}
+.chapter--ink .chapter-head{border-top-color:var(--teal)}
+.chapter--ink .ch-dek{color:rgba(255,255,255,.55)}
+.vow{
+  display:grid;grid-template-columns:88px 1fr;gap:12px 32px;
+  padding:40px 0;border-top:1px solid rgba(255,255,255,.16);align-items:baseline;
+}
+.vow:last-of-type{border-bottom:1px solid rgba(255,255,255,.16)}
+.vow .vn{
+  font-size:15px;font-weight:800;color:var(--rose);letter-spacing:.1em;
+  font-variant-numeric:tabular-nums;
+}
+.vow h3{
+  font-size:clamp(1.5rem,3.2vw,2.3rem);font-weight:900;letter-spacing:-0.025em;
+  line-height:1.15;margin-bottom:12px;text-wrap:balance;
+}
+.vow h3 i{font-style:normal;color:var(--teal)}
+.vow p{color:rgba(255,255,255,.72);font-size:15.5px;line-height:1.75;max-width:62ch}
+.vow p i{font-style:italic;color:var(--teal);font-weight:600}
+.sig-block{
+  margin-top:56px;display:flex;align-items:flex-end;justify-content:space-between;
+  gap:40px;flex-wrap:wrap;
+}
+.sig-left .sig-art{width:min(300px,72vw);height:auto;margin-bottom:6px}
+.sig-name{
+  font-size:26px;font-weight:700;font-style:italic;letter-spacing:-0.01em;
+}
+.sig-role{
+  margin-top:6px;font-size:10px;font-weight:800;letter-spacing:.22em;
+  text-transform:uppercase;color:rgba(255,255,255,.5);
+}
+.sig-cta{display:flex;flex-direction:column;align-items:flex-start;gap:14px}
+.sig-cta .lede{
+  font-size:15px;color:rgba(255,255,255,.72);font-style:italic;max-width:34ch;line-height:1.6;
+}
+
+/* ============ FOOTER ============ */
+.site-foot{border-top:1px solid var(--hair);padding:52px 0 44px;background:#fff}
+.foot-top{
+  display:flex;align-items:flex-start;justify-content:space-between;
+  gap:32px;flex-wrap:wrap;margin-bottom:40px;
+}
+.foot-brand p{
+  margin-top:10px;font-size:12.5px;color:var(--muted);max-width:34ch;line-height:1.65;
+}
+.foot-nav{display:flex;gap:28px;flex-wrap:wrap}
+.foot-nav a{
+  font-size:13px;font-weight:600;color:var(--muted-2);text-decoration:none;
+}
+.foot-nav a:hover{color:var(--teal-deep)}
+.foot-bottom{
+  border-top:1px solid var(--hair);padding-top:22px;
+  display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  font-size:12px;color:var(--muted);
+}
+.foot-bottom i{font-style:italic;color:var(--teal-deep);font-weight:600}
+
+/* ============ TABLET ≤980 ============ */
+@media (max-width:980px){
+  .main-nav{display:none}
+  .burger{display:block}
+  .nav-toggle:checked ~ .mobile-nav{display:block}
+  .mobile-nav{
+    position:fixed;top:64px;left:0;right:0;z-index:99;background:#fff;
+    border-bottom:1px solid var(--hair);padding:10px 28px 26px;
+    box-shadow:0 24px 40px -28px rgba(33,37,41,.25);
+  }
+  .mobile-nav a{
+    display:block;padding:15px 0;font-size:19px;font-weight:800;
+    letter-spacing:-0.01em;text-decoration:none;border-bottom:1px solid var(--hair);
+  }
+  .mobile-nav a:last-of-type{border-bottom:none}
+  .mobile-nav a span{color:var(--rose);font-size:11px;font-weight:800;margin-right:14px;font-variant-numeric:tabular-nums}
+  .tools-grid{grid-template-columns:1fr;gap:44px}
+  .tools-fig{position:static;max-width:440px}
+  .trial-grid{grid-template-columns:1fr;gap:44px}
+  .trial-fig{order:-1}
+  .trial-fig svg{width:min(100%,300px)}
+  .duo{grid-template-columns:1fr}
+  .duo-rule{display:none}
+  .duo-col{padding:0}
+  .duo-col:last-child{margin-top:44px;padding-top:44px;border-top:1px solid var(--hair)}
+  .paths{grid-template-columns:1fr;gap:32px}
+  .chapter{padding:68px 0 74px}
+}
+
+/* ============ MOBILE ≤768 ============ */
+@media (max-width:768px){
+  .chapter-head{grid-template-columns:auto 1fr;gap:8px 20px}
+  .ch-dek{grid-column:1 / -1;text-align:left;justify-self:start;max-width:44ch}
+  .quotes{grid-template-columns:1fr}
+  .quotes blockquote{padding:42px 0 30px !important;border-right:none !important}
+  .quotes .qm{left:0 !important}
+  .lvl-row{grid-template-columns:84px 1fr;gap:4px 22px}
+  .lvl-num{font-size:56px}
+  .lvl-tag{grid-column:2;justify-self:start;margin-top:8px}
+  .steps{grid-template-columns:1fr}
+  .step{border-right:none !important;padding-left:0 !important;padding-right:0 !important}
+  .step:nth-child(2){border-top:none}
+  .masthead{display:grid;grid-template-columns:1fr 1fr}
+  .masthead li{border-right:none;margin-right:0;padding:14px 10px 14px 0;border-bottom:1px solid var(--hair)}
+  .masthead li:nth-last-child(-n+1){border-bottom:none}
+  .faq .ans{padding:0 0 26px 0}
+  .faq summary{grid-template-columns:44px 1fr 24px;gap:12px}
+  .sig-block{flex-direction:column;align-items:flex-start}
+}
+
+/* ============ SMALL MOBILE ≤420 ============ */
+@media (max-width:420px){
+  .wrap{padding:0 22px}
+  .logo small{display:none}
+  .hero{padding:44px 0 56px}
+  .hero h1{font-size:clamp(2.3rem,11.4vw,2.9rem)}
+  .dateline{margin-bottom:40px;gap:4px 14px}
+  .kicker{letter-spacing:.2em;font-size:11px}
+  .masthead b{font-size:19px}
+  .cta-row .btn,.trial-cta .btn,.rate-cta .btn,.sig-cta .btn{width:100%}
+  .cta-row .link-quiet{margin:0 auto}
+  .trial-cta .link-quiet{margin:0 auto}
+  .rate-row{flex-wrap:wrap;gap:6px 14px}
+  .rate-row .lead{min-width:20px}
+  .lvl-name{font-size:18.5px}
+  .duo-col:last-child{margin-top:36px;padding-top:36px}
+  .both-strip{grid-template-columns:1fr;gap:14px}
+  .both-list li{border-right:none;padding-right:0;margin-right:0;width:100%;
+    border-bottom:1px solid var(--hair);padding-bottom:10px}
+  .both-list li:last-child{border-bottom:none;padding-bottom:0}
+  .chapter--ink{padding:72px 0 80px}
+  .vow{grid-template-columns:1fr;gap:6px}
+  .spec-row{flex-wrap:wrap;gap:4px 12px}
+  .spec-row .sval{text-align:left}
+}
+</style>
+</head>
+<body>
+
+<div class="progress" aria-hidden="true"><i id="progressBar"></i></div>
+
+<!-- ================= HEADER ================= -->
+<header class="site-head">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="Passu home">
+      <span><b>Passu</b><span class="dot">.</span></span>
+      <small>The Honest French Program</small>
+    </a>
+    <nav class="main-nav" aria-label="Primary">
+      <a href="#roadmap">Passu Levels</a>
+      <a href="#experiences">Core &amp; Premium</a>
+      <a href="#paths">Learning Paths</a>
+      <a href="#trial">Free Trial</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div style="display:flex;align-items:center;gap:10px">
+      <a class="btn btn--head" href="#trial">Try a real class</a>
+      <input type="checkbox" id="navToggle" class="nav-toggle" aria-label="Toggle navigation">
+      <label for="navToggle" class="burger" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </label>
+    </div>
+  </div>
+  <nav class="mobile-nav" aria-label="Mobile">
+    <a href="#roadmap"><span>01</span>Passu Levels</a>
+    <a href="#experiences"><span>02</span>Core &amp; Premium</a>
+    <a href="#paths"><span>03</span>Learning Paths</a>
+    <a href="#trial"><span>05</span>Free Trial</a>
+    <a href="#pricing"><span>07</span>Pricing</a>
+    <a href="#faq"><span>08</span>FAQ</a>
+  </nav>
+</header>
+
+<!-- ================= CHAPTER RAIL ================= -->
+<nav class="rail" aria-label="Chapters">
+  <a href="#roadmap"><span class="rt">Roadmap</span>01</a>
+  <a href="#experiences"><span class="rt">Experiences</span>02</a>
+  <a href="#paths"><span class="rt">Your Path</span>03</a>
+  <a href="#tools"><span class="rt">The Tools</span>04</a>
+  <a href="#trial"><span class="rt">Try It First</span>05</a>
+  <a href="#students"><span class="rt">Real Students</span>06</a>
+  <a href="#pricing"><span class="rt">The Price</span>07</a>
+  <a href="#faq"><span class="rt">Questions</span>08</a>
+  <a href="#promises"><span class="rt">Our Promises</span>09</a>
+</nav>
+
+<main id="top">
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <div class="wrap">
+    <div class="dateline reveal in">
+      <span>Passu — Édition 2026</span>
+      <span>Le français, sérieusement</span>
+      <span>En ligne, partout au Canada</span>
+    </div>
+    <p class="kicker reveal">The Honest French Program</p>
+    <h1 class="reveal d1">No B2 guarantee. Just <em class="tl">3&nbsp;real classes a&nbsp;week</em>, for
+      <span class="circled">12&nbsp;months<svg class="scribble" viewBox="0 0 200 70" preserveAspectRatio="none" aria-hidden="true"><path d="M14 40 C 18 12, 168 4, 189 28 C 198 50, 138 68, 62 63 C 26 60, 6 50, 16 32"/></svg></span>.
+    </h1>
+    <p class="dek reveal d2">
+      Passu is a complete 12-month path toward B2 — <strong>six connected Passu Levels</strong>,
+      taught live by real instructors, three evenings a week, two hours at a time.
+      We can't promise you a certificate. We can promise the work that earns one.
+    </p>
+    <ul class="masthead reveal d3">
+      <li><b><i>3×</i> weekly</b> live classes</li>
+      <li><b><i>2</i> hrs</b> each session</li>
+      <li><b><i>6</i></b> Passu Levels</li>
+      <li><b><i>2</i></b> exams per level</li>
+      <li><b><i>90</i> min</b> Speaking Club, optional</li>
+    </ul>
+    <div class="cta-row reveal d4">
+      <a class="btn" href="#trial">Reserve a free trial class</a>
+      <a class="link-quiet" href="#promises">Read our promises, in writing ↓</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 01 ROADMAP ================= -->
+<section class="chapter" id="roadmap">
+  <div class="wrap">
+    <header class="chapter-head reveal">
+      <span class="ch-no">01</span>
+      <h2 class="ch-title">The Roadmap</h2>
+      <p class="ch-dek">One roadmap. Six connected levels. You always know what happens next.</p>
+    </header>
+
+    <div class="lvl-row reveal">
+      <span class="lvl-num" aria-hidden="true">1</span>
+      <div class="lvl-main">
+        <p class="lvl-name">Passu Level 1 <span class="badge">A1.1</span></p>
+        <p class="lvl-desc">Build the essential foundations for everyday French.</p>
+      </div>
+    </div>
+    <div class="lvl-row reveal">
+      <span class="lvl-num" aria-hidden="true">2</span>
+      <div class="lvl-main">
+        <p class="lvl-name">Passu Level 2 <span class="badge">A1.2</span></p>
+        <p class="lvl-desc">Expand practical vocabulary and sentence control.</p>
+      </div>
+    </div>
+    <div class="lvl-row reveal">
+      <span class="lvl-num" aria-hidden="true">3</span>
+      <div class="lvl-main">
+        <p class="lvl-name">Passu Level 3 <span class="badge">A2</span></p>
+        <p class="lvl-desc">Move from basic exchanges into longer communication.</p>
+      </div>
+    </div>
+    <div class="lvl-row reveal">
+      <span class="lvl-num" aria-hidden="true">4</span>
+      <div class="lvl-main">
+        <p class="lvl-name">Passu Level 4 <span class="badge">B1</span></p>
+        <p class="lvl-desc">Develop confidence, accuracy and independent expression.</p>
+      </div>
+    </div>
+    <div class="lvl-row reveal">
+      <span class="lvl-num" aria-hidden="true">5</span>
+      <div class="lvl-main">
+        <p class="lvl-name">Passu Level 5 <span class="badge">B2.1</span></p>
+        <p class="lvl-desc">Begin your selected Path: Social, Business, or Exam.</p>
+      </div>
+      <span class="lvl-tag">Specialization</span>
+    </div>
+    <div class="lvl-row reveal">
+      <span class="lvl-num" aria-hidden="true">6</span>
+      <div class="lvl-main">
+        <p class="lvl-name">Passu Level 6 <span class="badge">B2.2</span></p>
+        <p class="lvl-desc">Complete the advanced stage of your chosen specialization.</p>
+      </div>
+      <span class="lvl-tag">Specialization</span>
+    </div>
+
+    <p class="foot-note reveal">Every level closes with a midterm and a final exam — two honest checkpoints, so progress is measured, never assumed.</p>
+  </div>
+</section>
+
+<!-- ================= 02 EXPERIENCES ================= -->
+<section class="chapter" id="experiences">
+  <div class="wrap">
+    <header class="chapter-head reveal">
+      <span class="ch-no">02</span>
+      <h2 class="ch-title">Two Experiences</h2>
+      <p class="ch-dek">Same journey, same instructors, same roadmap. One decision: how many people share your classroom.</p>
+    </header>
+
+    <div class="duo">
+      <div class="duo-col reveal">
+        <p class="plan-label">Core</p>
+        <p class="plan-price">$99<sub>/month</sub></p>
+        <p class="plan-cap">Up to <b>14 students</b> per class</p>
+        <p class="plan-copy">
+          The full Passu journey with a lively classroom around you. Best for learners who want
+          <em>structure, community, and value</em> — and who like hearing more voices than their own.
+        </p>
+      </div>
+      <div class="duo-rule" aria-hidden="true"></div>
+      <div class="duo-col reveal d1">
+        <p class="plan-label">Premium</p>
+        <p class="plan-price">$200<sub>/month</sub></p>
+        <p class="plan-cap">Up to <b>7 students</b> per class</p>
+        <p class="plan-copy">
+          The same classes, half the classroom. We won't dress it up as magic — the honest
+          arithmetic is simply on your side.
+        </p>
+        <p class="plan-promise">
+          The truthful premium promise: fewer classmates means more speaking turns.
+          <i>That's it — and that's a lot.</i>
+        </p>
+      </div>
+    </div>
+
+    <div class="both-strip reveal">
+      <h3>Both include</h3>
+      <ul class="both-list">
+        <li><b>3 live classes</b> weekly, 2 hrs each</li>
+        <li><b>Full platform</b> + class recordings</li>
+        <li><b>Midterm &amp; final</b> every level</li>
+        <li><b>Speaking Club</b>, optional weekends</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 03 PATHS ================= -->
+<section class="chapter" id="paths">
+  <div class="wrap">
+    <header class="chapter-head reveal">
+      <span class="ch-no">03</span>
+      <h2 class="ch-title">Your Path</h2>
+      <p class="ch-dek">Choose your path from the beginning — and know exactly where it forks.</p>
+    </header>
+
+    <div class="paths">
+      <article class="path reveal">
+        <span class="pn">P.01</span>
+        <h3>Social French</h3>
+        <span class="fr">le français du quotidien</span>
+        <p>Everyday life, travel, relationships, culture — the French of actually being somewhere, not just visiting it.</p>
+      </article>
+      <article class="path reveal d1">
+        <span class="pn">P.02</span>
+        <h3>Business French</h3>
+        <span class="fr">le français du travail</span>
+        <p>Professional settings, meetings, presentations — the French of getting things done, and getting credit for them.</p>
+      </article>
+      <article class="path reveal d2">
+        <span class="pn">P.03</span>
+        <h3>Exam Preparation</h3>
+        <span class="fr">le français de l'examen</span>
+        <p>Strategies, timed practice, precise feedback — the French of proving, on paper, what you can already do out loud.</p>
+      </article>
+    </div>
+
+    <p class="foot-note reveal"><span class="ast">*</span>Paths separate at Passu Levels 5–6. Levels 1–4 build one shared foundation; small cohorts may be combined.</p>
+  </div>
+</section>
+
+<!-- ================= 04 TOOLS ================= -->
+<section class="chapter" id="tools">
+  <div class="wrap">
+    <header class="chapter-head reveal">
+      <span class="ch-no">04</span>
+      <h2 class="ch-title">The Tools</h2>
+      <p class="ch-dek">A serious program tells students what happens next — and hands them the instruments to get there.</p>
+    </header>
+
+    <div class="tools-grid">
+      <div>
+        <div class="tool-row reveal">
+          <span class="tn">T.01</span>
+          <div>
+            <h3>Smart word references</h3>
+            <p>Every word remembers its lesson. See which class introduced it — and <em>jump back to that exact moment</em> in the recording.</p>
+          </div>
+        </div>
+        <div class="tool-row reveal">
+          <span class="tn">T.02</span>
+          <div>
+            <h3>Integrated dictionary</h3>
+            <p>Look up any word without leaving the platform — definitions, usage, and context that stays in your course.</p>
+          </div>
+        </div>
+        <div class="tool-row reveal">
+          <span class="tn">T.03</span>
+          <div>
+            <h3>Verb conjugator</h3>
+            <p>Every tense of every verb you meet, one click away. Le subjonctif holds fewer surprises when it's always in reach.</p>
+          </div>
+        </div>
+        <div class="tool-row reveal">
+          <span class="tn">T.04</span>
+          <div>
+            <h3>AI flashcards &amp; weekly plans</h3>
+            <p>Your review deck builds itself from what your class actually covered — organized into a weekly plan you can finish.</p>
+          </div>
+        </div>
+        <div class="tool-row reveal">
+          <span class="tn">T.05</span>
+          <div>
+            <h3>Class recordings</h3>
+            <p>Every session recorded and searchable. Miss an evening, never the material.</p>
+          </div>
+        </div>
+      </div>
+
+      <figure class="tools-fig reveal d1">
+        <svg viewBox="0 0 1007 675" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Puzzle pieces fitting together">
+        <path d="M835.819 443.906C815.884 443.986 795.89 430.903 793.259 404.716C792.841 398.91 793.62 393.08 795.549 387.588C797.478 382.096 800.515 377.058 804.472 372.789C807.152 368.858 809.993 365.067 812.604 361.396C822.766 347.033 813.084 339.471 803.501 337.33L669.66 337.33L669.66 203.488C667.519 193.906 659.957 184.224 645.594 194.386C641.923 196.997 638.132 199.838 634.201 202.518C629.932 206.475 624.894 209.512 619.402 211.441C613.91 213.37 608.08 214.149 602.274 213.731C576.077 211.1 563.004 191.106 563.084 171.171C563.004 151.236 576.087 131.241 602.274 128.611C608.08 128.192 613.91 128.972 619.402 130.901C624.894 132.829 629.932 135.867 634.201 139.823C638.132 142.504 641.923 145.345 645.594 147.955C659.957 158.118 667.519 148.435 669.66 138.853L669.66 5.00118L1001.99 5.00119L1001.99 337.34L868.147 337.34C858.565 339.481 848.882 347.043 859.045 361.406C861.655 365.077 864.496 368.868 867.177 372.799C871.131 377.07 874.167 382.107 876.096 387.599C878.025 393.091 878.805 398.921 878.389 404.726C875.759 430.923 855.764 443.996 835.829 443.916L835.819 443.906Z" fill="#D1D5DB" stroke="white" stroke-width="10"/>
+        <path d="M503.51 230.775C523.445 230.695 543.439 243.778 546.07 269.964C546.486 275.77 545.705 281.6 543.777 287.092C541.848 292.583 538.812 297.621 534.857 301.892C532.177 305.823 529.336 309.614 526.726 313.285C516.563 327.648 526.245 335.21 535.828 337.35L669.7 337.35L669.7 471.192C671.84 480.775 679.402 490.457 693.755 480.294C697.436 477.684 701.227 474.843 705.148 472.162C709.42 468.206 714.459 465.17 719.953 463.241C725.447 461.312 731.278 460.533 737.086 460.95C763.282 463.58 776.355 483.575 776.275 503.51C776.355 523.445 763.272 543.439 737.086 546.07C731.278 546.487 725.447 545.708 719.953 543.779C714.459 541.85 709.42 538.813 705.148 534.857C701.227 532.177 697.436 529.336 693.755 526.726C679.402 516.563 671.84 526.245 669.7 535.828L669.7 669.67L337.37 669.67L337.37 535.838C339.511 526.265 347.073 516.573 361.436 526.745C365.107 529.356 368.898 532.187 372.829 534.867C377.098 538.824 382.136 541.861 387.628 543.79C393.12 545.719 398.95 546.498 404.756 546.08C430.953 543.449 444.036 523.455 443.946 503.52C444.036 483.575 430.943 463.58 404.756 460.95C398.95 460.531 393.12 461.311 387.628 463.24C382.136 465.169 377.098 468.206 372.829 472.162C368.898 474.843 365.107 477.674 361.436 480.284C347.073 490.457 339.511 480.765 337.37 471.192L337.37 337.34L471.212 337.34C480.785 335.2 490.477 327.638 480.304 313.275C477.694 309.604 474.863 305.813 472.182 301.882C468.226 297.612 465.189 292.575 463.26 287.083C461.331 281.59 460.551 275.76 460.97 269.954C463.6 243.758 483.595 230.685 503.53 230.765L503.51 230.775Z" fill="#D1D5DB" stroke="white" stroke-width="10"/>
+        <path d="M337.37 5.0212L337.37 138.863C335.22 148.445 327.668 158.128 313.305 147.965C309.634 145.355 305.843 142.514 301.912 139.833C297.64 135.878 292.6 132.842 287.107 130.913C281.613 128.984 275.782 128.204 269.974 128.621C243.788 131.251 230.705 151.246 230.795 171.181C230.705 191.116 243.798 211.11 269.974 213.741C275.782 214.16 281.614 213.381 287.108 211.452C292.602 209.523 297.641 206.486 301.912 202.528C305.843 199.848 309.634 197.017 313.305 194.406C327.668 184.234 335.22 193.926 337.37 203.498L337.37 337.34L471.212 337.34C480.785 335.2 490.467 327.638 480.304 313.275C477.694 309.604 474.863 305.813 472.173 301.882C468.218 297.612 465.182 292.574 463.255 287.082C461.328 281.589 460.55 275.76 460.97 269.954C463.6 243.758 483.595 230.675 503.53 230.765C523.475 230.675 543.47 243.768 546.1 269.954C546.518 275.76 545.739 281.591 543.81 287.083C541.881 292.575 538.844 297.612 534.887 301.882C532.207 305.813 529.376 309.604 526.766 313.275C516.593 327.638 526.285 335.2 535.858 337.34L669.7 337.34L669.7 203.509C667.549 193.936 659.997 184.254 645.634 194.416C641.963 197.027 638.172 199.858 634.241 202.548C629.97 206.505 624.93 209.541 619.436 211.468C613.942 213.395 608.111 214.172 602.304 213.751C576.117 211.12 563.034 191.126 563.124 171.191C563.034 151.246 576.127 131.251 602.304 128.621C608.111 128.202 613.943 128.981 619.437 130.909C624.931 132.838 629.97 135.876 634.241 139.833C638.172 142.514 641.963 145.345 645.634 147.955C659.997 158.128 667.549 148.435 669.7 138.863L669.7 5.02122L337.37 5.0212Z" fill="#9CA3AF" stroke="white" stroke-width="10"/>
+        <path d="M171.161 443.906C151.226 443.986 131.231 430.903 128.601 404.716C128.181 398.911 128.959 393.081 130.886 387.589C132.813 382.097 135.848 377.059 139.803 372.789C142.494 368.858 145.325 365.067 147.935 361.396C158.098 347.033 148.415 339.471 138.843 337.33L5.00118 337.33L5.00119 5.00118L337.33 5.00119L337.33 138.843C335.18 148.415 327.628 158.108 313.265 147.935C309.584 145.325 305.793 142.494 301.872 139.813C297.6 135.857 292.561 132.82 287.067 130.891C281.573 128.962 275.742 128.183 269.934 128.601C243.748 131.231 230.665 151.226 230.755 171.161C230.665 191.106 243.758 211.1 269.934 213.731C275.742 214.149 281.573 213.369 287.067 211.44C292.561 209.512 297.6 206.475 301.872 202.518C305.793 199.838 309.584 197.007 313.265 194.396C327.628 184.224 335.18 193.916 337.33 203.488L337.33 337.34L203.438 337.34C193.866 339.481 184.184 347.043 194.346 361.406C196.957 365.077 199.788 368.868 202.478 372.799C206.433 377.069 209.468 382.107 211.396 387.599C213.323 393.091 214.101 398.921 213.681 404.726C211.05 430.923 191.065 443.996 171.121 443.916L171.161 443.906Z" fill="#D1D5DB" stroke="white" stroke-width="10"/>
+        <path d="M443.896 503.5C443.986 523.435 430.893 543.429 404.716 546.06C398.909 546.475 393.078 545.694 387.585 543.765C382.092 541.837 377.052 538.802 372.779 534.847C368.858 532.167 365.067 529.326 361.386 526.716C347.023 516.553 339.471 526.235 337.38 535.818L337.38 669.66L5.05127 669.66L5.05128 337.34L138.843 337.34C148.415 339.481 158.098 347.043 147.935 361.406C145.325 365.077 142.494 368.868 139.803 372.799C135.848 377.069 132.813 382.107 130.886 387.599C128.959 393.091 128.181 398.921 128.601 404.726C131.231 430.923 151.226 444.006 171.161 443.916C191.096 444.006 211.1 430.913 213.731 404.726C214.147 398.921 213.366 393.091 211.438 387.599C209.509 382.107 206.473 377.07 202.518 372.799C199.838 368.868 196.997 365.077 194.386 361.406C184.224 347.043 193.906 339.481 203.489 337.34L337.33 337.34L337.33 471.172C339.471 480.745 347.023 490.437 361.336 480.264C365.017 477.654 368.808 474.823 372.729 472.143C377.001 468.186 382.04 465.15 387.534 463.221C393.028 461.292 398.859 460.513 404.666 460.93C430.853 463.56 443.936 483.555 443.846 503.49L443.896 503.5Z" fill="#188888" stroke="white" stroke-width="10"/>
+        <path d="M1002 669.68L669.68 669.68L669.68 535.838C671.82 526.265 679.372 516.583 693.685 526.746C697.366 529.356 701.157 532.187 705.078 534.877C709.351 538.832 714.39 541.867 719.884 543.794C725.378 545.721 731.209 546.499 737.016 546.08C763.202 543.45 776.285 523.455 776.195 503.52C776.285 483.575 763.192 463.58 737.016 460.95C731.208 460.533 725.377 461.312 719.883 463.241C714.389 465.17 709.35 468.206 705.078 472.163C701.157 474.843 697.366 477.684 693.685 480.294C679.322 490.457 671.77 480.775 669.68 471.192L669.68 337.34L803.522 337.34C813.084 339.511 822.716 347.053 812.524 361.346C809.913 365.017 807.072 368.808 804.392 372.739C800.436 377.011 797.4 382.05 795.471 387.544C793.542 393.038 792.762 398.869 793.179 404.676C795.81 430.863 815.804 443.946 835.739 443.856C855.674 443.946 875.669 430.853 878.299 404.676C878.718 398.869 877.939 393.037 876.011 387.543C874.082 382.049 871.044 377.01 867.087 372.739C864.406 368.808 861.575 365.017 858.965 361.346C848.802 347.003 858.445 339.451 868.017 337.34C868.017 337.34 868.017 337.34 868.067 337.34L1002 337.34L1002 669.68Z" fill="#9CA3AF" stroke="white" stroke-width="10"/>
+        </svg>
+        <figcaption class="fig-cap">Nos outils s'emboîtent.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 05 TRIAL ================= -->
+<section class="chapter" id="trial">
+  <div class="wrap">
+    <header class="chapter-head reveal">
+      <span class="ch-no">05</span>
+      <h2 class="ch-title">Try It First</h2>
+      <p class="ch-dek">Try a real class before choosing Core or Premium. Decide with evidence, not brochures.</p>
+    </header>
+
+    <div class="trial-grid">
+      <div>
+        <div class="steps">
+          <div class="step reveal">
+            <span class="sn">01<i>.</i></span>
+            <h3>Reserve a seat</h3>
+            <p>Pick a date. A real chair, in a real cohort, held for you.</p>
+          </div>
+          <div class="step reveal d1">
+            <span class="sn">02<i>.</i></span>
+            <h3>Attend a 2-hour class</h3>
+            <p>The full experience — live instructor, live classmates, no shortened demo.</p>
+          </div>
+          <div class="step reveal d2">
+            <span class="sn">03<i>.</i></span>
+            <h3>Explore the platform</h3>
+            <p>Recordings, dictionary, conjugator, flashcards — open everything, judge everything.</p>
+          </div>
+          <div class="step reveal d3">
+            <span class="sn">04<i>.</i></span>
+            <h3>Choose how to continue</h3>
+            <p>Core, Premium, or not at all. No pressure calls — we put that in writing below.</p>
+          </div>
+        </div>
+        <div class="trial-cta reveal">
+          <a class="btn" href="#pricing">Reserve your trial seat</a>
+          <a class="link-quiet" href="#experiences">Compare Core &amp; Premium ↑</a>
+        </div>
+      </div>
+
+      <figure class="trial-fig reveal d1">
+        <svg viewBox="0 0 360 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A student reading the Passu class journal">
+          <ellipse cx="180" cy="266" rx="150" ry="17" fill="#f2fbfb"/>
+          <!-- coffee -->
+          <path d="M291 214c-4-7 4-10 0-17" stroke="#21b6b6" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <path d="M303 218c-4-7 4-10 0-17" stroke="#21b6b6" stroke-width="3" fill="none" stroke-linecap="round" opacity=".55"/>
+          <path d="M280 231h36l-4 25a8 8 0 0 1-8 7h-12a8 8 0 0 1-8-7z" fill="#ffffff" stroke="#212529" stroke-width="3" stroke-linejoin="round"/>
+          <path d="M315 237h5a8 8 0 0 1 0 16h-7" stroke="#212529" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <!-- pouf -->
+          <path d="M122 234h116c7 0 12 8 10 16-2 9-10 15-17 15H129c-7 0-15-6-17-15-2-8 3-16 10-16z" fill="#cdeeee" stroke="#212529" stroke-width="3" stroke-linejoin="round"/>
+          <!-- head -->
+          <circle cx="180" cy="116" r="32" fill="#ffffff" stroke="#212529" stroke-width="3"/>
+          <path d="M148 114c-2-23 16-35 32-35 18 0 30 13 31 29-6-8-14-12-22-10 2 4 2 8 1 11-5-7-13-11-21-10-8 1-16 6-21 15z" fill="#212529"/>
+          <!-- glasses -->
+          <circle cx="167" cy="121" r="9" fill="none" stroke="#212529" stroke-width="3"/>
+          <circle cx="193" cy="121" r="9" fill="none" stroke="#212529" stroke-width="3"/>
+          <path d="M176 121h8" stroke="#212529" stroke-width="3" stroke-linecap="round"/>
+          <!-- newspaper -->
+          <path d="M108 154l70-10v96l-70 12z" fill="#ffffff" stroke="#212529" stroke-width="3" stroke-linejoin="round"/>
+          <path d="M252 154l-70-10v96l70 12z" fill="#ffffff" stroke="#212529" stroke-width="3" stroke-linejoin="round"/>
+          <path d="M180 144v96" stroke="#212529" stroke-width="2"/>
+          <!-- masthead + lines, left page -->
+          <path d="M118 160l50-7v11l-50 7z" fill="#21b6b6"/>
+          <path d="M118 180l50-7" stroke="#6b7280" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M118 190l50-7" stroke="#6b7280" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M118 200l34-5" stroke="#6b7280" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M118 214l50-7" stroke="#e5e7eb" stroke-width="4" stroke-linecap="round"/>
+          <path d="M118 224l40-6" stroke="#e5e7eb" stroke-width="4" stroke-linecap="round"/>
+          <!-- photo + lines, right page -->
+          <path d="M192 166l42 6v24l-42-6z" fill="#e7f7f7" stroke="#212529" stroke-width="2.5" stroke-linejoin="round"/>
+          <circle cx="213" cy="181" r="6" fill="#e11d48"/>
+          <path d="M192 206l50 7" stroke="#6b7280" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M192 216l50 7" stroke="#6b7280" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M192 226l32 5" stroke="#6b7280" stroke-width="2.5" stroke-linecap="round"/>
+          <!-- hands -->
+          <circle cx="108" cy="176" r="8" fill="#ffffff" stroke="#212529" stroke-width="3"/>
+          <circle cx="252" cy="176" r="8" fill="#ffffff" stroke="#212529" stroke-width="3"/>
+        </svg>
+        <figcaption class="trial-note"><b>Le premier cours est offert.</b> The trial is a full, scheduled class with a real cohort — not a demo, not a sales call.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 06 STUDENTS ================= -->
+<section class="chapter" id="students">
+  <div class="wrap">
+    <header class="chapter-head reveal">
+      <span class="ch-no">06</span>
+      <h2 class="ch-title">Real Students</h2>
+      <p class="ch-dek">Pulled from the people doing the three-classes-a-week part.</p>
+    </header>
+
+    <div class="quotes">
+      <blockquote class="reveal">
+        <span class="qm" aria-hidden="true">«</span>
+        <p>Three classes every week sounded like a lot. It's the reason I'm still here — <i>la régularité, c'est tout</i>.</p>
+        <footer><b>Amélie Rousseau</b> Level 4 · Social Path</footer>
+      </blockquote>
+      <blockquote class="reveal d1">
+        <span class="qm" aria-hidden="true">«</span>
+        <p>In Premium there are seven of us. When they said more speaking time, I checked — I literally counted my turns.</p>
+        <footer><b>David Okonkwo</b> Level 5 · Business Path</footer>
+      </blockquote>
+      <blockquote class="reveal">
+        <span class="qm" aria-hidden="true">«</span>
+        <p>Recordings plus the AI flashcards changed how I revise. I stopped re-watching classes and started reviewing them.</p>
+        <footer><b>Sofia Martín</b> Level 6 · Exam Path</footer>
+      </blockquote>
+      <blockquote class="reveal d1">
+        <span class="qm" aria-hidden="true">«</span>
+        <p>I clicked a word and it took me to the exact moment it was taught. That's when I understood this platform is serious.</p>
+        <footer><b>Liam Bennett</b> Level 3 · Social Path</footer>
+      </blockquote>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 07 PRICING ================= -->
+<section class="chapter" id="pricing">
+  <div class="wrap">
+    <header class="chapter-head reveal">
+      <span class="ch-no">07</span>
+      <h2 class="ch-title">The Price</h2>
+      <p class="ch-dek">Start monthly. Save when you commit to the full journey. No other tricks in the arithmetic.</p>
+    </header>
+
+    <div class="rate-card">
+      <div class="rate-h reveal"><span>Monthly rates<span class="ast">*</span></span><span>Per student</span></div>
+      <div class="rate-row reveal">
+        <span class="rname">Core</span>
+        <span class="rsub">up to 14 students</span>
+        <span class="lead" aria-hidden="true"></span>
+        <span class="rprice">$99<sub>/mo</sub></span>
+      </div>
+      <div class="rate-row reveal">
+        <span class="rname">Premium</span>
+        <span class="rsub">up to 7 students</span>
+        <span class="lead" aria-hidden="true"></span>
+        <span class="rprice">$200<sub>/mo</sub></span>
+      </div>
+
+      <h3 class="spec-h reveal">What every month includes</h3>
+      <div class="spec-row reveal">
+        <span class="sname">Live classes</span>
+        <span class="lead" aria-hidden="true"></span>
+        <span class="sval"><b>3 × 2 hrs</b> weekly</span>
+      </div>
+      <div class="spec-row reveal">
+        <span class="sname">Class size</span>
+        <span class="lead" aria-hidden="true"></span>
+        <span class="sval">Core <b>14</b> · Premium <b>7</b></span>
+      </div>
+      <div class="spec-row reveal">
+        <span class="sname">Platform &amp; recordings</span>
+        <span class="lead" aria-hidden="true"></span>
+        <span class="sval"><b>Included</b>, both plans</span>
+      </div>
+      <div class="spec-row reveal">
+        <span class="sname">Exams</span>
+        <span class="lead" aria-hidden="true"></span>
+        <span class="sval"><b>Midterm + final</b>, every level</span>
+      </div>
+      <div class="spec-row reveal">
+        <span class="sname">Speaking Club</span>
+        <span class="lead" aria-hidden="true"></span>
+        <span class="sval"><b>90 min</b> weekends, optional</span>
+      </div>
+
+      <div class="rate-notes reveal">
+        <p><span class="ast">*</span>Commit to the full 12-month journey upfront and save 5% — our only discount, honestly earned by your commitment, not our marketing.</p>
+        <p><span class="ast">†</span>Path pricing: Social French follows the standard rate shown above.</p>
+      </div>
+
+      <div class="rate-cta reveal">
+        <a class="btn" href="#trial">Start with the free class</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 08 FAQ ================= -->
+<section class="chapter" id="faq">
+  <div class="wrap">
+    <header class="chapter-head reveal">
+      <span class="ch-no">08</span>
+      <h2 class="ch-title">Questions</h2>
+      <p class="ch-dek">Asked often, answered plainly.</p>
+    </header>
+
+    <div class="faq reveal">
+      <details>
+        <summary>
+          <span class="qn">Q.01</span>
+          <h3>Do I need previous French knowledge?</h3>
+          <span class="plus" aria-hidden="true"></span>
+        </summary>
+        <p class="ans">No. <b>Passu Level 1 starts from zero</b> — greetings, sounds, first sentences. If you already have some French, a short placement conversation puts you in the right level instead of making you repeat what you know.</p>
+      </details>
+      <details>
+        <summary>
+          <span class="qn">Q.02</span>
+          <h3>Can I change from Core to Premium later?</h3>
+          <span class="plus" aria-hidden="true"></span>
+        </summary>
+        <p class="ans">Yes — at the start of any month, as long as a Premium seat is open in your level. Your progress, recordings, and flashcards move with you. Switching back works the same way.</p>
+      </details>
+      <details>
+        <summary>
+          <span class="qn">Q.03</span>
+          <h3>When do the paths separate?</h3>
+          <span class="plus" aria-hidden="true"></span>
+        </summary>
+        <p class="ans">At <b>Passu Levels 5–6</b>. Levels 1–4 build one shared foundation for everyone; then Social, Business, and Exam Preparation split into their own classes. When a path's cohort is small, groups may be combined.</p>
+      </details>
+      <details>
+        <summary>
+          <span class="qn">Q.04</span>
+          <h3>Is the free trial a real class?</h3>
+          <span class="plus" aria-hidden="true"></span>
+        </summary>
+        <p class="ans">Yes — a scheduled two-hour class with a real cohort and instructor, plus full access to explore the platform afterwards. <i>Pas une démo</i> — if we showed you a polished sample, you'd be choosing a program that doesn't exist.</p>
+      </details>
+      <details open>
+        <summary>
+          <span class="qn">Q.05</span>
+          <h3>Is B2 guaranteed after 12 months?</h3>
+          <span class="plus" aria-hidden="true"></span>
+        </summary>
+        <p class="ans"><b>No — and be wary of anyone who says otherwise.</b> Language learning depends on attendance, practice, and where you start. What we promise instead: a coherent six-level roadmap, three real classes a week, and honest exams that tell you exactly where you stand. Students who attend consistently are the ones who get there.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 09 PROMISES ================= -->
+<section class="chapter chapter--ink" id="promises">
+  <div class="wrap">
+    <header class="chapter-head reveal">
+      <span class="ch-no">09</span>
+      <h2 class="ch-title">Our promises, in&nbsp;writing.</h2>
+      <p class="ch-dek">Everything above, condensed into four commitments. Signed.</p>
+    </header>
+
+    <article class="vow reveal">
+      <span class="vn">01</span>
+      <div>
+        <h3>Every class, <i>recorded</i>.</h3>
+        <p>Attendance matters, but life happens. Every session lands on the platform the same day, searchable to the minute. Miss an evening — never the material.</p>
+      </div>
+    </article>
+    <article class="vow reveal">
+      <span class="vn">02</span>
+      <div>
+        <h3>Change plans, <i>not journeys</i>.</h3>
+        <p>Move between Core and Premium at the start of any month. Your cohort progress, recordings, and flashcards move with you. No penalties, no re-enrolment, no paperwork drama.</p>
+      </div>
+    </article>
+    <article class="vow reveal">
+      <span class="vn">03</span>
+      <div>
+        <h3>A fair refund, in <i>plain language</i>.</h3>
+        <p>Our refund policy is written to be read — shown before you pay, not buried in a PDF. If Passu isn't right for you, we part ways fairly. <i>C'est promis.</i></p>
+      </div>
+    </article>
+    <article class="vow reveal">
+      <span class="vn">04</span>
+      <div>
+        <h3>No fake guarantees. <i>Ever.</i></h3>
+        <p>We will never sell you "B2 in 90 days," because nobody honest can. We promise the roadmap, three real classes a week, and exams that tell the truth. That promise, we keep.</p>
+      </div>
+    </article>
+
+    <div class="sig-block reveal">
+      <div class="sig-left">
+        <svg class="sig-art" viewBox="0 0 300 90" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path class="sig-path" d="M14 62 C 56 20, 92 74, 138 48 S 224 16, 262 42" fill="none" stroke="#21b6b6" stroke-width="3.5" stroke-linecap="round"/>
+          <g transform="translate(262,42) rotate(-38)">
+            <path d="M0 0 L7 16 L-7 16 Z" fill="#ffffff"/>
+            <rect x="-6" y="16" width="12" height="30" rx="5" fill="#21b6b6"/>
+            <path d="M0 4 L0 12" stroke="#212529" stroke-width="1.6" stroke-linecap="round"/>
+          </g>
+        </svg>
+        <p class="sig-name">— Passu</p>
+        <p class="sig-role">Fondé sur des promesses tenables</p>
+      </div>
+      <div class="sig-cta">
+        <p class="lede">Take the trial class. Then decide with evidence.</p>
+        <a class="btn btn--light" href="#trial">Reserve a free trial class</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <a class="logo" href="#top" aria-label="Passu home">
+          <span><b>Passu</b><span class="dot">.</span></span>
+        </a>
+        <p>The honest French program — six connected levels, three live classes a week, toward B2 for your life in Canada.</p>
+      </div>
+      <nav class="foot-nav" aria-label="Footer">
+        <a href="#roadmap">Passu Levels</a>
+        <a href="#experiences">Core &amp; Premium</a>
+        <a href="#paths">Learning Paths</a>
+        <a href="#trial">Free Trial</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+        <a href="#promises">Our Promises</a>
+      </nav>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Passu. All rights reserved.</span>
+      <span><i>Le français, sérieusement.</i></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* --- scroll reveal --- */
+  var reveals = document.querySelectorAll('.reveal');
+  if (reduced || !('IntersectionObserver' in window)) {
+    reveals.forEach(function(el){ el.classList.add('in'); });
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, {threshold:.12, rootMargin:'0px 0px -6% 0px'});
+    reveals.forEach(function(el){ io.observe(el); });
+  }
+
+  /* --- chapter spy for the rail --- */
+  var railLinks = document.querySelectorAll('.rail a');
+  var byId = {};
+  railLinks.forEach(function(a){ byId[a.getAttribute('href').slice(1)] = a; });
+  var sections = document.querySelectorAll('section[id]');
+  if ('IntersectionObserver' in window) {
+    var spy = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting && byId[e.target.id]) {
+          railLinks.forEach(function(a){ a.classList.remove('active'); });
+          byId[e.target.id].classList.add('active');
+        }
+      });
+    }, {rootMargin:'-42% 0px -52% 0px', threshold:0});
+    sections.forEach(function(s){ spy.observe(s); });
+  }
+
+  /* --- top scroll progress --- */
+  var bar = document.getElementById('progressBar');
+  var ticking = false;
+  function paint(){
+    var h = document.documentElement;
+    var max = h.scrollHeight - h.clientHeight;
+    bar.style.transform = 'scaleX(' + (max > 0 ? h.scrollTop / max : 0) + ')';
+    ticking = false;
+  }
+  window.addEventListener('scroll', function(){
+    if (!ticking) { ticking = true; requestAnimationFrame(paint); }
+  }, {passive:true});
+  paint();
+
+  /* --- close mobile nav on link tap --- */
+  var toggle = document.getElementById('navToggle');
+  document.querySelectorAll('.mobile-nav a').forEach(function(a){
+    a.addEventListener('click', function(){ toggle.checked = false; });
+  });
+})();
+</script>
+</body>
+</html>

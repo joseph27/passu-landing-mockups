@@ -1,0 +1,1231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Passu — Your complete 12-month path toward B2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,500;1,600&display=swap" rel="stylesheet">
+<style>
+  /* ============ TOKENS ============ */
+  :root{
+    --teal:#21b6b6; --teal-deep:#188888; --teal-soft:#e7f7f7; --teal-tint:#f2fbfb; --teal-mid:#cdeeee;
+    --rose:#e11d48; --ink:#212529; --muted:#6b7280; --muted2:#374151; --line:#e5e7eb; --bg:#f6f7f9;
+    --glass: rgba(255,255,255,.72);
+    --glass-border: rgba(255,255,255,.92);
+    --shadow-soft: 0 24px 60px -28px rgba(24,136,136,.22), 0 6px 18px -10px rgba(33,37,41,.08);
+    --ease-out: cubic-bezier(.22,1,.36,1);
+    --spring: cubic-bezier(.34,1.56,.64,1);
+    --radius: 22px;
+  }
+  @property --ang { syntax:'<angle>'; initial-value:0deg; inherits:false; }
+
+  *,*::before,*::after{ margin:0; padding:0; box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    font-family:'Montserrat',sans-serif; color:var(--ink); background:var(--bg);
+    -webkit-font-smoothing:antialiased; overflow-x:hidden; line-height:1.6;
+  }
+  img{ max-width:100%; display:block; }
+  a{ color:inherit; text-decoration:none; }
+  button{ font-family:inherit; }
+  .container{ max-width:1140px; margin:0 auto; padding:0 24px; }
+  section{ position:relative; }
+
+  ::selection{ background:var(--teal-mid); color:var(--ink); }
+  :focus-visible{ outline:2px solid var(--teal); outline-offset:3px; border-radius:6px; }
+
+  /* ============ LIVING ATMOSPHERE ============ */
+  .mesh{ position:fixed; inset:0; z-index:-1; overflow:hidden; background:
+    linear-gradient(180deg,#ffffff 0%, var(--bg) 32%, #ffffff 70%, var(--teal-tint) 100%); }
+  .mesh b{ position:absolute; display:block; border-radius:50%; will-change:transform; }
+  .mesh .b1{ width:64vw; height:64vw; top:-26vw; left:-14vw;
+    background:radial-gradient(circle, rgba(33,182,182,.16) 0%, rgba(33,182,182,0) 62%);
+    animation:drift1 52s ease-in-out infinite alternate; }
+  .mesh .b2{ width:56vw; height:56vw; top:8vh; right:-22vw;
+    background:radial-gradient(circle, rgba(205,238,238,.85) 0%, rgba(205,238,238,0) 64%);
+    animation:drift2 64s ease-in-out infinite alternate; }
+  .mesh .b3{ width:70vw; height:70vw; bottom:-34vw; left:14vw;
+    background:radial-gradient(circle, rgba(231,247,247,.95) 0%, rgba(231,247,247,0) 60%);
+    animation:drift3 58s ease-in-out infinite alternate; }
+  .mesh .b4{ width:34vw; height:34vw; top:52vh; left:-12vw;
+    background:radial-gradient(circle, rgba(33,182,182,.10) 0%, rgba(33,182,182,0) 62%);
+    animation:drift2 70s ease-in-out infinite alternate-reverse; }
+  @keyframes drift1{ from{ transform:translate3d(0,0,0) scale(1);} to{ transform:translate3d(9vw,7vh,0) scale(1.14);} }
+  @keyframes drift2{ from{ transform:translate3d(0,0,0) scale(1.05);} to{ transform:translate3d(-8vw,10vh,0) scale(.94);} }
+  @keyframes drift3{ from{ transform:translate3d(0,0,0) scale(1);} to{ transform:translate3d(6vw,-8vh,0) scale(1.1);} }
+
+  /* ============ SCROLL PROGRESS ============ */
+  .progress{ position:fixed; top:0; left:0; right:0; height:3px; z-index:200;
+    background:linear-gradient(90deg,var(--teal-deep),var(--teal));
+    transform-origin:0 50%; transform:scaleX(0); }
+
+  /* ============ HEADER ============ */
+  header.site{ position:fixed; top:0; left:0; right:0; z-index:100;
+    transition:background .4s, box-shadow .4s, border-color .4s;
+    background:rgba(255,255,255,.5); border-bottom:1px solid transparent;
+    backdrop-filter:blur(14px) saturate(1.5); -webkit-backdrop-filter:blur(14px) saturate(1.5); }
+  header.site.scrolled{ background:rgba(255,255,255,.82); border-color:var(--line);
+    box-shadow:0 8px 30px -18px rgba(33,37,41,.18); }
+  .nav-row{ display:flex; align-items:center; gap:28px; height:68px; }
+  .logo{ display:flex; align-items:baseline; font-weight:900; font-size:1.42rem; letter-spacing:-.02em; }
+  .logo span{ color:var(--teal); }
+  .logo i{ font-style:normal; width:8px; height:8px; border-radius:50%; background:var(--rose); margin-left:4px; align-self:flex-end; margin-bottom:6px; }
+  nav.main{ display:flex; gap:4px; margin-left:auto; }
+  nav.main a{ font-size:.85rem; font-weight:600; color:var(--muted2); padding:8px 13px; border-radius:99px; transition:color .25s, background .25s; }
+  nav.main a:hover{ color:var(--teal-deep); background:var(--teal-soft); }
+  .btn{ display:inline-flex; align-items:center; justify-content:center; gap:10px; border:0; cursor:pointer;
+    font-weight:700; font-size:.95rem; border-radius:99px; padding:14px 28px; position:relative;
+    transition:transform .25s var(--ease-out), box-shadow .3s, background .3s; }
+  .btn:active{ transform:scale(.97); }
+  .btn-primary{ background:var(--teal); color:#fff; box-shadow:0 12px 28px -12px rgba(24,136,136,.55); }
+  .btn-primary:hover{ background:var(--teal-deep); box-shadow:0 16px 34px -12px rgba(24,136,136,.6); }
+  .btn-ghost{ background:transparent; color:var(--teal-deep); border:1.5px solid var(--teal-mid); }
+  .btn-ghost:hover{ background:var(--teal-soft); border-color:var(--teal); }
+  .btn-sm{ padding:10px 20px; font-size:.85rem; }
+  .nav-toggle{ display:none; }
+  .burger{ display:none; }
+
+  /* ============ REVEAL SYSTEM ============ */
+  [data-rv]{ opacity:0; transform:translateY(26px); transition:opacity .8s var(--ease-out), transform .8s var(--ease-out); }
+  [data-rv].on{ opacity:1; transform:none; }
+  [data-rv="scale"]{ transform:scale(.96) translateY(14px); }
+  [data-rv="scale"].on{ transform:none; }
+  [data-rv="left"]{ transform:translateX(-30px); }
+  [data-rv="right"]{ transform:translateX(30px); }
+  [data-rv="left"].on,[data-rv="right"].on{ transform:none; }
+  .line{ display:block; overflow:hidden; padding-bottom:.08em; margin-bottom:-.08em; }
+  .line > span{ display:block; transform:translateY(112%); transition:transform .9s var(--ease-out); }
+  .rv-lines.on .line > span{ transform:none; }
+  .rv-lines .line:nth-child(2) > span{ transition-delay:.09s; }
+  .rv-lines .line:nth-child(3) > span{ transition-delay:.18s; }
+
+  /* ============ SECTION SCAFFOLD ============ */
+  .sec{ padding:110px 0; }
+  .eyebrow{ display:inline-flex; align-items:center; gap:10px; font-size:.74rem; font-weight:800; letter-spacing:.16em;
+    text-transform:uppercase; color:var(--teal-deep); margin-bottom:18px; }
+  .eyebrow::before{ content:""; width:26px; height:2px; border-radius:2px; background:var(--teal); }
+  h1,h2{ letter-spacing:-.025em; line-height:1.12; }
+  h2{ font-size:clamp(1.9rem, 3.6vw, 2.85rem); font-weight:800; }
+  .sec-head{ max-width:640px; margin-bottom:56px; }
+  .sec-head p{ margin-top:18px; color:var(--muted); font-size:1.02rem; font-weight:500; }
+
+  .glass{ background:var(--glass); border:1px solid var(--glass-border); border-radius:var(--radius);
+    box-shadow:var(--shadow-soft), inset 0 1px 0 rgba(255,255,255,.95); }
+
+  /* ============ HERO ============ */
+  .hero{ padding:172px 0 96px; overflow:hidden; }
+  .hero-grid{ display:grid; grid-template-columns:1.08fr .92fr; gap:48px; align-items:center; }
+  h1{ font-size:clamp(2.45rem, 5vw, 4.05rem); font-weight:900; }
+  .shimmer{ background:linear-gradient(100deg, var(--teal-deep) 20%, var(--teal) 38%, #6fd6d6 50%, var(--teal) 62%, var(--teal-deep) 80%);
+    background-size:220% 100%; -webkit-background-clip:text; background-clip:text; color:transparent;
+    animation:shimmer 6.5s linear infinite; }
+  @keyframes shimmer{ from{ background-position:120% 0; } to{ background-position:-120% 0; } }
+  .hero-sub{ margin-top:22px; color:var(--muted2); font-size:1.08rem; font-weight:500; max-width:520px; }
+  .hero-ctas{ display:flex; gap:16px; margin-top:34px; align-items:center; flex-wrap:wrap; }
+  .magnet-zone{ display:inline-block; padding:10px; margin:-10px; }
+  .btn-hero{ padding:17px 34px; font-size:1rem; will-change:transform; }
+  .arrow-link{ font-weight:700; font-size:.95rem; color:var(--teal-deep); display:inline-flex; align-items:center; gap:8px; }
+  .arrow-link svg{ transition:transform .3s var(--ease-out); }
+  .arrow-link:hover svg{ transform:translateX(5px); }
+  .hero-note{ margin-top:16px; font-size:.82rem; color:var(--muted); font-weight:500; }
+
+  .chips{ display:flex; flex-wrap:wrap; gap:10px; margin-top:40px; max-width:560px; }
+  .chip{ display:inline-flex; align-items:center; gap:8px; font-size:.8rem; font-weight:700; color:var(--muted2);
+    background:rgba(255,255,255,.8); border:1px solid var(--line); padding:9px 15px; border-radius:99px;
+    box-shadow:0 8px 20px -14px rgba(33,37,41,.25);
+    opacity:0; animation:orbit .95s var(--spring) forwards; animation-delay:var(--cd, .3s); }
+  .chip b{ color:var(--teal-deep); font-weight:800; }
+  .chip svg{ color:var(--teal); flex:none; }
+  @keyframes orbit{
+    0%{ opacity:0; transform:translate(var(--ox,0), var(--oy,26px)) scale(.55) rotate(var(--or,0deg)); }
+    100%{ opacity:1; transform:translate(0,0) scale(1) rotate(0deg); } }
+
+  .hero-visual{ position:relative; min-height:460px; display:flex; align-items:center; justify-content:center; }
+  .hero-halo{ position:absolute; inset:6% 4%; border-radius:50%;
+    background:radial-gradient(circle, rgba(33,182,182,.16) 0%, rgba(33,182,182,0) 66%); }
+  .hero-char{ position:relative; width:min(390px, 82%); animation:bob 6.5s ease-in-out infinite; will-change:transform; }
+  .hero-shadow{ position:absolute; left:50%; bottom:2%; width:56%; height:26px; transform:translateX(-50%);
+    background:radial-gradient(ellipse, rgba(33,37,41,.16) 0%, rgba(33,37,41,0) 68%);
+    animation:shadowPulse 6.5s ease-in-out infinite; }
+  @keyframes bob{ 0%,100%{ transform:translateY(0);} 50%{ transform:translateY(-13px);} }
+  @keyframes shadowPulse{ 0%,100%{ transform:translateX(-50%) scaleX(1); opacity:.9;} 50%{ transform:translateX(-50%) scaleX(.86); opacity:.6;} }
+  .float-card{ position:absolute; z-index:2; padding:12px 16px; border-radius:16px; font-size:.8rem; font-weight:700;
+    display:flex; align-items:center; gap:10px; animation:bob 7.5s ease-in-out infinite; will-change:transform; }
+  .fc-live{ top:3%; left:-2%; animation-delay:-2.4s; }
+  .fc-live .dot{ width:9px; height:9px; border-radius:50%; background:var(--rose); position:relative; flex:none; }
+  .fc-live .dot::after{ content:""; position:absolute; inset:-4px; border-radius:50%; border:2px solid rgba(225,29,72,.4); animation:pulse 2s ease-out infinite; }
+  @keyframes pulse{ from{ transform:scale(.5); opacity:1;} to{ transform:scale(1.5); opacity:0;} }
+  .fc-live small{ display:block; font-weight:600; color:var(--muted); font-size:.7rem; }
+  .fc-b2{ bottom:14%; right:0; animation-delay:-4.8s; flex-direction:column; align-items:flex-start; gap:6px; }
+  .fc-b2 .track{ display:flex; align-items:center; gap:5px; }
+  .fc-b2 .track i{ font-style:normal; font-size:.68rem; font-weight:800; color:var(--muted); }
+  .fc-b2 .track .seg{ width:16px; height:5px; border-radius:3px; background:var(--teal-mid); }
+  .fc-b2 .track .seg.f{ background:var(--teal); }
+  .fc-b2 .track i.goal{ color:var(--rose); }
+
+  /* ============ ROADMAP ============ */
+  .roadmap-outer{ /* height set by JS when pinned */ }
+  .roadmap-sticky{ display:flex; flex-direction:column; justify-content:center; }
+  .pinned .roadmap-sticky{ position:sticky; top:0; height:100vh; overflow:hidden; }
+  .roadmap-head{ display:flex; align-items:flex-end; justify-content:space-between; gap:32px; margin-bottom:44px; }
+  .roadmap-head .journey-img{ width:300px; flex:none; }
+  .rail-wrap{ position:relative; }
+  .rail{ display:flex; gap:26px; align-items:stretch; will-change:transform; padding:34px 0 12px; }
+  .lvl-card{ position:relative; flex:0 0 330px; padding:28px 26px 26px; overflow:hidden;
+    transition:border-color .5s, box-shadow .5s, transform .5s var(--ease-out); }
+  .lvl-card .idx{ position:absolute; top:6px; right:14px; font-size:4.4rem; font-weight:900; letter-spacing:-.04em;
+    color:var(--teal-soft); line-height:1; user-select:none; transition:color .5s; }
+  .lvl-card.lit .idx{ color:var(--teal-mid); }
+  .lvl-card.lit{ border-color:var(--teal-mid); box-shadow:0 30px 60px -26px rgba(24,136,136,.34), inset 0 1px 0 rgba(255,255,255,.95); transform:translateY(-6px); }
+  .lvl-top{ display:flex; align-items:center; gap:12px; margin-bottom:16px; position:relative; }
+  .lvl-dot{ width:14px; height:14px; border-radius:50%; border:3px solid var(--teal-mid); background:#fff; transition:background .5s, border-color .5s, box-shadow .5s; flex:none; }
+  .lvl-card.lit .lvl-dot{ background:var(--teal); border-color:var(--teal); box-shadow:0 0 0 5px rgba(33,182,182,.18); }
+  .lvl-name{ font-weight:800; font-size:1.06rem; letter-spacing:-.01em; }
+  .cefr{ margin-left:auto; width:52px; height:26px; position:relative; transform-style:preserve-3d; perspective:400px;
+    transform:rotateY(180deg); transition:transform .8s var(--spring); }
+  .lvl-card.lit .cefr{ transform:rotateY(0deg); }
+  .cefr .f{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; border-radius:8px;
+    font-size:.68rem; font-weight:800; letter-spacing:.06em; backface-visibility:hidden; -webkit-backface-visibility:hidden; }
+  .cefr .front{ background:var(--teal); color:#fff; }
+  .cefr .back{ background:var(--teal-soft); color:var(--teal-deep); transform:rotateY(180deg); }
+  .lvl-card p{ font-size:.9rem; color:var(--muted2); font-weight:500; line-height:1.55; position:relative; }
+  .lvl-fr{ margin-top:16px; font-style:italic; font-weight:600; font-size:.88rem; color:var(--teal-deep); position:relative; }
+  .lvl-path-tag{ display:inline-block; margin-top:12px; font-size:.68rem; font-weight:800; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--rose); background:rgba(225,29,72,.07); padding:4px 10px; border-radius:99px; position:relative; }
+  .rail-track{ position:absolute; top:9px; left:14px; right:14px; height:4px; border-radius:4px; background:var(--teal-soft); display:none; }
+  .pinned .rail-track{ display:block; }
+  .rail-fill{ position:absolute; inset:0; border-radius:4px; transform-origin:0 50%; transform:scaleX(0);
+    background:linear-gradient(90deg, var(--teal-deep), var(--teal)); }
+  .rail-head-dot{ position:absolute; top:50%; left:0; width:14px; height:14px; margin:-7px 0 0 -7px; border-radius:50%;
+    background:var(--teal); box-shadow:0 0 0 6px rgba(33,182,182,.22), 0 0 18px rgba(33,182,182,.55); will-change:transform; }
+  .roadmap-hint{ margin-top:26px; font-size:.8rem; font-weight:600; color:var(--muted); display:none; align-items:center; gap:10px; }
+  .pinned .roadmap-hint{ display:inline-flex; }
+
+  /* grid fallback (mobile / static) */
+  .no-pin .rail{ display:grid; grid-template-columns:repeat(3,1fr); }
+  .no-pin .lvl-card{ flex:auto; }
+  .no-pin .lvl-card,.static .lvl-card{ }
+  .no-pin .rail-track{ display:none; }
+
+  /* ============ PLANS ============ */
+  .both-strip{ display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-bottom:34px; }
+  .both-item{ display:flex; align-items:center; gap:12px; padding:16px 18px; border-radius:16px;
+    background:rgba(255,255,255,.66); border:1px solid var(--line); font-size:.83rem; font-weight:600; color:var(--muted2); }
+  .both-item svg{ color:var(--teal); flex:none; }
+  .plans-grid{ display:grid; grid-template-columns:1fr 1fr; gap:26px; }
+  .plan-card{ padding:38px 34px; position:relative; isolation:isolate; }
+  .plan-card::before{ content:""; position:absolute; inset:0; border-radius:var(--radius); padding:1.5px; z-index:-1;
+    background:conic-gradient(from var(--ang), transparent 0turn, transparent .62turn, rgba(33,182,182,.9) .78turn, transparent .95turn);
+    -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite:xor; mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); mask-composite:exclude;
+    opacity:0; transition:opacity .45s; }
+  .plan-card:hover::before{ opacity:1; animation:ring 3.2s linear infinite; }
+  @keyframes ring{ to{ --ang:360deg; } }
+  .plan-flag{ font-size:.7rem; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--teal-deep);
+    background:var(--teal-soft); display:inline-block; padding:6px 13px; border-radius:99px; margin-bottom:18px; }
+  .plan-card.premium .plan-flag{ background:var(--teal); color:#fff; }
+  .plan-name{ font-size:1.5rem; font-weight:800; letter-spacing:-.02em; }
+  .plan-size{ color:var(--muted); font-weight:600; font-size:.9rem; margin-top:6px; }
+  .plan-price{ display:flex; align-items:baseline; gap:8px; margin:22px 0 6px; }
+  .plan-price .cur{ font-size:1.3rem; font-weight:800; color:var(--teal-deep); }
+  .plan-price .num{ font-size:3.2rem; font-weight:900; letter-spacing:-.04em; line-height:1; font-variant-numeric:tabular-nums; }
+  .plan-price .per{ color:var(--muted); font-weight:600; font-size:.9rem; }
+  .plan-for{ margin-top:18px; padding-top:18px; border-top:1px solid var(--line); font-size:.92rem; color:var(--muted2); font-weight:500; }
+  .plan-for b{ color:var(--ink); font-weight:700; }
+  .promise{ margin-top:18px; padding:16px 18px; border-radius:14px; background:rgba(225,29,72,.05);
+    border-left:3px solid var(--rose); font-size:.88rem; font-weight:500; color:var(--muted2); }
+  .promise b{ color:var(--rose); font-weight:800; font-size:.72rem; letter-spacing:.1em; text-transform:uppercase; display:block; margin-bottom:6px; }
+  .plan-cta{ margin-top:26px; width:100%; }
+
+  /* ============ PATHS ============ */
+  .paths-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+  .path-card{ padding:32px 28px; transition:transform .5s var(--ease-out), box-shadow .5s; }
+  .path-card:hover{ transform:translateY(-8px); box-shadow:0 34px 70px -30px rgba(24,136,136,.4), inset 0 1px 0 rgba(255,255,255,.95); }
+  .path-icon{ width:52px; height:52px; border-radius:15px; background:var(--teal-soft); color:var(--teal-deep);
+    display:flex; align-items:center; justify-content:center; margin-bottom:20px; transition:background .4s, color .4s; }
+  .path-card:hover .path-icon{ background:var(--teal); color:#fff; }
+  .path-card h3{ font-size:1.18rem; font-weight:800; letter-spacing:-.01em; }
+  .path-card p{ margin-top:10px; font-size:.9rem; color:var(--muted2); font-weight:500; }
+  .path-tags{ display:flex; flex-wrap:wrap; gap:7px; margin-top:16px; }
+  .path-tags span{ font-size:.72rem; font-weight:700; color:var(--teal-deep); background:var(--teal-tint);
+    border:1px solid var(--teal-mid); padding:4px 11px; border-radius:99px; }
+  .paths-note{ margin-top:26px; display:flex; align-items:center; gap:12px; padding:16px 20px; border-radius:14px;
+    background:rgba(255,255,255,.66); border:1px dashed var(--teal-mid); font-size:.85rem; font-weight:600; color:var(--muted2); }
+  .paths-note svg{ color:var(--teal); flex:none; }
+
+  /* ============ FEATURES (bento) ============ */
+  .bento{ display:grid; grid-template-columns:repeat(12,1fr); gap:24px; }
+  .feat{ padding:30px 28px; overflow:hidden; position:relative; transition:transform .5s var(--ease-out), box-shadow .5s; }
+  .feat:hover{ transform:translateY(-6px); box-shadow:0 34px 70px -30px rgba(24,136,136,.38), inset 0 1px 0 rgba(255,255,255,.95); }
+  .feat h3{ font-size:1.12rem; font-weight:800; letter-spacing:-.01em; }
+  .feat p{ margin-top:9px; font-size:.89rem; color:var(--muted2); font-weight:500; max-width:44ch; }
+  .feat-icon{ width:46px; height:46px; border-radius:13px; background:var(--teal-soft); color:var(--teal-deep);
+    display:flex; align-items:center; justify-content:center; margin-bottom:18px; }
+  .f-a{ grid-column:span 7; display:grid; grid-template-columns:1.15fr .85fr; gap:18px; align-items:center; }
+  .f-a img{ width:100%; max-width:250px; justify-self:center; }
+  .f-b{ grid-column:span 5; }
+  .f-c{ grid-column:span 5; }
+  .f-d{ grid-column:span 7; display:grid; grid-template-columns:1fr .7fr; gap:18px; align-items:center; }
+  .f-d img{ width:100%; max-width:200px; justify-self:center; }
+  .f-e{ grid-column:span 5; }
+  .f-f{ grid-column:span 7; display:grid; grid-template-columns:1fr .75fr; gap:18px; align-items:center; }
+  .f-f img{ width:100%; max-width:230px; justify-self:center; }
+  .kbd-demo{ margin-top:16px; display:inline-flex; align-items:center; gap:8px; font-size:.78rem; font-weight:700;
+    color:var(--teal-deep); background:var(--teal-tint); border:1px solid var(--teal-mid); padding:8px 14px; border-radius:10px; }
+
+  /* ============ FREE TRIAL ============ */
+  .trial-head{ display:grid; grid-template-columns:1.1fr .9fr; gap:44px; align-items:center; margin-bottom:52px; }
+  .trial-head img{ width:min(430px,100%); justify-self:center; }
+  .steps{ display:grid; grid-template-columns:repeat(4,1fr); gap:22px; counter-reset:step; }
+  .step{ padding:28px 24px; position:relative; }
+  .step .n{ font-size:2.6rem; font-weight:900; letter-spacing:-.04em; line-height:1;
+    background:linear-gradient(135deg, var(--teal) 0%, var(--teal-deep) 100%);
+    -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .step h3{ font-size:1rem; font-weight:800; margin-top:14px; }
+  .step p{ margin-top:8px; font-size:.85rem; color:var(--muted2); font-weight:500; }
+  .step::after{ content:""; position:absolute; top:42px; right:-19px; width:16px; height:2px;
+    background:repeating-linear-gradient(90deg, var(--teal-mid) 0 4px, transparent 4px 8px); }
+  .step:last-child::after{ display:none; }
+  .trial-cta-row{ margin-top:40px; display:flex; align-items:center; gap:20px; flex-wrap:wrap; }
+  .trial-cta-row .muted{ font-size:.84rem; color:var(--muted); font-weight:500; }
+
+  /* ============ TESTIMONIALS ============ */
+  .quotes{ display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+  .quote{ padding:32px 30px; position:relative; will-change:transform; transition:box-shadow .5s; transform-style:preserve-3d; }
+  .quote:hover{ box-shadow:0 34px 70px -30px rgba(24,136,136,.4), inset 0 1px 0 rgba(255,255,255,.95); }
+  .quote .mark{ position:absolute; top:20px; right:26px; font-size:4rem; line-height:1; font-weight:900; color:var(--teal-soft); font-family:Georgia,serif; user-select:none; }
+  .quote .fr{ font-style:italic; font-weight:600; color:var(--teal-deep); font-size:.95rem; position:relative; }
+  .quote .en{ margin-top:12px; font-size:.95rem; font-weight:500; color:var(--muted2); position:relative; }
+  .quote footer{ margin-top:20px; display:flex; align-items:center; gap:13px; }
+  .avatar{ width:44px; height:44px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:.86rem; color:#fff; background:linear-gradient(135deg, var(--teal), var(--teal-deep)); flex:none; }
+  .avatar.r{ background:linear-gradient(135deg, #f0698a, var(--rose)); }
+  .quote footer b{ font-size:.92rem; font-weight:800; display:block; }
+  .quote footer small{ font-size:.76rem; color:var(--muted); font-weight:600; }
+
+  /* ============ PRICING ============ */
+  .pricing-grid{ display:grid; grid-template-columns:1fr 1fr; gap:26px; }
+  .check-rows{ margin-top:22px; display:grid; gap:0; }
+  .check-row{ display:flex; align-items:center; gap:12px; padding:11px 0; border-top:1px solid var(--line);
+    font-size:.88rem; font-weight:600; color:var(--muted2); }
+  .check-row svg{ flex:none; color:var(--teal); }
+  .check-row svg path{ stroke-dasharray:1; stroke-dashoffset:1; transition:stroke-dashoffset .55s var(--ease-out); transition-delay:var(--kd,0s); }
+  .on .check-row svg path, .lit-checks .check-row svg path{ stroke-dashoffset:0; }
+  .save-banner{ margin-top:30px; display:grid; grid-template-columns:auto 1fr auto; gap:26px; align-items:center; padding:30px 34px; }
+  .save-banner img{ width:150px; }
+  .save-banner h3{ font-size:1.25rem; font-weight:800; letter-spacing:-.01em; }
+  .save-banner p{ margin-top:8px; font-size:.89rem; color:var(--muted2); font-weight:500; max-width:56ch; }
+  .save-pct{ font-size:2.6rem; font-weight:900; letter-spacing:-.04em; color:var(--teal-deep); white-space:nowrap; }
+  .save-pct small{ display:block; font-size:.72rem; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); }
+  .path-price-note{ margin-top:18px; font-size:.82rem; color:var(--muted); font-weight:500; display:flex; gap:10px; align-items:flex-start; }
+  .path-price-note svg{ color:var(--teal); flex:none; margin-top:2px; }
+
+  /* ============ FAQ ============ */
+  .faq-grid{ display:grid; grid-template-columns:1fr 340px; gap:52px; align-items:start; }
+  .faq-side{ position:sticky; top:110px; text-align:center; }
+  .faq-side img{ width:min(280px, 90%); margin:0 auto 18px; }
+  .faq-side p{ font-size:.88rem; color:var(--muted); font-weight:500; }
+  .faq-side a{ color:var(--teal-deep); font-weight:700; }
+  .acc{ border-bottom:1px solid var(--line); }
+  .acc:first-child{ border-top:1px solid var(--line); }
+  .acc-btn{ width:100%; background:none; border:0; cursor:pointer; display:flex; align-items:center; justify-content:space-between;
+    gap:20px; text-align:left; padding:24px 4px; font-size:1.04rem; font-weight:700; color:var(--ink); letter-spacing:-.01em;
+    transition:color .3s; }
+  .acc-btn:hover{ color:var(--teal-deep); }
+  .acc-ico{ flex:none; width:30px; height:30px; border-radius:50%; background:var(--teal-soft); position:relative; transition:background .35s, transform .5s var(--ease-out); }
+  .acc-ico::before,.acc-ico::after{ content:""; position:absolute; top:50%; left:50%; background:var(--teal-deep); border-radius:2px;
+    transition:transform .5s var(--ease-out), background .35s; }
+  .acc-ico::before{ width:12px; height:2px; margin:-1px 0 0 -6px; }
+  .acc-ico::after{ width:2px; height:12px; margin:-6px 0 0 -1px; }
+  .acc.open .acc-ico{ background:var(--teal); transform:rotate(180deg); }
+  .acc.open .acc-ico::before{ background:#fff; }
+  .acc.open .acc-ico::after{ transform:scaleY(0); background:#fff; }
+  .acc-panel{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .55s var(--ease-out); }
+  .acc.open .acc-panel{ grid-template-rows:1fr; }
+  .acc-inner{ overflow:hidden; }
+  .acc-inner p{ padding:0 44px 26px 4px; font-size:.93rem; color:var(--muted2); font-weight:500; opacity:0; transform:translateY(-6px);
+    transition:opacity .5s .1s, transform .5s .1s var(--ease-out); }
+  .acc.open .acc-inner p{ opacity:1; transform:none; }
+  .acc-inner b{ color:var(--ink); }
+
+  /* ============ POLICIES ============ */
+  .pol-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:22px; }
+  .pol{ padding:28px 24px; transition:transform .5s var(--ease-out), box-shadow .5s; }
+  .pol:hover{ transform:translateY(-6px); box-shadow:0 30px 60px -28px rgba(24,136,136,.38), inset 0 1px 0 rgba(255,255,255,.95); }
+  .pol .feat-icon{ width:42px; height:42px; margin-bottom:16px; }
+  .pol h3{ font-size:.98rem; font-weight:800; }
+  .pol p{ margin-top:8px; font-size:.83rem; color:var(--muted2); font-weight:500; }
+
+  /* ============ FINAL CTA ============ */
+  .final{ padding:30px 0 120px; }
+  .final-card{ text-align:center; padding:74px 40px; position:relative; overflow:hidden;
+    background:linear-gradient(150deg, #0e2727 0%, #143c3c 55%, #185252 100%); border-radius:28px;
+    box-shadow:0 40px 90px -40px rgba(14,39,39,.7); }
+  .final-card::before{ content:""; position:absolute; width:560px; height:560px; border-radius:50%; top:-260px; right:-160px;
+    background:radial-gradient(circle, rgba(33,182,182,.35) 0%, rgba(33,182,182,0) 65%); }
+  .final-card::after{ content:""; position:absolute; width:420px; height:420px; border-radius:50%; bottom:-240px; left:-120px;
+    background:radial-gradient(circle, rgba(33,182,182,.22) 0%, rgba(33,182,182,0) 65%); }
+  .final-card h2{ color:#fff; position:relative; z-index:1; }
+  .final-card p{ color:rgba(255,255,255,.72); margin:16px auto 34px; max-width:52ch; font-weight:500; position:relative; z-index:1; }
+  .final-card .btn{ position:relative; z-index:1; }
+  .final-fr{ display:block; margin-top:22px; font-style:italic; color:rgba(255,255,255,.5); font-size:.88rem; font-weight:500; position:relative; z-index:1; }
+
+  /* ============ FOOTER ============ */
+  footer.site{ background:#0e2323; color:rgba(255,255,255,.66); padding:64px 0 36px; position:relative; }
+  .foot-grid{ display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:40px; }
+  .foot-logo{ color:#fff; }
+  .foot-tag{ margin-top:14px; font-size:.86rem; font-weight:500; max-width:30ch; }
+  .foot-col h4{ color:#fff; font-size:.78rem; font-weight:800; letter-spacing:.12em; text-transform:uppercase; margin-bottom:16px; }
+  .foot-col a{ display:block; font-size:.88rem; font-weight:500; padding:5px 0; transition:color .25s; }
+  .foot-col a:hover{ color:var(--teal); }
+  .foot-bottom{ margin-top:48px; padding-top:24px; border-top:1px solid rgba(255,255,255,.1);
+    display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; font-size:.8rem; font-weight:500; }
+  .foot-bottom i{ font-style:italic; color:rgba(255,255,255,.42); }
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width:1023px){
+    .roadmap-head .journey-img{ width:230px; }
+    .rail{ display:grid; grid-template-columns:1fr 1fr; }
+    .lvl-card{ flex:auto; }
+    .rail-track{ display:none !important; }
+    .f-a,.f-d,.f-f{ grid-column:span 12; }
+    .f-b,.f-c,.f-e{ grid-column:span 6; }
+    .steps{ grid-template-columns:1fr 1fr; }
+    .step::after{ display:none; }
+    .faq-grid{ grid-template-columns:1fr; }
+    .faq-side{ position:static; order:2; margin-top:20px; }
+    .pol-grid{ grid-template-columns:1fr 1fr; }
+    .foot-grid{ grid-template-columns:1fr 1fr; }
+    .both-strip{ grid-template-columns:1fr 1fr; }
+  }
+  @media (max-width:860px){
+    .hero{ padding-top:140px; }
+    .hero-grid{ grid-template-columns:1fr; gap:26px; }
+    .hero-visual{ min-height:380px; order:2; }
+    .trial-head{ grid-template-columns:1fr; gap:26px; }
+    .quotes{ grid-template-columns:1fr; }
+    .pricing-grid,.plans-grid{ grid-template-columns:1fr; }
+    .paths-grid{ grid-template-columns:1fr; }
+    .save-banner{ grid-template-columns:1fr; text-align:center; }
+    .save-banner img{ margin:0 auto; }
+    .roadmap-head{ flex-direction:column; align-items:flex-start; }
+  }
+  @media (max-width:768px){
+    nav.main{ position:fixed; inset:68px 0 auto 0; background:rgba(255,255,255,.96);
+      backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
+      flex-direction:column; padding:18px 24px 26px; gap:2px; border-bottom:1px solid var(--line);
+      box-shadow:0 30px 60px -30px rgba(33,37,41,.3);
+      transform:translateY(-12px); opacity:0; pointer-events:none; transition:transform .4s var(--ease-out), opacity .4s; }
+    nav.main a{ font-size:1rem; padding:13px 8px; border-radius:12px; }
+    .nav-toggle:checked ~ nav.main{ transform:none; opacity:1; pointer-events:auto; }
+    .burger{ display:flex; flex-direction:column; justify-content:center; gap:5px; width:44px; height:44px;
+      margin-left:auto; cursor:pointer; padding:10px; border-radius:12px; }
+    .burger:hover{ background:var(--teal-soft); }
+    .burger span{ display:block; height:2px; border-radius:2px; background:var(--ink); transition:transform .4s var(--ease-out), opacity .3s; }
+    .nav-toggle:checked ~ .burger span:nth-child(1){ transform:translateY(7px) rotate(45deg); }
+    .nav-toggle:checked ~ .burger span:nth-child(2){ opacity:0; }
+    .nav-toggle:checked ~ .burger span:nth-child(3){ transform:translateY(-7px) rotate(-45deg); }
+    .nav-cta{ display:none; }
+  }
+  @media (max-width:640px){
+    .sec{ padding:78px 0; }
+    .rail{ grid-template-columns:1fr; }
+    .steps{ grid-template-columns:1fr; }
+    .pol-grid{ grid-template-columns:1fr; }
+    .both-strip{ grid-template-columns:1fr; }
+    .f-b,.f-c,.f-e{ grid-column:span 12; }
+    .f-a,.f-d,.f-f{ grid-template-columns:1fr; }
+    .f-a img,.f-d img,.f-f img{ max-width:200px; }
+    .foot-grid{ grid-template-columns:1fr; gap:28px; }
+    .hero-ctas .btn-hero{ width:100%; }
+    .magnet-zone{ width:100%; }
+    .float-card{ display:none; }
+    .save-banner{ padding:26px 22px; }
+    .final-card{ padding:56px 24px; }
+    .acc-inner p{ padding-right:8px; }
+  }
+
+  /* ============ REDUCED MOTION / STATIC ============ */
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    *,*::before,*::after{ animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; }
+    [data-rv],.chip{ opacity:1 !important; transform:none !important; }
+    .line > span{ transform:none !important; }
+    .lvl-card .cefr{ transform:rotateY(0) !important; }
+    .check-row svg path{ stroke-dashoffset:0 !important; }
+  }
+  html.static [data-rv],html.static .chip{ opacity:1 !important; transform:none !important; animation:none !important; }
+  html.static .line > span{ transform:none !important; }
+  html.static .mesh b,html.static .hero-char,html.static .float-card,html.static .hero-shadow,html.static .shimmer{ animation:none !important; }
+  html.static .lvl-card .cefr{ transform:rotateY(0) !important; }
+  html.static .lvl-card{ border-color:var(--teal-mid); }
+  html.static .lvl-card .lvl-dot{ background:var(--teal); border-color:var(--teal); }
+  html.static .check-row svg path{ stroke-dashoffset:0 !important; }
+</style>
+</head>
+<body>
+
+<div class="mesh" aria-hidden="true"><b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b></div>
+<div class="progress" id="progress" aria-hidden="true"></div>
+
+<!-- ============ 1 · HEADER ============ -->
+<header class="site" id="siteHeader">
+  <div class="container nav-row">
+    <a class="logo" href="#top" aria-label="Passu home">Pass<span>u</span><i></i></a>
+    <input type="checkbox" id="navToggle" class="nav-toggle" aria-label="Open menu">
+    <label class="burger" for="navToggle" aria-hidden="true"><span></span><span></span><span></span></label>
+    <nav class="main" aria-label="Main">
+      <a href="#levels">Passu Levels</a>
+      <a href="#plans">Core &amp; Premium</a>
+      <a href="#paths">Learning Paths</a>
+      <a href="#trial">Free Trial</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <a class="btn btn-primary btn-sm nav-cta" href="#trial">Book a free class</a>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ============ 2 · HERO ============ -->
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <p class="eyebrow">Bienvenue chez Passu · Live French, taught properly</p>
+      <h1 class="rv-lines" id="heroTitle" data-rv>
+        <span class="line"><span>Your complete 12-month</span></span>
+        <span class="line"><span>path <span class="shimmer">toward B2.</span></span></span>
+      </h1>
+      <p class="hero-sub">Six connected Passu Levels, live classes three times a week, and a real
+        two-hour class experience. A serious program that always tells you what happens next —
+        and never promises what it can't keep.</p>
+      <div class="hero-ctas">
+        <span class="magnet-zone"><a class="btn btn-primary btn-hero" id="magnetBtn" href="#trial">Book your free trial class
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></span>
+        <a class="arrow-link" href="#levels">See the roadmap
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div>
+      <p class="hero-note">The trial is a real scheduled class — not a demo, not a sales call.</p>
+      <div class="chips" aria-label="Program facts">
+        <span class="chip" style="--cd:.35s; --ox:-46px; --oy:34px; --or:-6deg"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="4" width="18" height="17" rx="3"/><path d="M8 2v4M16 2v4M3 9h18"/></svg><b>3×</b>&nbsp;live classes weekly</span>
+        <span class="chip" style="--cd:.46s; --ox:40px; --oy:40px; --or:5deg"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg><b>2 hrs</b>&nbsp;per session</span>
+        <span class="chip" style="--cd:.57s; --ox:-30px; --oy:46px; --or:4deg"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19V6l8-3 8 3v13"/><path d="M4 19h16M9 19v-6h6v6"/></svg><b>6</b>&nbsp;Passu Levels</span>
+        <span class="chip" style="--cd:.68s; --ox:52px; --oy:28px; --or:-5deg"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11l3 3 8-8"/><path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h9"/></svg><b>2</b>&nbsp;exams per level</span>
+        <span class="chip" style="--cd:.79s; --ox:-20px; --oy:52px; --or:6deg"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a4 4 0 0 1 4 4v5a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4z"/><path d="M5 11a7 7 0 0 0 14 0M12 18v4"/></svg><b>90 min</b>&nbsp;Speaking Club · optional</span>
+      </div>
+    </div>
+    <div class="hero-visual" aria-hidden="true">
+      <div class="hero-halo"></div>
+      <div class="float-card glass fc-live"><span class="dot"></span><span>Class in session<small>Passu Level 2 · Tonight 7:00 pm</small></span></div>
+      <div class="hero-char">
+        <img src="assets/girl-books-waving.svg" alt="" width="390" height="360">
+        <div class="hero-shadow"></div>
+      </div>
+      <div class="float-card glass fc-b2"><span>12 months, one path</span>
+        <span class="track"><i>A1</i><span class="seg f"></span><span class="seg f"></span><span class="seg"></span><span class="seg"></span><span class="seg"></span><span class="seg"></span><i class="goal">B2</i></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 3 · ROADMAP ============ -->
+<section class="sec roadmap-outer" id="levels">
+  <div class="roadmap-sticky">
+    <div class="container">
+      <div class="roadmap-head">
+        <div class="rv-lines" data-rv>
+          <p class="eyebrow">The Passu roadmap</p>
+          <h2><span class="line"><span>One roadmap.</span></span>
+              <span class="line"><span>Six connected levels.</span></span></h2>
+          <p style="margin-top:16px; color:var(--muted); font-weight:500; max-width:52ch;">Every level hands you
+            to the next — same method, same rhythm, rising challenge. You always know where you
+            are and what comes after.</p>
+        </div>
+        <img class="journey-img" src="assets/learning-journey.svg" alt="Four learners on ascending steps" data-rv="right">
+      </div>
+      <div class="rail-wrap">
+        <div class="rail-track" aria-hidden="true"><div class="rail-fill" id="railFill"></div><div class="rail-head-dot" id="railDot"></div></div>
+        <div class="rail" id="rail">
+          <article class="lvl-card glass">
+            <span class="idx" aria-hidden="true">01</span>
+            <div class="lvl-top"><span class="lvl-dot"></span><span class="lvl-name">Passu Level 1</span>
+              <span class="cefr" aria-label="CEFR A1.1"><span class="f front">A1.1</span><span class="f back">·</span></span></div>
+            <p>Build the essential foundations for everyday French — sounds, greetings, and your
+              first real sentences.</p>
+            <p class="lvl-fr">« Bonjour, je m'appelle… »</p>
+          </article>
+          <article class="lvl-card glass">
+            <span class="idx" aria-hidden="true">02</span>
+            <div class="lvl-top"><span class="lvl-dot"></span><span class="lvl-name">Passu Level 2</span>
+              <span class="cefr" aria-label="CEFR A1.2"><span class="f front">A1.2</span><span class="f back">·</span></span></div>
+            <p>Expand practical vocabulary and sentence control — describe your day, your plans,
+              your world.</p>
+            <p class="lvl-fr">« Qu'est-ce qu'on fait ce week-end ? »</p>
+          </article>
+          <article class="lvl-card glass">
+            <span class="idx" aria-hidden="true">03</span>
+            <div class="lvl-top"><span class="lvl-dot"></span><span class="lvl-name">Passu Level 3</span>
+              <span class="cefr" aria-label="CEFR A2"><span class="f front">A2</span><span class="f back">·</span></span></div>
+            <p>Move from basic exchanges into longer communication — past, future, and opinions
+              that hold together.</p>
+            <p class="lvl-fr">« Je me débrouille de mieux en mieux. »</p>
+          </article>
+          <article class="lvl-card glass">
+            <span class="idx" aria-hidden="true">04</span>
+            <div class="lvl-top"><span class="lvl-dot"></span><span class="lvl-name">Passu Level 4</span>
+              <span class="cefr" aria-label="CEFR B1"><span class="f front">B1</span><span class="f back">·</span></span></div>
+            <p>Develop confidence, accuracy and independent expression — French that survives
+              real conversations.</p>
+            <p class="lvl-fr">« À mon avis, c'est possible. »</p>
+          </article>
+          <article class="lvl-card glass">
+            <span class="idx" aria-hidden="true">05</span>
+            <div class="lvl-top"><span class="lvl-dot"></span><span class="lvl-name">Passu Level 5</span>
+              <span class="cefr" aria-label="CEFR B2.1"><span class="f front">B2.1</span><span class="f back">·</span></span></div>
+            <p>Begin your selected Path — Social, Business, or Exam Preparation — with French
+              that's ready to specialize.</p>
+            <span class="lvl-path-tag">Paths separate here</span>
+          </article>
+          <article class="lvl-card glass">
+            <span class="idx" aria-hidden="true">06</span>
+            <div class="lvl-top"><span class="lvl-dot"></span><span class="lvl-name">Passu Level 6</span>
+              <span class="cefr" aria-label="CEFR B2.2"><span class="f front">B2.2</span><span class="f back">·</span></span></div>
+            <p>Complete the advanced stage of your chosen specialization — and finish the
+              12-month journey at B2.</p>
+            <p class="lvl-fr">« On y est arrivé. »</p>
+          </article>
+        </div>
+      </div>
+      <p class="roadmap-hint"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg>Keep scrolling — the journey moves with you</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 4 · PLANS ============ -->
+<section class="sec" id="plans">
+  <div class="container">
+    <div class="sec-head rv-lines" data-rv>
+      <p class="eyebrow">Core &amp; Premium</p>
+      <h2><span class="line"><span>Same journey.</span></span>
+          <span class="line"><span>Two class experiences.</span></span></h2>
+      <p>Both plans follow the identical roadmap with the same instructors. The only real
+        difference is how many people share the room with you — so that's the only difference
+        we'll sell you.</p>
+    </div>
+    <div class="both-strip" data-rv>
+      <div class="both-item" data-rv-child><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="4" width="18" height="17" rx="3"/><path d="M8 2v4M16 2v4M3 9h18"/></svg>3 live 2-hour classes weekly</div>
+      <div class="both-item" data-rv-child><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="3"/><path d="M10 9.5l5 2.5-5 2.5z"/></svg>Full platform + class recordings</div>
+      <div class="both-item" data-rv-child><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11l3 3 8-8"/><path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h9"/></svg>Midterm &amp; final exam each level</div>
+      <div class="both-item" data-rv-child><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a4 4 0 0 1 4 4v5a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4z"/><path d="M5 11a7 7 0 0 0 14 0M12 18v4"/></svg>Optional weekend Speaking Club</div>
+    </div>
+    <div class="plans-grid" data-rv>
+      <article class="plan-card glass" data-rv-child>
+        <span class="plan-flag">Core</span>
+        <h3 class="plan-name">The full program, full room</h3>
+        <p class="plan-size">Up to 14 students per class</p>
+        <div class="plan-price"><span class="cur">$</span><span class="num">99</span><span class="per">/ month</span></div>
+        <p class="plan-for"><b>Best for:</b> structure, community, and value. The complete Passu
+          experience with a lively, larger group.</p>
+        <a class="btn btn-ghost plan-cta" href="#trial">Start with a free class</a>
+      </article>
+      <article class="plan-card glass premium" data-rv-child>
+        <span class="plan-flag">Premium</span>
+        <h3 class="plan-name">The same program, half the room</h3>
+        <p class="plan-size">Up to 7 students per class</p>
+        <div class="plan-price"><span class="cur">$</span><span class="num">200</span><span class="per">/ month</span></div>
+        <div class="promise"><b>The truthful premium promise</b>
+          Fewer classmates doesn't guarantee fluency — nothing does. It guarantees more speaking
+          turns per class. That is the honest reason Premium exists, and the only claim we make.</div>
+        <a class="btn btn-primary plan-cta" href="#trial">Start with a free class</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 5 · LEARNING PATHS ============ -->
+<section class="sec" id="paths">
+  <div class="container">
+    <div class="sec-head rv-lines" data-rv>
+      <p class="eyebrow">Learning Paths</p>
+      <h2><span class="line"><span>Choose your path</span></span>
+          <span class="line"><span>from the beginning.</span></span></h2>
+      <p>You pick a destination on day one, so every level quietly builds toward it. The paths
+        fully separate at Passu Levels 5–6.</p>
+    </div>
+    <div class="paths-grid" data-rv>
+      <article class="path-card glass" data-rv-child>
+        <div class="path-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-8 8H5l-2 2V12a8 8 0 0 1 8-8h2a8 8 0 0 1 8 8z"/><path d="M8 11h8M8 15h5"/></svg></div>
+        <h3>Social French</h3>
+        <p>French for a life lived in French — everyday conversations, travel, relationships,
+          and the culture behind the words.</p>
+        <div class="path-tags"><span>Everyday life</span><span>Travel</span><span>Relationships</span><span>Culture</span></div>
+      </article>
+      <article class="path-card glass" data-rv-child>
+        <div class="path-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 13h18"/></svg></div>
+        <h3>Business French</h3>
+        <p>Professional communication that holds up under pressure — meetings, presentations,
+          email, and the workplace register.</p>
+        <div class="path-tags"><span>Meetings</span><span>Presentations</span><span>Professional email</span></div>
+      </article>
+      <article class="path-card glass" data-rv-child>
+        <div class="path-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/></svg></div>
+        <h3>Exam Preparation</h3>
+        <p>Strategy, timing, and feedback for official French exams — timed practice under real
+          conditions, reviewed by instructors.</p>
+        <div class="path-tags"><span>Strategies</span><span>Timed practice</span><span>Instructor feedback</span></div>
+      </article>
+    </div>
+    <p class="paths-note" data-rv><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M12 11v5"/></svg>
+      Honest note: paths separate at Passu Levels 5–6. When a cohort is small, path groups may
+      be combined — we tell you before you commit, not after.</p>
+  </div>
+</section>
+
+<!-- ============ 6 · FEATURES ============ -->
+<section class="sec" id="features">
+  <div class="container">
+    <div class="sec-head rv-lines" data-rv>
+      <p class="eyebrow">The platform</p>
+      <h2><span class="line"><span>A serious program that tells</span></span>
+          <span class="line"><span>students what happens next.</span></span></h2>
+      <p>Class is where you learn. The platform is what makes it stick — built around one idea:
+        you should never lose track of anything you've been taught.</p>
+    </div>
+    <div class="bento" data-rv>
+      <article class="feat glass f-a" data-rv-child>
+        <div>
+          <div class="feat-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></div>
+          <h3>Smart word references</h3>
+          <p>Every word remembers where you learned it. See which lesson introduced it — and
+            jump back to that exact moment in the class recording.</p>
+          <span class="kbd-demo">« se débrouiller » · introduced in Level 3, Lesson 12 · Jump to moment</span>
+        </div>
+        <img src="assets/girl-searching.svg" alt="Learner following word origins with a magnifying glass" loading="lazy">
+      </article>
+      <article class="feat glass f-b" data-rv-child>
+        <div class="feat-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5v14z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></svg></div>
+        <h3>Integrated dictionary</h3>
+        <p>Look up any word without leaving your lesson — definitions, genders, and real usage
+          examples at your level.</p>
+      </article>
+      <article class="feat glass f-c" data-rv-child>
+        <div class="feat-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2L4.5 13.5H11L9.5 22 19 10h-6.5L13 2z"/></svg></div>
+        <h3>Verb conjugator</h3>
+        <p>Every tense of every verb you've met, one tap away — connected to the lessons where
+          you first saw them.</p>
+      </article>
+      <article class="feat glass f-d" data-rv-child>
+        <div>
+          <div class="feat-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.9 4.6L18.5 9l-4.6 1.4L12 15l-1.9-4.6L5.5 9l4.6-1.4L12 3z"/><path d="M19 15l.9 2.1L22 18l-2.1.9L19 21l-.9-2.1L16 18l2.1-.9L19 15z"/></svg></div>
+          <h3>AI flashcards &amp; weekly plans</h3>
+          <p>Your mistakes become your study plan. AI turns what you struggled with in class
+            into flashcards and a weekly review plan sized to your schedule.</p>
+        </div>
+        <img src="assets/girl-studying.svg" alt="Learner studying with book, laptop and ideas" loading="lazy">
+      </article>
+      <article class="feat glass f-e" data-rv-child>
+        <div class="feat-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="3"/><path d="M10 9.5l5 2.5-5 2.5z"/></svg></div>
+        <h3>Class recordings</h3>
+        <p>Miss a class, keep the class. Every session is recorded and searchable, so travel and
+          life don't cost you a level.</p>
+      </article>
+      <article class="feat glass f-f" data-rv-child>
+        <div>
+          <div class="feat-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg></div>
+          <h3>Listen everywhere</h3>
+          <p>Recordings and audio review travel with you — on the bus, on a run, entre deux
+            rendez-vous. Your commute becomes class time.</p>
+        </div>
+        <img src="assets/girl-listening.svg" alt="Learner listening with headphones" loading="lazy">
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 7 · FREE TRIAL ============ -->
+<section class="sec" id="trial">
+  <div class="container">
+    <div class="trial-head">
+      <div class="rv-lines" data-rv>
+        <p class="eyebrow">Free trial</p>
+        <h2><span class="line"><span>Try a real class before</span></span>
+            <span class="line"><span>choosing Core or Premium.</span></span></h2>
+        <p style="margin-top:16px; color:var(--muted); font-weight:500;">Not a recorded demo. Not a
+          placement quiz with a sales call after. You sit in an actual scheduled class at your
+          level and judge us on the real thing.</p>
+      </div>
+      <img src="assets/try-desktop.svg" alt="Instructor waving from a live class on a laptop" data-rv="right">
+    </div>
+    <div class="steps" data-rv>
+      <article class="step glass" data-rv-child>
+        <span class="n">01</span>
+        <h3>Reserve a seat</h3>
+        <p>Pick a real upcoming class that matches your level. Takes two minutes.</p>
+      </article>
+      <article class="step glass" data-rv-child>
+        <span class="n">02</span>
+        <h3>Attend a 2-hour class</h3>
+        <p>The full experience — live instructor, classmates, exercises, corrections.</p>
+      </article>
+      <article class="step glass" data-rv-child>
+        <span class="n">03</span>
+        <h3>Explore the platform</h3>
+        <p>Recordings, dictionary, conjugator, and AI flashcards — unlocked for you to try.</p>
+      </article>
+      <article class="step glass" data-rv-child>
+        <span class="n">04</span>
+        <h3>Choose how to continue</h3>
+        <p>Core, Premium — or not at all. No pressure, no follow-up barrage.</p>
+      </article>
+    </div>
+    <div class="trial-cta-row" data-rv>
+      <a class="btn btn-primary btn-hero" href="#pricing">Reserve your free seat</a>
+      <span class="muted">No card required. One trial class per student.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 8 · TESTIMONIALS ============ -->
+<section class="sec" id="stories">
+  <div class="container">
+    <div class="sec-head rv-lines" data-rv>
+      <p class="eyebrow">Student stories</p>
+      <h2><span class="line"><span>People who kept showing up —</span></span>
+          <span class="line"><span>and what actually changed.</span></span></h2>
+    </div>
+    <div class="quotes" data-rv>
+      <article class="quote glass" data-tilt data-rv-child>
+        <span class="mark" aria-hidden="true">&ldquo;</span>
+        <p class="fr">« Trois cours par semaine, c'est le rythme qui m'a gardée constante. »</p>
+        <p class="en">Three weekly classes was the rhythm that kept me consistent. I stopped
+          negotiating with myself about when to study — class was simply on the calendar.</p>
+        <footer><span class="avatar">AR</span><div><b>Amélie Rousseau</b><small>Passu Level 4 · A1 to B1 · Social Path</small></div></footer>
+      </article>
+      <article class="quote glass" data-tilt data-rv-child>
+        <span class="mark" aria-hidden="true">&ldquo;</span>
+        <p class="fr">« Dans un petit groupe, impossible de se cacher. »</p>
+        <p class="en">Premium's smaller group meant real speaking time in every single class. In a
+          room of seven, you can't hide — which turned out to be exactly what I was paying for.</p>
+        <footer><span class="avatar r">DO</span><div><b>David Okonkwo</b><small>Passu Level 5 · Business Path · Premium</small></div></footer>
+      </article>
+      <article class="quote glass" data-tilt data-rv-child>
+        <span class="mark" aria-hidden="true">&ldquo;</span>
+        <p class="fr">« Réviser est devenu presque automatique. »</p>
+        <p class="en">The recordings plus AI flashcards changed how I revise. My mistakes from
+          Tuesday's class were my flashcards by Wednesday morning.</p>
+        <footer><span class="avatar">SM</span><div><b>Sofia Martín</b><small>Passu Level 6 · Exam Preparation Path</small></div></footer>
+      </article>
+      <article class="quote glass" data-tilt data-rv-child>
+        <span class="mark" aria-hidden="true">&ldquo;</span>
+        <p class="fr">« Chaque mot sait d'où il vient. »</p>
+        <p class="en">Being able to jump to the exact moment a word was taught is the feature I
+          didn't know I needed. It's like having a perfect memory of every class.</p>
+        <footer><span class="avatar r">LB</span><div><b>Liam Bennett</b><small>Passu Level 3 · Social Path</small></div></footer>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 9 · PRICING ============ -->
+<section class="sec" id="pricing">
+  <div class="container">
+    <div class="sec-head rv-lines" data-rv>
+      <p class="eyebrow">Pricing</p>
+      <h2><span class="line"><span>Start monthly. Save when</span></span>
+          <span class="line"><span>committing to the full journey.</span></span></h2>
+      <p>No enrollment fees, no locked contracts. Month to month by default — a discount only
+        if you choose to commit.</p>
+    </div>
+    <div class="pricing-grid" data-rv id="pricingCards">
+      <article class="plan-card glass" data-rv-child>
+        <span class="plan-flag">Core</span>
+        <h3 class="plan-name">Monthly</h3>
+        <p class="plan-size">Up to 14 students per class</p>
+        <div class="plan-price"><span class="cur">$</span><span class="num" data-count="99">0</span><span class="per">/ month</span></div>
+        <div class="check-rows">
+          <div class="check-row" style="--kd:.05s"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5" pathLength="1"/></svg>3 live 2-hour classes every week</div>
+          <div class="check-row" style="--kd:.2s"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5" pathLength="1"/></svg>Full platform access + recordings</div>
+          <div class="check-row" style="--kd:.35s"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5" pathLength="1"/></svg>Midterm &amp; final exam each level</div>
+          <div class="check-row" style="--kd:.5s"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5" pathLength="1"/></svg>Optional 90-min weekend Speaking Club</div>
+          <div class="check-row" style="--kd:.65s"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5" pathLength="1"/></svg>Switch to Premium at any month</div>
+        </div>
+        <a class="btn btn-ghost plan-cta" href="#trial">Try a free class first</a>
+      </article>
+      <article class="plan-card glass premium" data-rv-child>
+        <span class="plan-flag">Premium</span>
+        <h3 class="plan-name">Monthly</h3>
+        <p class="plan-size">Up to 7 students per class</p>
+        <div class="plan-price"><span class="cur">$</span><span class="num" data-count="200">0</span><span class="per">/ month</span></div>
+        <div class="check-rows">
+          <div class="check-row" style="--kd:.05s"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5" pathLength="1"/></svg>Everything in Core, same roadmap</div>
+          <div class="check-row" style="--kd:.2s"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5" pathLength="1"/></svg>Half the class size — up to 7 students</div>
+          <div class="check-row" style="--kd:.35s"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5" pathLength="1"/></svg>More speaking turns per class</div>
+          <div class="check-row" style="--kd:.5s"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5" pathLength="1"/></svg>Closer instructor attention</div>
+          <div class="check-row" style="--kd:.65s"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5" pathLength="1"/></svg>Switch back to Core at any month</div>
+        </div>
+        <a class="btn btn-primary plan-cta" href="#trial">Try a free class first</a>
+      </article>
+    </div>
+    <div class="save-banner glass" data-rv="scale">
+      <img src="assets/girl-investment.svg" alt="Learner pointing at a rising chart" loading="lazy">
+      <div>
+        <h3>Commit to the full journey, save 5%</h3>
+        <p>Pay the full 12-month journey upfront and take 5% off the total. That's the whole
+          deal — no asterisks, no "limited time".</p>
+        <p class="path-price-note"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M12 11v5"/></svg>
+          Path pricing: Social French runs at the standard rate shown above. Business and Exam
+          Preparation carry path-specific rates at Passu Levels 5–6 — published before you choose.</p>
+      </div>
+      <div class="save-pct">−5%<small>Full journey</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 10 · FAQ ============ -->
+<section class="sec" id="faq">
+  <div class="container">
+    <div class="sec-head rv-lines" data-rv>
+      <p class="eyebrow">FAQ</p>
+      <h2><span class="line"><span>Honest answers,</span></span>
+          <span class="line"><span>before you pay for anything.</span></span></h2>
+    </div>
+    <div class="faq-grid">
+      <div data-rv>
+        <div class="acc" data-rv-child>
+          <button class="acc-btn" aria-expanded="false">Do I need previous French knowledge?<span class="acc-ico" aria-hidden="true"></span></button>
+          <div class="acc-panel"><div class="acc-inner"><p>No. Passu Level 1 assumes zero French — we start with sounds, greetings, and your
+            first sentences. If you already have some French, the trial class doubles as a level
+            check and we'll place you where you'll actually be challenged.</p></div></div>
+        </div>
+        <div class="acc" data-rv-child>
+          <button class="acc-btn" aria-expanded="false">Can I change from Core to Premium later?<span class="acc-ico" aria-hidden="true"></span></button>
+          <div class="acc-panel"><div class="acc-inner"><p>Yes, at any monthly boundary, in either direction. Same roadmap, same instructors —
+            you keep all your progress, recordings, and flashcards. No penalties and no forms.</p></div></div>
+        </div>
+        <div class="acc" data-rv-child>
+          <button class="acc-btn" aria-expanded="false">When do the Learning Paths separate?<span class="acc-ico" aria-hidden="true"></span></button>
+          <div class="acc-panel"><div class="acc-inner"><p>At Passu Levels 5–6 (B2.1 and B2.2). Levels 1–4 are shared by everyone, with your
+            chosen path flavouring examples and vocabulary along the way. Small cohorts may be
+            combined across paths — and we tell you if that applies to your group before you commit.</p></div></div>
+        </div>
+        <div class="acc" data-rv-child>
+          <button class="acc-btn" aria-expanded="false">Is the free trial a real class?<span class="acc-ico" aria-hidden="true"></span></button>
+          <div class="acc-panel"><div class="acc-inner"><p>Yes — a scheduled 2-hour class with a live instructor and current students, not a
+            demo built to impress you. You'll do the exercises, get corrected, and feel the actual
+            pace. That's the point: judge us on the real product.</p></div></div>
+        </div>
+        <div class="acc" data-rv-child>
+          <button class="acc-btn" aria-expanded="false">Is B2 guaranteed after 12 months?<span class="acc-ico" aria-hidden="true"></span></button>
+          <div class="acc-panel"><div class="acc-inner"><p><b>No — and be wary of anyone who guarantees it.</b> Language outcomes depend on
+            attendance, practice, and where you start. What we promise is the roadmap: six
+            connected levels, three live classes a week, and honest feedback on where you stand.
+            Students who attend consistently reach B2 on this path — that's the claim, and it's
+            the only one we'll make.</p></div></div>
+        </div>
+      </div>
+      <div class="faq-side" data-rv="right">
+        <img src="assets/boy-notebook.svg" alt="Student taking relaxed notes in a bean bag" loading="lazy">
+        <p>Still weighing it up? The trial class answers most questions better than we can.
+          <a href="#trial">Reserve a free seat</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 11 · POLICIES ============ -->
+<section class="sec" id="policies" style="padding-top:0;">
+  <div class="container">
+    <div class="sec-head rv-lines" data-rv>
+      <p class="eyebrow">Our policies</p>
+      <h2><span class="line"><span>The fine print,</span></span>
+          <span class="line"><span>in large print.</span></span></h2>
+    </div>
+    <div class="pol-grid" data-rv>
+      <article class="pol glass" data-rv-child>
+        <div class="feat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="3"/><path d="M10 9.5l5 2.5-5 2.5z"/></svg></div>
+        <h3>Attendance &amp; recordings</h3>
+        <p>Life happens. Miss a class and the full recording is waiting for you the same day —
+          no penalties, no lost ground.</p>
+      </article>
+      <article class="pol glass" data-rv-child>
+        <div class="feat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 2l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14M7 22l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg></div>
+        <h3>Flexible plan changes</h3>
+        <p>Switch between Core and Premium at any monthly boundary, in either direction. Your
+          progress travels with you.</p>
+      </article>
+      <article class="pol glass" data-rv-child>
+        <div class="feat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <h3>Fair refund policy</h3>
+        <p>If we can't deliver your classes as scheduled, you don't pay for them. Clear terms,
+          stated before you commit — not after.</p>
+      </article>
+      <article class="pol glass" data-rv-child>
+        <div class="feat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-9-9"/><path d="M9 11l3 3 9-9"/></svg></div>
+        <h3>Honest promises</h3>
+        <p>No "fluent in 3 months", no fake urgency, no guarantees we can't keep. A roadmap,
+          real classes, and clear expectations.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FINAL CTA ============ -->
+<section class="final">
+  <div class="container">
+    <div class="final-card" data-rv="scale">
+      <h2>Twelve months from now, you'll wish you started today.</h2>
+      <p>Or you'll be glad you did. Sit in one real class — free — and decide with evidence
+        instead of promises.</p>
+      <span class="magnet-zone"><a class="btn btn-primary btn-hero" id="magnetBtn2" href="#trial">Book your free trial class</a></span>
+      <span class="final-fr">« Le meilleur moment pour commencer, c'était hier. Le deuxième meilleur, c'est aujourd'hui. »</span>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ 12 · FOOTER ============ -->
+<footer class="site">
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <span class="logo foot-logo">Pass<span style="color:var(--teal)">u</span><i style="font-style:normal;display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--rose);margin-left:4px;"></i></span>
+        <p class="foot-tag">Live French, six connected levels, and a program that always tells
+          you what happens next.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Program</h4>
+        <a href="#levels">Passu Levels</a>
+        <a href="#plans">Core &amp; Premium</a>
+        <a href="#paths">Learning Paths</a>
+        <a href="#features">The platform</a>
+      </div>
+      <div class="foot-col">
+        <h4>Start</h4>
+        <a href="#trial">Free Trial</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#stories">Student stories</a>
+      </div>
+      <div class="foot-col">
+        <h4>Help</h4>
+        <a href="#faq">FAQ</a>
+        <a href="#policies">Policies</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Passu. All rights reserved.</span>
+      <i>À bientôt en classe.</i>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+  var RM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var STATIC = location.hash.indexOf('static') !== -1;
+  if (RM || STATIC) document.documentElement.classList.add('static');
+  var MOTION = !RM && !STATIC;
+  var FINE = window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+
+  /* ---------- header + scroll progress (one rAF loop on scroll) ---------- */
+  var header = document.getElementById('siteHeader');
+  var progress = document.getElementById('progress');
+  var ticking = false;
+  function onScrollFrame(){
+    ticking = false;
+    var y = window.scrollY || 0;
+    header.classList.toggle('scrolled', y > 12);
+    var max = document.documentElement.scrollHeight - window.innerHeight;
+    progress.style.transform = 'scaleX(' + (max > 0 ? Math.min(1, y / max) : 0) + ')';
+    checkReveals();
+    if (pinActive) updateRail(y);
+  }
+  function requestFrame(){ if (!ticking){ ticking = true; requestAnimationFrame(onScrollFrame); } }
+  window.addEventListener('scroll', requestFrame, { passive:true });
+
+  /* ---------- reveal system ---------- */
+  document.querySelectorAll('[data-rv]').forEach(function(el){
+    var kids = el.querySelectorAll('[data-rv-child]');
+    kids.forEach(function(kid, i){
+      kid.setAttribute('data-rv','');
+      kid.style.transitionDelay = (0.08 + i * 0.04) + 's';
+    });
+  });
+  var pending = Array.prototype.slice.call(document.querySelectorAll('[data-rv]'));
+  function checkReveals(){
+    if (!pending.length) return;
+    var vh = window.innerHeight;
+    pending = pending.filter(function(el){
+      var r = el.getBoundingClientRect();
+      if (r.top < vh * 0.9 && r.bottom > 0){
+        el.classList.add('on');
+        el.querySelectorAll('[data-count]').forEach(countUp);
+        return false;
+      }
+      return true;
+    });
+  }
+  if (MOTION){
+    if ('IntersectionObserver' in window){
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add('on'); io.unobserve(e.target); } });
+      }, { threshold: 0.15, rootMargin: '0px 0px -6% 0px' });
+      pending.forEach(function(el){ io.observe(el); });
+    }
+    /* hero title reveals on load, everything else on first scroll frame in view */
+    requestAnimationFrame(function(){ requestAnimationFrame(function(){
+      var ht = document.getElementById('heroTitle');
+      if (ht) ht.classList.add('on');
+      checkReveals();
+    }); });
+  } else {
+    pending.forEach(function(el){ el.classList.add('on'); });
+    pending = [];
+  }
+
+  /* ---------- roadmap pin ---------- */
+  var outer = document.querySelector('.roadmap-outer');
+  var rail = document.getElementById('rail');
+  var fill = document.getElementById('railFill');
+  var dot = document.getElementById('railDot');
+  var cards = rail ? Array.prototype.slice.call(rail.children) : [];
+  var pinActive = false, pinTop = 0, pinLen = 0, maxShift = 0, trackW = 0;
+
+  function setupPin(){
+    var wants = MOTION && window.innerWidth >= 1024 && window.innerHeight >= 620;
+    if (!wants){
+      if (pinActive){ rail.style.transform = ''; }
+      pinActive = false;
+      outer.classList.remove('pinned');
+      outer.classList.add('no-pin');
+      outer.style.height = '';
+      cards.forEach(function(c){ c.classList.add('lit'); });
+      return;
+    }
+    outer.classList.add('pinned');
+    outer.classList.remove('no-pin');
+    cards.forEach(function(c){ c.classList.remove('lit'); });
+    rail.style.transform = 'translate3d(0,0,0)';
+    var vw = document.documentElement.clientWidth;
+    maxShift = Math.max(0, rail.scrollWidth - (Math.min(vw, 1140) - 48));
+    pinLen = Math.max(700, Math.round(maxShift * 1.35));
+    outer.style.height = 'calc(100vh + ' + pinLen + 'px)';
+    var r = outer.getBoundingClientRect();
+    pinTop = r.top + window.scrollY;
+    trackW = rail.scrollWidth - 28;
+    pinActive = true;
+    updateRail(window.scrollY);
+  }
+
+  function updateRail(y){
+    var p = (y - pinTop) / pinLen;
+    p = Math.max(0, Math.min(1, p));
+    var ease = p < 0.5 ? 2*p*p : 1 - Math.pow(-2*p + 2, 2)/2;
+    rail.style.transform = 'translate3d(' + (-ease * maxShift) + 'px,0,0)';
+    fill.style.transform = 'scaleX(' + p + ')';
+    dot.style.transform = 'translate3d(' + (p * trackW) + 'px,0,0)';
+    for (var i = 0; i < cards.length; i++){
+      cards[i].classList.toggle('lit', p * 6 >= i + 0.42);
+    }
+  }
+
+  if (outer && rail){
+    setupPin();
+    var rT;
+    window.addEventListener('resize', function(){ clearTimeout(rT); rT = setTimeout(setupPin, 180); });
+    window.addEventListener('load', setupPin);
+  }
+
+  /* ---------- magnetic CTA (desktop, subtle, max 6px) ---------- */
+  if (MOTION && FINE){
+    ['magnetBtn','magnetBtn2'].forEach(function(id){
+      var btn = document.getElementById(id);
+      if (!btn) return;
+      var tx = 0, ty = 0, cx = 0, cy = 0, raf = null;
+      function tick(){
+        cx += (tx - cx) * 0.18; cy += (ty - cy) * 0.18;
+        btn.style.transform = 'translate(' + cx.toFixed(2) + 'px,' + cy.toFixed(2) + 'px)';
+        if (Math.abs(tx - cx) > 0.1 || Math.abs(ty - cy) > 0.1) raf = requestAnimationFrame(tick);
+        else raf = null;
+      }
+      function aim(e){
+        var r = btn.getBoundingClientRect();
+        var dx = e.clientX - (r.left + r.width/2), dy = e.clientY - (r.top + r.height/2);
+        var dist = Math.hypot(dx, dy), range = 140;
+        if (dist < range){ var pull = (1 - dist/range) * 6; tx = (dx/dist||0) * pull; ty = (dy/dist||0) * pull; }
+        else { tx = 0; ty = 0; }
+        if (!raf) raf = requestAnimationFrame(tick);
+      }
+      btn.parentElement.addEventListener('mousemove', aim);
+      btn.parentElement.addEventListener('mouseleave', function(){ tx = 0; ty = 0; if (!raf) raf = requestAnimationFrame(tick); });
+    });
+  }
+
+  /* ---------- testimonial tilt (2 degrees max, desktop only) ---------- */
+  if (MOTION && FINE){
+    document.querySelectorAll('[data-tilt]').forEach(function(card){
+      var raf = null, rx = 0, ry = 0;
+      function apply(){ raf = null; card.style.transform = 'perspective(700px) rotateX(' + rx + 'deg) rotateY(' + ry + 'deg)'; }
+      card.addEventListener('mousemove', function(e){
+        var r = card.getBoundingClientRect();
+        ry = ((e.clientX - r.left)/r.width - .5) * 4;
+        rx = -((e.clientY - r.top)/r.height - .5) * 4;
+        ry = Math.max(-2, Math.min(2, ry)); rx = Math.max(-2, Math.min(2, rx));
+        if (!raf) raf = requestAnimationFrame(apply);
+      });
+      card.addEventListener('mouseleave', function(){
+        rx = 0; ry = 0;
+        card.style.transition = 'transform .6s cubic-bezier(.22,1,.36,1), box-shadow .5s';
+        card.style.transform = '';
+        setTimeout(function(){ card.style.transition = ''; }, 620);
+      });
+    });
+  }
+
+  /* ---------- count-up prices ---------- */
+  function countUp(el){
+    if (el.hasAttribute('data-counted')) return;
+    el.setAttribute('data-counted','');
+    var target = parseInt(el.getAttribute('data-count'), 10);
+    if (!MOTION){ el.textContent = target; return; }
+    var t0 = null, dur = 1100;
+    function frame(t){
+      if (!t0) t0 = t;
+      var p = Math.min(1, (t - t0) / dur);
+      var ease = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(target * ease);
+      if (p < 1) requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  }
+  if (!MOTION){
+    document.querySelectorAll('[data-count]').forEach(function(n){ n.textContent = n.getAttribute('data-count'); });
+  }
+
+  /* ---------- FAQ accordion ---------- */
+  document.querySelectorAll('.acc-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var acc = btn.parentElement;
+      var open = acc.classList.contains('open');
+      document.querySelectorAll('.acc.open').forEach(function(o){
+        o.classList.remove('open');
+        o.querySelector('.acc-btn').setAttribute('aria-expanded','false');
+      });
+      if (!open){ acc.classList.add('open'); btn.setAttribute('aria-expanded','true'); }
+    });
+  });
+
+  /* ---------- close mobile nav on link tap ---------- */
+  var navToggle = document.getElementById('navToggle');
+  document.querySelectorAll('nav.main a').forEach(function(a){
+    a.addEventListener('click', function(){ navToggle.checked = false; });
+  });
+
+  onScrollFrame();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Passu — Your complete 12-month path toward B2</title>
+<meta name="description" content="Passu — six connected levels, live classes three times a week, and a real two-hour class experience. Your complete 12-month path toward B2.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   TÊTE-À-TÊTE — the page is a French conversation.
+   Kinetic bilingual typography: FR asks in ink, EN answers in teal,
+   rose is reserved for the honesty punchlines.
+   ============================================================ */
+:root{
+  --teal:#21b6b6;
+  --teal-deep:#188888;
+  --teal-soft:#e7f7f7;
+  --teal-tint:#f2fbfb;
+  --teal-mid:#cdeeee;
+  --rose:#e11d48;
+  --ink:#212529;
+  --muted:#6b7280;
+  --muted-dark:#374151;
+  --hair:#e5e7eb;
+  --paper:#f6f7f9;
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+html,body{overflow-x:clip}
+body{
+  font-family:'Montserrat',sans-serif;
+  color:var(--ink);
+  background:#fff;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+img{max-width:100%;height:auto;display:block}
+a{color:inherit;text-decoration:none}
+ul{list-style:none}
+button{font:inherit;border:0;background:none;cursor:pointer}
+h1,h2,h3,.q{text-wrap:balance}
+.container{max-width:1100px;margin:0 auto;padding:0 24px}
+section{scroll-margin-top:84px}
+.icon{width:24px;height:24px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.icon.sm{width:18px;height:18px}
+
+/* ---------- progress bar ---------- */
+#progress{
+  position:fixed;top:0;left:0;right:0;height:3px;z-index:120;
+  background:var(--teal);transform:scaleX(0);transform-origin:0 50%;
+}
+
+/* ---------- header ---------- */
+header{
+  position:sticky;top:0;z-index:100;
+  background:rgba(255,255,255,.86);
+  -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--hair);
+}
+.nav-bar{display:flex;align-items:center;justify-content:space-between;gap:16px;height:68px}
+.logo{display:flex;align-items:baseline;gap:2px;font-weight:900;font-size:1.4rem;letter-spacing:-.02em}
+.logo .dot{width:9px;height:9px;border-radius:50%;background:var(--teal);align-self:center;margin-left:3px}
+.nav-links{display:flex;align-items:center;gap:26px}
+.nav-links a{font-size:.83rem;font-weight:600;color:var(--muted-dark);transition:color .25s var(--ease)}
+.nav-links a:hover{color:var(--teal-deep)}
+.btn{
+  display:inline-flex;align-items:center;gap:9px;
+  padding:13px 26px;border-radius:999px;
+  font-weight:700;font-size:.9rem;line-height:1;
+  transition:transform .3s var(--ease),background .3s var(--ease),border-color .3s var(--ease),box-shadow .3s var(--ease);
+}
+.btn-primary{background:var(--teal);color:#fff;box-shadow:0 6px 18px rgba(33,182,182,.28)}
+.btn-primary:hover{background:var(--teal-deep);transform:translateY(-2px)}
+.btn-ghost{border:1.5px solid var(--hair);color:var(--ink)}
+.btn-ghost:hover{border-color:var(--teal);color:var(--teal-deep);transform:translateY(-2px)}
+.btn-sm{padding:10px 20px;font-size:.83rem}
+#nav-toggle{display:none}
+.burger{display:none;width:44px;height:44px;align-items:center;justify-content:center;cursor:pointer;border-radius:10px}
+.burger span,.burger span::before,.burger span::after{
+  content:"";display:block;width:22px;height:2px;background:var(--ink);border-radius:2px;position:relative;
+  transition:transform .3s var(--ease),top .3s var(--ease),opacity .2s;
+}
+.burger span::before{position:absolute;top:-7px}
+.burger span::after{position:absolute;top:7px}
+#nav-toggle:checked ~ .burger span{transform:rotate(45deg)}
+#nav-toggle:checked ~ .burger span::before{top:0;transform:rotate(-90deg)}
+#nav-toggle:checked ~ .burger span::after{top:0;opacity:0}
+
+/* ---------- shared Q&A spine ---------- */
+.eyebrow{
+  display:flex;align-items:center;gap:12px;
+  font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);
+  margin-bottom:22px;
+}
+.eyebrow .qnum{
+  font-weight:900;color:var(--teal-deep);background:var(--teal-soft);
+  border:1px solid var(--teal-mid);border-radius:999px;padding:4px 11px;letter-spacing:.08em;
+}
+.eyebrow::after{content:"";height:1px;flex:0 1 90px;background:var(--hair)}
+.q{
+  font-size:clamp(2.1rem,5.6vw,4.2rem);
+  font-weight:900;letter-spacing:-.025em;line-height:1.08;color:var(--ink);
+}
+.q-mask{overflow:hidden;margin-top:14px}
+.q-en{
+  display:inline-block;
+  font-size:clamp(1.05rem,2.2vw,1.45rem);font-weight:700;color:var(--teal);letter-spacing:-.01em;
+}
+.q-en::before{content:"— "}
+.a-lede{
+  margin-top:26px;max-width:640px;
+  font-size:clamp(1.35rem,2.6vw,1.9rem);font-weight:800;letter-spacing:-.02em;line-height:1.3;color:var(--ink);
+}
+.a-sub{margin-top:14px;max-width:620px;color:var(--muted);font-size:1rem;font-weight:500}
+.a-sub strong{color:var(--muted-dark)}
+.fr-note{color:var(--teal-deep);font-weight:700}
+.sec{padding:clamp(72px,9vw,120px) 0}
+.sec-head{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:48px;align-items:center}
+.sec-head .art{display:flex;justify-content:center}
+.sec-head .art img{max-height:300px;width:auto;max-width:100%}
+
+/* backgrounds */
+.bg-paper{background:var(--paper)}
+.bg-tint{background:var(--teal-tint)}
+.bg-ink{background:var(--ink);color:#fff}
+
+/* ---------- hero ---------- */
+.hero{position:relative;padding:clamp(48px,7vw,84px) 0 clamp(64px,8vw,96px);overflow:clip}
+.hero::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(52% 46% at 84% 20%,var(--teal-tint) 0%,rgba(242,251,251,0) 100%);
+}
+.hero-grid{position:relative;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:44px;align-items:center}
+.convo{display:flex;flex-direction:column;gap:6px;margin-bottom:34px}
+.convo-line{
+  font-size:clamp(1.8rem,4.6vw,3.3rem);
+  font-weight:900;letter-spacing:-.025em;line-height:1.18;color:var(--ink);
+}
+.convo-line.l2{margin-left:clamp(12px,4vw,56px)}
+.convo-line.l3{margin-left:clamp(24px,8vw,112px)}
+.convo-en{
+  display:block;font-size:.95rem;font-weight:700;color:var(--teal);margin:2px 0 10px;
+}
+.convo-line.l2 + .convo-en{margin-left:clamp(12px,4vw,56px)}
+.convo-line.l3 + .convo-en{margin-left:clamp(24px,8vw,112px)}
+.convo .w{display:inline-block}
+
+/* flip words: FR face rotates to EN and back */
+.flip{position:relative;display:inline-block;cursor:pointer;outline-offset:4px}
+.flip .inner{
+  display:inline-block;position:relative;
+  transform-style:preserve-3d;
+  transition:transform .55s var(--ease);
+}
+.flip .face{display:inline-block;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.flip .fr{border-bottom:3px dotted var(--teal)}
+.flip .en{
+  position:absolute;inset:0;transform:rotateX(180deg);
+  color:var(--teal-deep);white-space:nowrap;border-bottom:3px dotted var(--teal-mid);
+}
+.flip:hover .inner,.flip.on .inner,.flip:focus-visible .inner{transform:rotateX(180deg)}
+.flip-hint{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:.75rem;font-weight:600;color:var(--muted);margin-bottom:26px;
+}
+.flip-hint .dotline{width:26px;border-bottom:3px dotted var(--teal)}
+
+.hero h1{
+  font-size:clamp(1.55rem,3.2vw,2.3rem);
+  font-weight:800;letter-spacing:-.02em;line-height:1.22;max-width:560px;
+}
+.hero .h1-fr{display:block;margin-top:10px;font-size:.65em;font-weight:700;color:var(--teal-deep)}
+.hero-sub{margin-top:16px;max-width:540px;color:var(--muted);font-size:1rem;font-weight:500}
+.cta-row{display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin-top:28px}
+.cta-note{font-size:.8rem;font-weight:600;color:var(--muted);margin-top:12px}
+.cta-note em{font-style:normal;color:var(--teal-deep)}
+
+.hero-art{position:relative;display:flex;justify-content:center}
+.hero-art .blob{
+  position:absolute;inset:6% 2% 2% 2%;z-index:0;background:var(--teal-soft);
+  border-radius:58% 42% 46% 54% / 48% 54% 46% 52%;
+}
+.hero-art img{position:relative;z-index:1;width:min(88%,420px)}
+.float-pill{
+  position:absolute;z-index:2;background:#fff;border:1px solid var(--hair);
+  border-radius:999px;padding:9px 16px;box-shadow:0 10px 26px rgba(33,37,41,.09);
+  font-size:.8rem;font-weight:700;color:var(--ink);white-space:nowrap;
+}
+.float-pill small{display:block;font-size:.66rem;font-weight:600;color:var(--teal-deep)}
+.float-pill.p1{top:4%;left:0}
+.float-pill.p2{bottom:16%;right:0}
+
+.stats{display:flex;flex-wrap:wrap;gap:12px;margin-top:clamp(36px,5vw,56px);position:relative}
+.stat-chip{
+  display:flex;align-items:baseline;gap:8px;
+  background:#fff;border:1px solid var(--hair);border-radius:14px;
+  padding:14px 18px;box-shadow:0 4px 14px rgba(33,37,41,.05);
+}
+.stat-chip b{font-size:1.25rem;font-weight:900;color:var(--teal-deep);letter-spacing:-.02em}
+.stat-chip span{font-size:.78rem;font-weight:600;color:var(--muted-dark);line-height:1.3}
+
+/* ---------- roadmap ---------- */
+.levels-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:clamp(38px,5vw,56px)}
+.level-card{
+  position:relative;background:#fff;border:1px solid var(--hair);border-radius:18px;
+  padding:26px 24px 22px;display:flex;flex-direction:column;gap:10px;
+  transition:transform .35s var(--ease),box-shadow .35s var(--ease),border-color .35s var(--ease);
+}
+.level-card:hover{transform:translateY(-5px);border-color:var(--teal-mid);box-shadow:0 16px 36px rgba(33,182,182,.13)}
+.level-top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.level-num{
+  font-size:2rem;font-weight:900;letter-spacing:-.03em;color:transparent;
+  -webkit-text-stroke:1.5px var(--teal-mid);line-height:1;
+}
+.badge{
+  font-size:.68rem;font-weight:800;letter-spacing:.08em;color:var(--teal-deep);
+  background:var(--teal-soft);border:1px solid var(--teal-mid);border-radius:999px;padding:4px 11px;
+}
+.level-card h3{font-size:1.02rem;font-weight:800;letter-spacing:-.01em}
+.level-card .desc{font-size:.86rem;color:var(--muted);font-weight:500;line-height:1.55;flex:1}
+.level-say{border-top:1px dashed var(--hair);padding-top:12px}
+.level-say .fr{display:block;font-size:.92rem;font-weight:700;color:var(--ink)}
+.level-say .en{display:block;font-size:.78rem;font-weight:600;color:var(--teal-deep);margin-top:2px}
+.meter{height:5px;border-radius:99px;background:var(--teal-soft);overflow:hidden;margin-top:12px}
+.meter i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--teal),var(--teal-deep))}
+.roadmap-notes{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.note-chip{
+  display:inline-flex;align-items:center;gap:9px;background:#fff;border:1px solid var(--hair);
+  border-radius:999px;padding:10px 18px;font-size:.8rem;font-weight:600;color:var(--muted-dark);
+}
+.note-chip .icon{width:17px;height:17px;color:var(--teal-deep)}
+
+/* ---------- plans ---------- */
+.plans-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:clamp(38px,5vw,54px)}
+.plan-card{
+  position:relative;background:#fff;border:1.5px solid var(--hair);border-radius:22px;padding:34px 32px;
+  display:flex;flex-direction:column;gap:18px;
+  transition:transform .35s var(--ease),box-shadow .35s var(--ease);
+}
+.plan-card:hover{transform:translateY(-5px);box-shadow:0 18px 44px rgba(33,37,41,.09)}
+.plan-card.premium{border-color:var(--teal);box-shadow:0 12px 36px rgba(33,182,182,.14)}
+.plan-tag{
+  position:absolute;top:-13px;left:32px;background:var(--teal);color:#fff;
+  font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+  border-radius:999px;padding:5px 14px;
+}
+.plan-name{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.plan-name h3{font-size:1.5rem;font-weight:900;letter-spacing:-.02em}
+.plan-name .fr{font-size:.82rem;font-weight:700;color:var(--teal-deep)}
+.plan-price{display:flex;align-items:baseline;gap:6px}
+.plan-price b{font-size:2.9rem;font-weight:900;letter-spacing:-.04em}
+.plan-price span{font-size:.85rem;font-weight:600;color:var(--muted)}
+.plan-cap{
+  display:inline-flex;align-items:center;gap:9px;align-self:flex-start;
+  background:var(--teal-tint);border:1px solid var(--teal-mid);border-radius:999px;
+  padding:8px 16px;font-size:.82rem;font-weight:700;color:var(--teal-deep);
+}
+.plan-cap .icon{width:17px;height:17px}
+.plan-best{font-size:.9rem;color:var(--muted);font-weight:500;line-height:1.6;flex:1}
+.plan-best strong{color:var(--ink)}
+.honest-line{
+  border-left:3px solid var(--rose);padding:4px 0 4px 14px;
+  font-size:.9rem;font-weight:700;color:var(--rose);line-height:1.5;
+}
+.honest-line small{display:block;font-weight:600;color:var(--muted-dark);font-size:.8rem;margin-top:3px}
+.both-strip{
+  margin-top:22px;background:#fff;border:1px dashed var(--teal-mid);border-radius:18px;
+  padding:22px 26px;display:flex;flex-wrap:wrap;align-items:center;gap:14px 26px;
+}
+.both-strip .lbl{font-size:.75rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--teal-deep)}
+.both-strip ul{display:flex;flex-wrap:wrap;gap:10px 24px}
+.both-strip li{display:flex;align-items:center;gap:8px;font-size:.83rem;font-weight:600;color:var(--muted-dark)}
+.both-strip .icon{width:16px;height:16px;color:var(--teal)}
+
+/* ---------- paths ---------- */
+.paths-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:clamp(38px,5vw,54px)}
+.path-card{
+  background:#fff;border:1px solid var(--hair);border-radius:20px;padding:30px 26px;
+  display:flex;flex-direction:column;gap:12px;
+  transition:transform .35s var(--ease),box-shadow .35s var(--ease),border-color .35s var(--ease);
+}
+.path-card:hover{transform:translateY(-5px);border-color:var(--teal-mid);box-shadow:0 16px 36px rgba(33,182,182,.12)}
+.path-ic{
+  width:52px;height:52px;border-radius:15px;background:var(--teal-soft);color:var(--teal-deep);
+  display:flex;align-items:center;justify-content:center;
+}
+.path-card h3{font-size:1.1rem;font-weight:800;letter-spacing:-.01em}
+.path-card .fr{font-size:.8rem;font-weight:700;color:var(--teal-deep);margin-top:-6px}
+.path-card p{font-size:.88rem;color:var(--muted);font-weight:500;line-height:1.6}
+.paths-note{
+  margin-top:24px;display:inline-flex;align-items:flex-start;gap:10px;
+  font-size:.83rem;color:var(--muted);font-weight:500;max-width:640px;
+}
+.paths-note .icon{width:18px;height:18px;color:var(--teal-deep);margin-top:2px}
+
+/* ---------- features ---------- */
+.features-grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:56px;margin-top:clamp(38px,5vw,54px);align-items:start}
+.features-art{position:sticky;top:110px;display:flex;flex-direction:column;gap:18px;align-items:center}
+.features-art img{width:min(100%,400px)}
+.demo-chip{
+  width:min(100%,360px);background:#fff;border:1px solid var(--hair);border-radius:16px;
+  padding:16px 20px;box-shadow:0 12px 30px rgba(33,37,41,.08);
+}
+.demo-chip .word{font-size:1.05rem;font-weight:800}
+.demo-chip .word span{color:var(--teal-deep);font-weight:700;font-size:.88rem}
+.demo-chip .meta{display:flex;align-items:center;gap:8px;font-size:.74rem;font-weight:600;color:var(--muted);margin-top:6px}
+.demo-chip a{display:inline-flex;align-items:center;gap:7px;margin-top:10px;font-size:.8rem;font-weight:700;color:var(--teal-deep)}
+.demo-chip a .icon{width:15px;height:15px;transition:transform .3s var(--ease)}
+.demo-chip a:hover .icon{transform:translateX(3px)}
+.feature-list{display:flex;flex-direction:column}
+.feature-row{
+  display:flex;gap:20px;padding:24px 4px;border-bottom:1px solid var(--hair);
+  transition:background .3s var(--ease);
+}
+.feature-row:first-child{padding-top:6px}
+.feature-ic{
+  width:46px;height:46px;border-radius:13px;background:var(--teal-soft);color:var(--teal-deep);
+  display:flex;align-items:center;justify-content:center;flex:none;
+}
+.feature-ic .icon{width:22px;height:22px}
+.feature-row h3{font-size:1rem;font-weight:800;letter-spacing:-.01em}
+.feature-row .fr{font-size:.76rem;font-weight:700;color:var(--teal-deep)}
+.feature-row p{font-size:.88rem;color:var(--muted);font-weight:500;margin-top:6px;line-height:1.6}
+
+/* ---------- trial ---------- */
+.steps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:clamp(38px,5vw,54px)}
+.step-card{
+  position:relative;background:#fff;border:1px solid var(--hair);border-radius:18px;padding:26px 22px;
+  transition:transform .35s var(--ease),box-shadow .35s var(--ease);
+}
+.step-card:hover{transform:translateY(-5px);box-shadow:0 14px 32px rgba(33,37,41,.08)}
+.step-num{
+  font-size:.78rem;font-weight:900;letter-spacing:.1em;color:var(--teal-deep);
+  background:var(--teal-soft);border-radius:999px;padding:5px 13px;display:inline-block;
+}
+.step-card h3{font-size:.98rem;font-weight:800;margin-top:14px;letter-spacing:-.01em}
+.step-card .fr{font-size:.78rem;font-weight:700;color:var(--teal-deep);margin-top:2px}
+.step-card p{font-size:.83rem;color:var(--muted);font-weight:500;margin-top:8px;line-height:1.55}
+.step-arrow{
+  position:absolute;top:50%;right:-14px;transform:translateY(-50%);z-index:2;
+  width:26px;height:26px;border-radius:50%;background:#fff;border:1px solid var(--hair);
+  display:flex;align-items:center;justify-content:center;color:var(--teal-deep);
+}
+.step-arrow .icon{width:13px;height:13px}
+.trial-cta{display:flex;flex-wrap:wrap;align-items:center;gap:16px;margin-top:34px}
+
+/* ---------- testimonials ---------- */
+.voices-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:clamp(38px,5vw,54px)}
+.voice-card{
+  background:#fff;border:1px solid var(--hair);
+  border-radius:20px 20px 20px 5px;padding:28px 28px 24px;
+  display:flex;flex-direction:column;gap:16px;
+  transition:transform .35s var(--ease),box-shadow .35s var(--ease);
+}
+.voice-card:nth-child(even){border-radius:20px 20px 5px 20px}
+.voice-card:hover{transform:translateY(-4px);box-shadow:0 16px 36px rgba(33,37,41,.08)}
+.voice-card blockquote{font-size:.95rem;font-weight:600;color:var(--muted-dark);line-height:1.65;flex:1}
+.voice-card blockquote::before{
+  content:"«";display:block;font-size:2rem;font-weight:900;color:var(--teal);line-height:1;margin-bottom:6px;
+}
+.voice-who{display:flex;align-items:center;gap:13px}
+.avatar{
+  width:44px;height:44px;border-radius:50%;background:var(--teal-soft);border:1px solid var(--teal-mid);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.82rem;font-weight:800;color:var(--teal-deep);flex:none;
+}
+.voice-who b{display:block;font-size:.9rem;font-weight:800}
+.voice-who span{font-size:.75rem;font-weight:600;color:var(--muted)}
+
+/* ---------- pricing ---------- */
+.price-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:clamp(38px,5vw,54px)}
+.price-card{
+  background:#fff;border:1.5px solid var(--hair);border-radius:22px;padding:32px;
+  display:flex;flex-direction:column;gap:14px;
+  transition:transform .35s var(--ease),box-shadow .35s var(--ease);
+}
+.price-card:hover{transform:translateY(-5px);box-shadow:0 18px 44px rgba(33,37,41,.09)}
+.price-card.premium{border-color:var(--teal)}
+.price-card ul{display:flex;flex-direction:column;gap:9px;margin-top:4px}
+.price-card li{display:flex;align-items:flex-start;gap:9px;font-size:.85rem;font-weight:600;color:var(--muted-dark)}
+.price-card li .icon{width:16px;height:16px;color:var(--teal);margin-top:3px}
+.price-card .btn{align-self:flex-start;margin-top:8px}
+.journey-banner{
+  margin-top:24px;background:var(--ink);color:#fff;border-radius:20px;
+  padding:30px 34px;display:flex;flex-wrap:wrap;align-items:center;gap:20px 34px;justify-content:space-between;
+}
+.journey-banner .big{font-size:1.25rem;font-weight:800;letter-spacing:-.01em}
+.journey-banner .big em{font-style:normal;color:var(--teal)}
+.journey-banner .fr{display:block;font-size:.82rem;font-weight:700;color:var(--teal);margin-top:4px}
+.journey-banner p{font-size:.82rem;font-weight:500;color:#b7bcc3;max-width:380px}
+.price-note{margin-top:18px;font-size:.82rem;color:var(--muted);font-weight:500;max-width:660px;display:flex;gap:10px}
+.price-note .icon{width:18px;height:18px;color:var(--teal-deep);flex:none;margin-top:2px}
+
+/* ---------- FAQ (the honesty moment) ---------- */
+.bg-ink .eyebrow{color:#9ca3af}
+.bg-ink .eyebrow .qnum{color:var(--teal);background:rgba(33,182,182,.12);border-color:rgba(33,182,182,.35)}
+.bg-ink .eyebrow::after{background:rgba(255,255,255,.14)}
+.bg-ink .q{color:#fff}
+.non-block{margin-top:30px}
+.non{
+  font-size:clamp(4rem,12vw,8.5rem);font-weight:900;letter-spacing:-.04em;line-height:1;
+  color:var(--rose);
+}
+.non-sub{
+  margin-top:16px;font-size:clamp(1.15rem,2.4vw,1.6rem);font-weight:800;color:#fff;letter-spacing:-.015em;max-width:620px;
+}
+.non-en{display:block;margin-top:8px;font-size:.72em;font-weight:700;color:var(--teal)}
+.faq-list{margin-top:clamp(38px,5vw,54px);display:flex;flex-direction:column;max-width:780px}
+.faq-item{border-top:1px solid rgba(255,255,255,.13)}
+.faq-item:last-child{border-bottom:1px solid rgba(255,255,255,.13)}
+.faq-item summary{
+  list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:18px;
+  padding:22px 4px;font-size:1rem;font-weight:700;color:#fff;
+  transition:color .25s var(--ease);
+}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary:hover{color:var(--teal)}
+.faq-item summary .icon{width:19px;height:19px;color:var(--teal);transition:transform .35s var(--ease)}
+.faq-item[open] summary .icon{transform:rotate(180deg)}
+.faq-item .ans{padding:0 4px 24px;font-size:.9rem;font-weight:500;color:#b7bcc3;line-height:1.7;max-width:660px}
+.faq-item .ans strong{color:#fff}
+.faq-item .ans .rose{color:var(--rose);font-weight:700}
+
+/* ---------- policies ---------- */
+.pol-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:clamp(38px,5vw,54px)}
+.pol-card{
+  background:#fff;border:1px solid var(--hair);border-radius:18px;padding:26px 22px;
+  display:flex;flex-direction:column;gap:12px;
+  transition:transform .35s var(--ease),box-shadow .35s var(--ease);
+}
+.pol-card:hover{transform:translateY(-4px);box-shadow:0 14px 30px rgba(33,37,41,.07)}
+.pol-ic{
+  width:44px;height:44px;border-radius:12px;background:var(--teal-soft);color:var(--teal-deep);
+  display:flex;align-items:center;justify-content:center;
+}
+.pol-ic .icon{width:21px;height:21px}
+.pol-card h3{font-size:.95rem;font-weight:800;letter-spacing:-.01em}
+.pol-card p{font-size:.82rem;color:var(--muted);font-weight:500;line-height:1.6}
+
+/* ---------- footer ---------- */
+footer{background:var(--ink);color:#fff;padding:clamp(56px,7vw,84px) 0 36px}
+.foot-bye{font-size:clamp(2rem,5vw,3.2rem);font-weight:900;letter-spacing:-.03em;color:var(--teal)}
+.foot-bye small{display:block;font-size:.4em;font-weight:700;color:#9ca3af;letter-spacing:0;margin-top:6px}
+.foot-grid{
+  display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:28px;
+  margin-top:40px;padding-top:34px;border-top:1px solid rgba(255,255,255,.12);
+}
+footer .logo{color:#fff}
+.foot-nav{display:flex;flex-wrap:wrap;gap:12px 26px}
+.foot-nav a{font-size:.82rem;font-weight:600;color:#b7bcc3;transition:color .25s}
+.foot-nav a:hover{color:var(--teal)}
+.foot-legal{margin-top:34px;font-size:.75rem;font-weight:500;color:#9ca3af}
+
+/* ============================================================
+   MOTION — every animated initial state lives inside this media
+   query, so reduced-motion (and no-JS) users get the page fully
+   composed, never blank.
+   ============================================================ */
+@media (prefers-reduced-motion:no-preference){
+  /* generic scroll reveals */
+  .js .reveal.up{opacity:0;transform:translateY(26px)}
+  .js .reveal.up.inview{
+    opacity:1;transform:none;
+    transition:opacity .7s ease var(--dl,0s),transform .8s var(--ease) var(--dl,0s);
+  }
+  /* Q&A spine: French words rise one by one, EN slides up after */
+  .js .qa .w{display:inline-block;opacity:0;transform:translateY(1.1em)}
+  .js .qa.inview .w{
+    opacity:1;transform:none;
+    transition:transform .75s var(--ease) calc(var(--i)*80ms),opacity .5s ease calc(var(--i)*80ms);
+  }
+  .js .qa .q-en{opacity:0;transform:translateY(115%)}
+  .js .qa.inview .q-en{
+    opacity:1;transform:none;
+    transition:transform .8s var(--ease) .45s,opacity .5s ease .45s;
+  }
+  /* hero conversation timeline */
+  .js .hero .convo-line{overflow:clip}
+  .js .hero .convo-line .w{opacity:0;transform:translateY(112%)}
+  .js.play .hero .convo-line .w{
+    opacity:1;transform:none;
+    transition:transform .8s var(--ease) calc(var(--d) + var(--i)*95ms),opacity .55s ease calc(var(--d) + var(--i)*95ms);
+  }
+  .js .hero .convo-en{opacity:0;transform:translateY(8px)}
+  .js.play .hero .convo-en{
+    opacity:1;transform:none;
+    transition:transform .7s var(--ease) calc(var(--d) + .4s),opacity .5s ease calc(var(--d) + .4s);
+  }
+  .js .hero .settle{opacity:0;transform:translateY(22px)}
+  .js.play .hero .settle{
+    opacity:1;transform:none;
+    transition:transform .85s var(--ease) var(--d,2.3s),opacity .6s ease var(--d,2.3s);
+  }
+  .js .hero-art{opacity:0;transform:translateX(28px) scale(.98)}
+  .js.play .hero-art{
+    opacity:1;transform:none;
+    transition:transform 1s var(--ease) .5s,opacity .7s ease .5s;
+  }
+  .float-pill{animation:float 5.5s ease-in-out infinite}
+  .float-pill.p2{animation-delay:2.2s}
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width:960px){
+  .levels-grid{grid-template-columns:1fr 1fr}
+  .paths-grid{grid-template-columns:1fr 1fr}
+  .pol-grid{grid-template-columns:1fr 1fr}
+  .steps-grid{grid-template-columns:1fr 1fr}
+  .step-arrow{display:none}
+  .sec-head{grid-template-columns:1fr;gap:30px}
+  .sec-head .art{order:2;justify-content:flex-start}
+  .sec-head .art img{max-height:230px}
+  .features-grid{grid-template-columns:1fr;gap:36px}
+  .features-art{position:static;flex-direction:row;flex-wrap:wrap;justify-content:flex-start;align-items:flex-end}
+  .features-art img{width:min(52%,300px)}
+}
+@media (max-width:768px){
+  .nav-links{
+    position:absolute;top:68px;left:0;right:0;
+    display:none;flex-direction:column;align-items:stretch;gap:0;
+    background:#fff;border-bottom:1px solid var(--hair);
+    padding:10px 24px 22px;box-shadow:0 18px 34px rgba(33,37,41,.08);
+  }
+  .nav-links a{padding:13px 4px;font-size:.95rem;border-bottom:1px solid var(--paper)}
+  .nav-links .btn{margin-top:14px;justify-content:center}
+  #nav-toggle:checked ~ .nav-links{display:flex}
+  .burger{display:flex}
+  .hero-grid{grid-template-columns:1fr;gap:36px}
+  .hero-art{order:-1}
+  .hero-art img{width:min(64%,300px)}
+  .plans-grid,.price-grid,.voices-grid{grid-template-columns:1fr}
+  .journey-banner{padding:26px}
+}
+@media (max-width:480px){
+  .container{padding:0 16px}
+  .levels-grid,.paths-grid,.pol-grid,.steps-grid{grid-template-columns:1fr}
+  .stats{gap:9px}
+  .stat-chip{padding:11px 14px}
+  .stat-chip b{font-size:1.05rem}
+  .float-pill.p1{top:-2%}
+  .float-pill.p2{bottom:6%}
+  .hero-art img{width:min(78%,280px)}
+  .both-strip ul{flex-direction:column;gap:8px}
+  .cta-row .btn{width:100%;justify-content:center}
+  .trial-cta .btn{width:100%;justify-content:center}
+}
+</style>
+</head>
+<body>
+
+<div id="progress" aria-hidden="true"></div>
+
+<!-- ============ 1 · HEADER ============ -->
+<header>
+  <div class="container nav-bar">
+    <a class="logo" href="#top" aria-label="Passu — home">Passu<span class="dot"></span></a>
+    <input type="checkbox" id="nav-toggle" aria-hidden="true">
+    <label class="burger" for="nav-toggle" aria-label="Toggle navigation"><span></span></label>
+    <nav class="nav-links" aria-label="Main">
+      <a href="#levels">Passu Levels</a>
+      <a href="#plans">Core &amp; Premium</a>
+      <a href="#paths">Learning Paths</a>
+      <a href="#trial">Free Trial</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+      <a class="btn btn-primary btn-sm" href="#trial">Book a free class</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ============ 2 · HERO — the conversation builds itself ============ -->
+<section class="hero" aria-label="Introduction">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <div class="convo" lang="fr" aria-label="Bonjour. Vous voulez parler français ? Voici le chemin. — Hello. You want to speak French? Here is the path.">
+          <p class="convo-line l1" style="--d:.15s">
+            <span class="w" style="--i:0">—&nbsp;<span class="flip"><span class="inner"><span class="face fr">Bonjour.</span><span class="face en" lang="en">Hello.</span></span></span></span>
+          </p>
+          <span class="convo-en" lang="en" style="--d:.15s">Hello. — There, you've read your first French word.</span>
+          <p class="convo-line l2" style="--d:.95s">
+            <span class="w" style="--i:0">—&nbsp;Vous</span>
+            <span class="w" style="--i:1">voulez</span>
+            <span class="w" style="--i:2"><span class="flip"><span class="inner"><span class="face fr">parler&nbsp;français&nbsp;?</span><span class="face en" lang="en">to&nbsp;speak&nbsp;French?</span></span></span></span>
+          </p>
+          <span class="convo-en" lang="en" style="--d:.95s">You want to speak French?</span>
+          <p class="convo-line l3" style="--d:1.8s">
+            <span class="w" style="--i:0">—&nbsp;Voici</span>
+            <span class="w" style="--i:1">le</span>
+            <span class="w" style="--i:2"><span class="flip"><span class="inner"><span class="face fr">chemin.</span><span class="face en" lang="en">the&nbsp;path.</span></span></span></span>
+          </p>
+          <span class="convo-en" lang="en" style="--d:1.8s">Here is the path.</span>
+        </div>
+
+        <div class="settle" style="--d:2.5s">
+          <p class="flip-hint"><span class="dotline" aria-hidden="true"></span>Hover or tap the dotted words — they translate themselves.</p>
+          <h1>Your complete 12-month path toward B2.
+            <span class="h1-fr" lang="fr">« Un seul chemin. Six niveaux. Trois classes par semaine. »</span>
+          </h1>
+          <p class="hero-sub">Six connected Passu Levels, live classes three times a week, and a real two-hour class experience — from your first <em class="fr-note" lang="fr">Bonjour</em> to confident conversation.</p>
+        </div>
+
+        <div class="settle" style="--d:2.75s">
+          <div class="cta-row">
+            <a class="btn btn-primary" href="#trial">Try a real class — free
+              <svg class="icon sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+            </a>
+            <a class="btn btn-ghost" href="#levels">See the roadmap</a>
+          </div>
+          <p class="cta-note"><em lang="fr">« Une vraie classe de 2 h. Pas de démo. »</em> — A real 2-hour class. Not a demo.</p>
+        </div>
+      </div>
+
+      <div class="hero-art" aria-hidden="false">
+        <div class="blob" aria-hidden="true"></div>
+        <img src="assets/girl-listening.svg" alt="Illustration of a student with headphones listening to French audio on her phone" width="576" height="504">
+        <div class="float-pill p1" lang="fr">« Salut ! »<small lang="en">Hi!</small></div>
+        <div class="float-pill p2" lang="fr">« Ça va ? »<small lang="en">How's it going?</small></div>
+      </div>
+    </div>
+
+    <ul class="stats settle" style="--d:3s" aria-label="Program at a glance">
+      <li class="stat-chip"><b>3&times;</b><span>live classes<br>weekly</span></li>
+      <li class="stat-chip"><b>2&nbsp;hrs</b><span>each<br>session</span></li>
+      <li class="stat-chip"><b>6</b><span>Passu<br>Levels</span></li>
+      <li class="stat-chip"><b>2</b><span>exams<br>per level</span></li>
+      <li class="stat-chip"><b>90&nbsp;min</b><span>optional<br>Speaking Club</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ 3 · ROADMAP — « Combien de temps ? » ============ -->
+<section id="levels" class="sec bg-paper" aria-label="The roadmap">
+  <div class="container">
+    <div class="sec-head">
+      <div class="reveal qa">
+        <p class="eyebrow"><span class="qnum">01</span> La durée · Duration</p>
+        <h2 class="q" lang="fr" data-split>«&nbsp;Combien de temps&nbsp;?&nbsp;»</h2>
+        <div class="q-mask"><span class="q-en">How long?</span></div>
+        <p class="a-lede"><span lang="fr">12 mois. Un seul chemin.</span></p>
+        <p class="a-sub">Twelve months. One roadmap — <strong>six connected Passu Levels</strong>, each one built to prepare the next, from your very first words to the advanced stage of your chosen path.</p>
+      </div>
+      <div class="art reveal up" style="--dl:.15s">
+        <img src="assets/learning-journey.svg" alt="Four students learning on ascending steps — chatting, writing, listening and reading" loading="lazy">
+      </div>
+    </div>
+
+    <div class="levels-grid">
+      <article class="level-card reveal up" style="--dl:0s">
+        <div class="level-top"><span class="level-num">01</span><span class="badge">A1.1</span></div>
+        <h3>Passu Level 1</h3>
+        <p class="desc">Build the essential foundations for everyday French.</p>
+        <div class="level-say"><span class="fr" lang="fr">« Je m'appelle Nadia. »</span><span class="en">My name is Nadia.</span></div>
+        <div class="meter" aria-hidden="true"><i style="width:16.6%"></i></div>
+      </article>
+      <article class="level-card reveal up" style="--dl:.08s">
+        <div class="level-top"><span class="level-num">02</span><span class="badge">A1.2</span></div>
+        <h3>Passu Level 2</h3>
+        <p class="desc">Expand practical vocabulary and sentence control.</p>
+        <div class="level-say"><span class="fr" lang="fr">« On se voit demain ? »</span><span class="en">See you tomorrow?</span></div>
+        <div class="meter" aria-hidden="true"><i style="width:33.3%"></i></div>
+      </article>
+      <article class="level-card reveal up" style="--dl:.16s">
+        <div class="level-top"><span class="level-num">03</span><span class="badge">A2</span></div>
+        <h3>Passu Level 3</h3>
+        <p class="desc">Move from basic exchanges into longer communication.</p>
+        <div class="level-say"><span class="fr" lang="fr">« Racontez-moi votre week-end. »</span><span class="en">Tell me about your weekend.</span></div>
+        <div class="meter" aria-hidden="true"><i style="width:50%"></i></div>
+      </article>
+      <article class="level-card reveal up" style="--dl:.24s">
+        <div class="level-top"><span class="level-num">04</span><span class="badge">B1</span></div>
+        <h3>Passu Level 4</h3>
+        <p class="desc">Develop confidence, accuracy and independent expression.</p>
+        <div class="level-say"><span class="fr" lang="fr">« Je me débrouille très bien. »</span><span class="en">I manage just fine.</span></div>
+        <div class="meter" aria-hidden="true"><i style="width:66.6%"></i></div>
+      </article>
+      <article class="level-card reveal up" style="--dl:.32s">
+        <div class="level-top"><span class="level-num">05</span><span class="badge">B2.1</span></div>
+        <h3>Passu Level 5</h3>
+        <p class="desc">Begin your selected Path: Social, Business or Exam.</p>
+        <div class="level-say"><span class="fr" lang="fr">« Passons aux choses sérieuses. »</span><span class="en">Let's get serious.</span></div>
+        <div class="meter" aria-hidden="true"><i style="width:83.3%"></i></div>
+      </article>
+      <article class="level-card reveal up" style="--dl:.4s">
+        <div class="level-top"><span class="level-num">06</span><span class="badge">B2.2</span></div>
+        <h3>Passu Level 6</h3>
+        <p class="desc">Complete the advanced stage of your chosen specialization.</p>
+        <div class="level-say"><span class="fr" lang="fr">« À nous deux, le B2. »</span><span class="en">B2, here I come.</span></div>
+        <div class="meter" aria-hidden="true"><i style="width:100%"></i></div>
+      </article>
+    </div>
+
+    <div class="roadmap-notes reveal up" style="--dl:.1s">
+      <span class="note-chip"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 15l2 2 4-4"/></svg>2 exams per level — midterm &amp; final</span>
+      <span class="note-chip"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 12l10 5 10-5"/><path d="M2 17l10 5 10-5"/></svg>Paths begin at Passu Level 5</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 4 · PLANS — « Seul ou bien entouré ? » ============ -->
+<section id="plans" class="sec" aria-label="Core and Premium plans">
+  <div class="container">
+    <div class="sec-head">
+      <div class="reveal qa">
+        <p class="eyebrow"><span class="qnum">02</span> La classe · The classroom</p>
+        <h2 class="q" lang="fr" data-split>«&nbsp;Seul ou bien entouré&nbsp;?&nbsp;»</h2>
+        <div class="q-mask"><span class="q-en">Alone, or in good company?</span></div>
+        <p class="a-lede">Same journey. Two class experiences.</p>
+        <p class="a-sub">Never alone — every plan is a <strong>live classroom</strong>. The real question is how many classmates share your two hours: <strong>up to fourteen, or up to seven</strong>.</p>
+      </div>
+      <div class="art reveal up" style="--dl:.15s">
+        <img src="assets/boy-notebook.svg" alt="A relaxed student taking notes in a notebook" loading="lazy">
+      </div>
+    </div>
+
+    <div class="plans-grid">
+      <article class="plan-card reveal up" style="--dl:0s">
+        <div class="plan-name"><h3>Core</h3><span class="fr" lang="fr">« L'essentiel, bien fait. »</span></div>
+        <div class="plan-price"><b>$99</b><span>/ month</span></div>
+        <span class="plan-cap"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2"/><circle cx="10" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Up to 14 students per class</span>
+        <p class="plan-best"><strong>Best for:</strong> learners who want structure, a real class community, and the strongest value on the market — the full roadmap, nothing held back.</p>
+        <a class="btn btn-ghost btn-sm" href="#pricing">Start with Core</a>
+      </article>
+
+      <article class="plan-card premium reveal up" style="--dl:.12s">
+        <span class="plan-tag">More speaking time</span>
+        <div class="plan-name"><h3>Premium</h3><span class="fr" lang="fr">« Plus de temps de parole. »</span></div>
+        <div class="plan-price"><b>$200</b><span>/ month</span></div>
+        <span class="plan-cap"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2"/><circle cx="10" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Up to 7 students per class</span>
+        <p class="plan-best"><strong>The truthful premium promise:</strong> fewer classmates means more speaking turns for you, every single class. That is the entire promise — and it's enough.</p>
+        <p class="honest-line" lang="fr">« Moins de camarades. Plus de parole. »<small lang="en">Fewer classmates. More speaking. Nothing else changes.</small></p>
+        <a class="btn btn-primary btn-sm" href="#pricing">Start with Premium</a>
+      </article>
+    </div>
+
+    <div class="both-strip reveal up" style="--dl:.1s">
+      <span class="lbl">Both plans include</span>
+      <ul>
+        <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>3 live 2-hour classes weekly</li>
+        <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Full platform + class recordings</li>
+        <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Midterm &amp; final exam each level</li>
+        <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Optional weekend Speaking Club (90 min)</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 5 · LEARNING PATHS — « Pour aller où ? » ============ -->
+<section id="paths" class="sec bg-tint" aria-label="Learning paths">
+  <div class="container">
+    <div class="reveal qa">
+      <p class="eyebrow"><span class="qnum">03</span> La direction · Direction</p>
+      <h2 class="q" lang="fr" data-split>«&nbsp;Pour aller où&nbsp;?&nbsp;»</h2>
+      <div class="q-mask"><span class="q-en">Headed where?</span></div>
+      <p class="a-lede">Choose your path from the beginning.</p>
+      <p class="a-sub">Your destination shapes Passu Levels 5 and 6. Pick it on day one, so every level knows exactly where it's taking you.</p>
+    </div>
+
+    <div class="paths-grid">
+      <article class="path-card reveal up" style="--dl:0s">
+        <div class="path-ic"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8z"/></svg></div>
+        <h3>Social French</h3>
+        <p class="fr" lang="fr">« Le français du quotidien »</p>
+        <p>Everyday conversation, travel, relationships and culture — the French that carries real life, from café small talk to lasting friendships.</p>
+      </article>
+      <article class="path-card reveal up" style="--dl:.1s">
+        <div class="path-ic"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
+        <h3>Business French</h3>
+        <p class="fr" lang="fr">« Le français des affaires »</p>
+        <p>Professional communication for meetings, presentations and negotiation — sound precise and credible in a francophone workplace.</p>
+      </article>
+      <article class="path-card reveal up" style="--dl:.2s">
+        <div class="path-ic"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+        <h3>Exam Preparation</h3>
+        <p class="fr" lang="fr">« Objectif : l'examen »</p>
+        <p>Exam strategies, timed practice and targeted feedback — walk into test day knowing the format as well as the language.</p>
+      </article>
+    </div>
+
+    <p class="paths-note reveal up" style="--dl:.1s">
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+      Paths separate at Passu Levels 5–6. Levels 1–4 build the same shared foundation for everyone; small cohorts may be combined.
+    </p>
+  </div>
+</section>
+
+<!-- ============ 6 · FEATURES — « Avec quels outils ? » ============ -->
+<section id="features" class="sec" aria-label="Platform features">
+  <div class="container">
+    <div class="reveal qa">
+      <p class="eyebrow"><span class="qnum">04</span> Les outils · The tools</p>
+      <h2 class="q" lang="fr" data-split>«&nbsp;Avec quels outils&nbsp;?&nbsp;»</h2>
+      <div class="q-mask"><span class="q-en">With which tools?</span></div>
+      <p class="a-lede">A serious program that tells students what happens next.</p>
+      <p class="a-sub">No mystery methods. Every tool exists to answer one question: <strong>what should I do now, and where did this word come from?</strong></p>
+    </div>
+
+    <div class="features-grid">
+      <div class="features-art reveal up" style="--dl:.1s">
+        <img src="assets/girl-studying.svg" alt="A student studying at her laptop with an open book, notes and a bright idea" loading="lazy">
+        <div class="demo-chip" aria-label="Example of a smart word reference">
+          <p class="word" lang="fr">le chemin <span lang="en">— the path</span></p>
+          <p class="meta"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" style="width:14px;height:14px"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/></svg>Introduced in Passu Level 1 · Leçon 3</p>
+          <a href="#features">Jump to that moment
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="feature-list">
+        <div class="feature-row reveal up" style="--dl:0s">
+          <div class="feature-ic"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="M2 12h2"/><path d="M20 12h2"/></svg></div>
+          <div>
+            <h3>Smart word references</h3>
+            <p class="fr" lang="fr">« Chaque mot se souvient de sa leçon. »</p>
+            <p>Every word remembers where you met it. See which lesson introduced it — and jump back to that exact moment of the class.</p>
+          </div>
+        </div>
+        <div class="feature-row reveal up" style="--dl:.07s">
+          <div class="feature-ic"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 4h6a4 4 0 0 1 4 4v12a3 3 0 0 0-3-3H2z"/><path d="M22 4h-6a4 4 0 0 0-4 4v12a3 3 0 0 1 3-3h7z"/></svg></div>
+          <div>
+            <h3>Integrated dictionary</h3>
+            <p class="fr" lang="fr">« Le dictionnaire, sans quitter la leçon. »</p>
+            <p>Look up any word without leaving your lesson — definitions, genders and real examples, one tap away.</p>
+          </div>
+        </div>
+        <div class="feature-row reveal up" style="--dl:.14s">
+          <div class="feature-ic"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M23 4v6h-6"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg></div>
+          <div>
+            <h3>Verb conjugator</h3>
+            <p class="fr" lang="fr">« je vais, tu vas, il va… »</p>
+            <p>Every tense of every verb you meet, instantly. The moment conjugation stops being scary, French speeds up.</p>
+          </div>
+        </div>
+        <div class="feature-row reveal up" style="--dl:.21s">
+          <div class="feature-ic"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 15l.9 2.4L22 18l-2.1.9L19 21l-.9-2.1L16 18l2.1-.6z"/></svg></div>
+          <div>
+            <h3>AI flashcards &amp; weekly plans</h3>
+            <p class="fr" lang="fr">« Vos erreurs deviennent vos cartes. »</p>
+            <p>Your mistakes become flashcards, and your week plans itself — so revision targets exactly what you got wrong.</p>
+          </div>
+        </div>
+        <div class="feature-row reveal up" style="--dl:.28s">
+          <div class="feature-ic"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="6" width="13" height="12" rx="2"/><path d="M15 10.5l7-4v11l-7-4"/></svg></div>
+          <div>
+            <h3>Class recordings</h3>
+            <p class="fr" lang="fr">« Ratez une soirée, pas le contenu. »</p>
+            <p>Miss a class, not the content. Every session is recorded and organized, available the same day.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 7 · FREE TRIAL — « Et si je ne suis pas sûr ? » ============ -->
+<section id="trial" class="sec bg-paper" aria-label="Free trial">
+  <div class="container">
+    <div class="sec-head">
+      <div class="reveal qa">
+        <p class="eyebrow"><span class="qnum">05</span> Le doute · The doubt</p>
+        <h2 class="q" lang="fr" data-split>«&nbsp;Et si je ne suis pas sûr&nbsp;?&nbsp;»</h2>
+        <div class="q-mask"><span class="q-en">What if I'm not sure?</span></div>
+        <p class="a-lede">Try a real class before choosing Core or Premium.</p>
+        <p class="a-sub">Not a demo, not a sales call — a <strong>scheduled two-hour class</strong> with real students and a real instructor. Decide from the inside.</p>
+      </div>
+      <div class="art reveal up" style="--dl:.15s">
+        <img src="assets/girl-books-waving.svg" alt="A student sitting on a stack of books, waving hello" loading="lazy">
+      </div>
+    </div>
+
+    <div class="steps-grid">
+      <article class="step-card reveal up" style="--dl:0s">
+        <span class="step-num">01</span>
+        <h3>Reserve a seat</h3>
+        <p class="fr" lang="fr">« Réservez votre place »</p>
+        <p>Pick a class that fits your evening. Your seat is confirmed in one email.</p>
+        <span class="step-arrow" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></span>
+      </article>
+      <article class="step-card reveal up" style="--dl:.09s">
+        <span class="step-num">02</span>
+        <h3>Attend a 2-hour class</h3>
+        <p class="fr" lang="fr">« Vivez la classe »</p>
+        <p>Join live, alongside current students. This is the actual experience — pace, teacher, everything.</p>
+        <span class="step-arrow" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></span>
+      </article>
+      <article class="step-card reveal up" style="--dl:.18s">
+        <span class="step-num">03</span>
+        <h3>Explore the platform</h3>
+        <p class="fr" lang="fr">« Explorez la plateforme »</p>
+        <p>Recordings, flashcards, dictionary, conjugator — see how the week works between classes.</p>
+        <span class="step-arrow" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></span>
+      </article>
+      <article class="step-card reveal up" style="--dl:.27s">
+        <span class="step-num">04</span>
+        <h3>Choose how to continue</h3>
+        <p class="fr" lang="fr">« Choisissez la suite »</p>
+        <p>Core, Premium — or neither. No pressure calls, no countdown timers. Your call.</p>
+      </article>
+    </div>
+
+    <div class="trial-cta reveal up" style="--dl:.1s">
+      <a class="btn btn-primary" href="#pricing">Reserve my free seat
+        <svg class="icon sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+      </a>
+      <p class="cta-note"><em lang="fr">« On vous garde une chaise. »</em> — We'll keep you a chair.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 8 · TESTIMONIALS — « Qui l'a déjà fait ? » ============ -->
+<section id="voices" class="sec" aria-label="Student voices">
+  <div class="container">
+    <div class="reveal qa">
+      <p class="eyebrow"><span class="qnum">06</span> Les voix · The voices</p>
+      <h2 class="q" lang="fr" data-split>«&nbsp;Qui l'a déjà fait&nbsp;?&nbsp;»</h2>
+      <div class="q-mask"><span class="q-en">Who's already done it?</span></div>
+      <p class="a-sub" style="margin-top:22px">Real students, real levels, real paths — in their own words.</p>
+    </div>
+
+    <div class="voices-grid">
+      <figure class="voice-card reveal up" style="--dl:0s">
+        <blockquote>Three classes a week sounds like a lot — until it becomes your rhythm. That consistency did more for my French than any app ever managed.</blockquote>
+        <figcaption class="voice-who">
+          <span class="avatar" aria-hidden="true">AR</span>
+          <div><b>Amélie Rousseau</b><span>Passu Level 4 · Social French</span></div>
+        </figcaption>
+      </figure>
+      <figure class="voice-card reveal up" style="--dl:.08s">
+        <blockquote>In Premium we are seven. I speak in every single class — real speaking time, not waiting politely for a turn that never comes.</blockquote>
+        <figcaption class="voice-who">
+          <span class="avatar" aria-hidden="true">DO</span>
+          <div><b>David Okonkwo</b><span>Passu Level 5 · Business French</span></div>
+        </figcaption>
+      </figure>
+      <figure class="voice-card reveal up" style="--dl:.16s">
+        <blockquote>The recordings plus the AI flashcards changed how I revise. My mistakes come back to me as questions — until they stop being mistakes.</blockquote>
+        <figcaption class="voice-who">
+          <span class="avatar" aria-hidden="true">SM</span>
+          <div><b>Sofia Martín</b><span>Passu Level 6 · Exam Preparation</span></div>
+        </figcaption>
+      </figure>
+      <figure class="voice-card reveal up" style="--dl:.24s">
+        <blockquote>I click a word and jump to the exact moment my teacher taught it. I have never seen that anywhere else — it makes forgetting very hard.</blockquote>
+        <figcaption class="voice-who">
+          <span class="avatar" aria-hidden="true">LB</span>
+          <div><b>Liam Bennett</b><span>Passu Level 3 · Social French</span></div>
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 9 · PRICING — « Combien ça coûte ? » ============ -->
+<section id="pricing" class="sec bg-tint" aria-label="Pricing">
+  <div class="container">
+    <div class="sec-head">
+      <div class="reveal qa">
+        <p class="eyebrow"><span class="qnum">07</span> Le prix · The price</p>
+        <h2 class="q" lang="fr" data-split>«&nbsp;Combien ça coûte&nbsp;?&nbsp;»</h2>
+        <div class="q-mask"><span class="q-en">How much does it cost?</span></div>
+        <p class="a-lede">Start monthly. Save when committing to the full journey.</p>
+        <p class="a-sub">No enrollment fees, no surprise add-ons. One monthly price per plan — and a reward for going all in.</p>
+      </div>
+      <div class="art reveal up" style="--dl:.15s">
+        <img src="assets/girl-investment.svg" alt="A student pointing at a rising progress chart" loading="lazy">
+      </div>
+    </div>
+
+    <div class="price-grid">
+      <article class="price-card reveal up" style="--dl:0s">
+        <div class="plan-name"><h3>Core</h3><span class="fr" lang="fr">« L'essentiel »</span></div>
+        <div class="plan-price"><b>$99</b><span>/ month</span></div>
+        <ul>
+          <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Up to 14 students per class</li>
+          <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>3 live 2-hour classes weekly</li>
+          <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Full platform + recordings</li>
+          <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Midterm &amp; final exam each level</li>
+          <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Optional weekend Speaking Club</li>
+        </ul>
+        <a class="btn btn-ghost btn-sm" href="#trial">Try a class first</a>
+      </article>
+
+      <article class="price-card premium reveal up" style="--dl:.12s">
+        <div class="plan-name"><h3>Premium</h3><span class="fr" lang="fr">« Plus de parole »</span></div>
+        <div class="plan-price"><b>$200</b><span>/ month</span></div>
+        <ul>
+          <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Up to 7 students per class</li>
+          <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>3 live 2-hour classes weekly</li>
+          <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Full platform + recordings</li>
+          <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Midterm &amp; final exam each level</li>
+          <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Optional weekend Speaking Club</li>
+        </ul>
+        <a class="btn btn-primary btn-sm" href="#trial">Try a class first</a>
+      </article>
+    </div>
+
+    <div class="journey-banner reveal up" style="--dl:.1s">
+      <div>
+        <p class="big">Commit to the full 12-month journey upfront — <em>save 5%</em>.
+          <span class="fr" lang="fr">« Le chemin complet, moins 5 %. »</span>
+        </p>
+      </div>
+      <p>One decision, one price, all six Passu Levels. The discount applies to either plan.</p>
+    </div>
+
+    <p class="price-note reveal up" style="--dl:.15s">
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+      Path pricing: Social French runs at the standard rate shown here. Business and Exam path pricing is confirmed before Level 5 — never mid-journey, never as a surprise.
+    </p>
+  </div>
+</section>
+
+<!-- ============ 10 · FAQ — « C'est garanti ? » ============ -->
+<section id="faq" class="sec bg-ink" aria-label="Frequently asked questions">
+  <div class="container">
+    <div class="reveal qa">
+      <p class="eyebrow"><span class="qnum">08</span> La vérité · The truth</p>
+      <h2 class="q" lang="fr" data-split>«&nbsp;C'est garanti&nbsp;?&nbsp;»</h2>
+      <div class="q-mask"><span class="q-en">Is it guaranteed?</span></div>
+      <div class="non-block">
+        <p class="non" lang="fr">Non.</p>
+        <p class="non-sub" lang="fr">Et c'est pour ça que vous pouvez nous croire.
+          <span class="non-en" lang="en">No. And that's exactly why you can trust us.</span>
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-list reveal up" style="--dl:.1s">
+      <details class="faq-item">
+        <summary>Do I need previous French knowledge?
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </summary>
+        <p class="ans">No. Passu Level 1 begins at A1.1, which assumes nothing — not even <strong lang="fr">« Bonjour »</strong>. The roadmap exists precisely so you never have to guess what you were supposed to already know.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Can I change from Core to Premium later?
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </summary>
+        <p class="ans">Yes, at the start of any month. Same roadmap, same materials, same exams — you only change the size of the room. Nothing about your progress resets.</p>
+      </details>
+      <details class="faq-item">
+        <summary>When do the paths separate?
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </summary>
+        <p class="ans">At Passu Levels 5 and 6. Levels 1 through 4 build the same shared foundation for everyone; your chosen path then shapes the final two levels. When cohorts are small, paths may be combined.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Is the free trial a real class?
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </summary>
+        <p class="ans">Yes — a scheduled two-hour class with current students and one of our instructors. You'll see exactly what a normal week feels like, because it <strong>is</strong> one.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Is B2 guaranteed after 12 months?
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </summary>
+        <p class="ans"><span class="rose">No — and be wary of anyone who guarantees it.</span> Languages don't come with warranties. What we promise instead: a coherent 12-month roadmap, three live classes a week, and honest exams twice per level that tell you exactly where you stand. Consistent attendance plus that roadmap is the strongest path to B2 we know how to build.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 11 · POLICIES — « Nos promesses, par écrit. » ============ -->
+<section id="policies" class="sec bg-paper" aria-label="Our policies">
+  <div class="container">
+    <div class="sec-head">
+      <div class="reveal qa">
+        <p class="eyebrow"><span class="qnum">09</span> Par écrit · In writing</p>
+        <h2 class="q" lang="fr" data-split>«&nbsp;Nos promesses, par écrit.&nbsp;»</h2>
+        <div class="q-mask"><span class="q-en">Our promises, in writing.</span></div>
+        <p class="a-sub" style="margin-top:22px">The fine print, in large print. These four commitments apply to every student, every plan, every level.</p>
+      </div>
+      <div class="art reveal up" style="--dl:.15s">
+        <img src="assets/study-complete.svg" alt="A student at her laptop beside a stack of books, with a completed checklist" loading="lazy">
+      </div>
+    </div>
+
+    <div class="pol-grid">
+      <article class="pol-card reveal up" style="--dl:0s">
+        <div class="pol-ic"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4z"/></svg></div>
+        <h3>Attendance &amp; recordings</h3>
+        <p>Life happens. Every class is recorded and available the same day, so a missed evening never becomes a missed week.</p>
+      </article>
+      <article class="pol-card reveal up" style="--dl:.08s">
+        <div class="pol-ic"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 16V4"/><path d="M3 8l4-4 4 4"/><path d="M17 8v12"/><path d="M13 16l4 4 4-4"/></svg></div>
+        <h3>Flexible plan changes</h3>
+        <p>Move between Core and Premium at any month boundary. No penalties, no lock-in, no "retention" conversations.</p>
+      </article>
+      <article class="pol-card reveal up" style="--dl:.16s">
+        <div class="pol-ic"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s8-3 8-10V5l-8-3-8 3v7c0 7 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <h3>Fair refund policy</h3>
+        <p>Clear, published refund terms before you pay a cent. If Passu isn't right for you, leaving is simple and civil.</p>
+      </article>
+      <article class="pol-card reveal up" style="--dl:.24s">
+        <div class="pol-ic"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <h3>Honest promises</h3>
+        <p>No guaranteed levels. No "fluent in 3 months." We publish what the program does — and we hold ourselves to it.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ 12 · FOOTER ============ -->
+<footer aria-label="Footer">
+  <div class="container">
+    <p class="foot-bye" lang="fr">À bientôt.<small lang="en">See you soon — your first class is waiting.</small></p>
+    <div class="foot-grid">
+      <a class="logo" href="#top" aria-label="Passu — home">Passu<span class="dot"></span></a>
+      <nav class="foot-nav" aria-label="Footer">
+        <a href="#levels">Passu Levels</a>
+        <a href="#plans">Core &amp; Premium</a>
+        <a href="#paths">Learning Paths</a>
+        <a href="#trial">Free Trial</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+    </div>
+    <p class="foot-legal">© 2026 Passu. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var root=document.documentElement;
+  root.classList.add('js');
+
+  /* split section questions into staggered words (NBSP keeps guillemets attached) */
+  document.querySelectorAll('[data-split]').forEach(function(el){
+    var words=el.textContent.trim().split(' ');
+    el.textContent='';
+    words.forEach(function(wd,i){
+      var s=document.createElement('span');
+      s.className='w';s.style.setProperty('--i',i);s.textContent=wd;
+      el.appendChild(s);
+      if(i<words.length-1)el.appendChild(document.createTextNode(' '));
+    });
+  });
+
+  /* scroll reveals */
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){e.target.classList.add('inview');io.unobserve(e.target);}
+      });
+    },{threshold:.15,rootMargin:'0px 0px -6% 0px'});
+    document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+  }else{
+    document.querySelectorAll('.reveal').forEach(function(el){el.classList.add('inview');});
+  }
+
+  /* hero conversation timeline */
+  requestAnimationFrame(function(){requestAnimationFrame(function(){root.classList.add('play');});});
+
+  /* flip words: tap + keyboard support */
+  document.querySelectorAll('.flip').forEach(function(f){
+    f.setAttribute('tabindex','0');
+    f.setAttribute('role','button');
+    var fr=f.querySelector('.fr'),en=f.querySelector('.en');
+    if(fr&&en)f.setAttribute('aria-label',fr.textContent+' — in English: '+en.textContent);
+    f.addEventListener('click',function(){f.classList.toggle('on');});
+    f.addEventListener('keydown',function(e){
+      if(e.key==='Enter'||e.key===' '){e.preventDefault();f.classList.toggle('on');}
+    });
+  });
+
+  /* the page teaches your first words: auto-flip each hero word once */
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(!reduce){
+    var flips=Array.prototype.slice.call(document.querySelectorAll('.hero .flip'));
+    flips.forEach(function(f,i){
+      setTimeout(function(){f.classList.add('on');},3300+i*1250);
+      setTimeout(function(){f.classList.remove('on');},4250+i*1250);
+    });
+  }
+
+  /* reading progress */
+  var bar=document.getElementById('progress'),ticking=false;
+  function paint(){
+    var d=document.documentElement;
+    var max=Math.max(1,d.scrollHeight-d.clientHeight);
+    bar.style.transform='scaleX('+(d.scrollTop/max)+')';
+    ticking=false;
+  }
+  window.addEventListener('scroll',function(){
+    if(!ticking){ticking=true;requestAnimationFrame(paint);}
+  },{passive:true});
+  paint();
+})();
+</script>
+</body>
+</html>

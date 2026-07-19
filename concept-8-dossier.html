@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Passu — Dossier d'admission · 12 months to B2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+<style>
+/* ============ TOKENS ============ */
+:root{
+  --teal:#21b6b6; --teal-deep:#188888; --teal-soft:#e7f7f7; --teal-tint:#f2fbfb; --teal-mid:#cdeeee;
+  --rose:#e11d48;
+  --ink:#212529; --body:#374151; --muted:#6b7280;
+  --hair:#e5e7eb; --paper:#ffffff; --paper-warm:#fbfdfd; --desk:#e7f7f7;
+  --headH:64px;
+  --ease-spring:cubic-bezier(.22,1,.36,1);
+  --shadow-sheet:0 -24px 60px rgba(24,136,136,.16), 0 -1px 0 rgba(33,182,182,.20);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--headH) + 56px)}
+body{
+  font-family:'Montserrat',sans-serif;color:var(--body);background:var(--desk);
+  -webkit-font-smoothing:antialiased;font-size:16px;line-height:1.65;
+  overflow-x:hidden;overflow-x:clip;
+}
+::selection{background:var(--teal-mid);color:var(--ink)}
+a{color:inherit}
+img{max-width:100%;display:block}
+:focus-visible{outline:2px solid var(--teal);outline-offset:3px;border-radius:3px}
+.skip{position:absolute;left:-9999px;top:0;background:var(--ink);color:#fff;padding:10px 18px;z-index:200;font-weight:700;font-size:13px}
+.skip:focus{left:12px;top:12px}
+
+/* paper grain over everything, extremely light */
+.grain{position:fixed;inset:0;z-index:90;pointer-events:none;opacity:.05;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='220' height='220' filter='url(%23n)'/></svg>");
+  background-size:220px 220px;
+}
+
+/* ============ TYPO HELPERS ============ */
+.smallcaps{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase}
+.kicker{font-size:12px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--teal-deep)}
+.h2{font-size:clamp(29px,3.6vw,44px);font-weight:800;line-height:1.12;letter-spacing:-.01em;color:var(--ink)}
+.lead{font-size:clamp(16px,1.5vw,18px);line-height:1.7;color:var(--body);font-weight:500}
+.note{font-size:13.5px;color:var(--muted);line-height:1.6}
+.fr{font-style:italic}
+
+/* ============ BUTTONS ============ */
+.btn{display:inline-flex;align-items:center;gap:10px;background:var(--teal);color:#fff;text-decoration:none;
+  font-weight:700;font-size:14px;letter-spacing:.03em;padding:15px 28px;border-radius:999px;border:none;cursor:pointer;
+  box-shadow:0 10px 24px rgba(33,182,182,.32);transition:transform .35s var(--ease-spring), box-shadow .35s, background .25s}
+.btn:hover{background:var(--teal-deep);transform:translateY(-2px);box-shadow:0 14px 30px rgba(24,136,136,.36)}
+.btn svg{width:16px;height:16px}
+.btn-ghost{display:inline-flex;align-items:center;gap:9px;background:transparent;color:var(--ink);text-decoration:none;
+  font-weight:700;font-size:14px;padding:14px 24px;border-radius:999px;border:1.5px solid var(--hair);
+  transition:border-color .25s, background .25s, transform .35s var(--ease-spring)}
+.btn-ghost:hover{border-color:var(--teal);background:var(--teal-tint);transform:translateY(-2px)}
+
+/* ============ HEADER ============ */
+.site-head{position:fixed;top:0;left:0;right:0;height:var(--headH);z-index:60;display:flex;align-items:center;
+  padding:0 clamp(16px,4vw,44px);gap:28px;
+  background:transparent;border-bottom:1px solid transparent;
+  transition:background .4s, border-color .4s, box-shadow .4s}
+.site-head.scrolled{background:rgba(255,255,255,.9);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border-bottom-color:var(--hair);box-shadow:0 6px 24px rgba(33,37,41,.05)}
+.logo{font-weight:900;font-size:22px;color:var(--ink);text-decoration:none;letter-spacing:-.02em;line-height:1}
+.logo b{color:var(--teal);font-weight:900}
+.tabs-nav{display:flex;gap:4px;margin-left:auto}
+.tabs-nav a{text-decoration:none;color:var(--muted);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  padding:9px 13px;border-radius:9px 9px 0 0;border:1px solid transparent;border-bottom:none;position:relative;top:1px;
+  transition:color .25s, background .25s, border-color .25s}
+.tabs-nav a:hover{color:var(--ink);background:var(--teal-tint)}
+.tabs-nav a.active{color:var(--teal-deep);background:var(--paper);border-color:var(--hair)}
+.tabs-nav a.active::after{content:"";position:absolute;left:13px;right:13px;bottom:5px;height:2px;background:var(--teal);border-radius:2px}
+.head-cta{margin-left:8px;background:var(--ink);color:#fff;text-decoration:none;font-weight:700;font-size:12.5px;
+  letter-spacing:.04em;padding:11px 20px;border-radius:999px;transition:background .25s,transform .3s var(--ease-spring)}
+.head-cta:hover{background:var(--teal-deep);transform:translateY(-1px)}
+.burger{display:none}
+#menu{display:none}
+
+/* mobile menu panel */
+.menu-panel{position:fixed;inset:0;z-index:55;background:var(--paper-warm);padding:96px 28px 40px;
+  transform:translateY(-8px);opacity:0;pointer-events:none;transition:opacity .35s, transform .45s var(--ease-spring)}
+#menu:checked ~ .menu-panel{opacity:1;transform:none;pointer-events:auto}
+.menu-panel nav{display:flex;flex-direction:column;border-top:1px solid var(--hair)}
+.menu-panel a{display:flex;justify-content:space-between;align-items:baseline;text-decoration:none;color:var(--ink);
+  font-weight:800;font-size:22px;padding:18px 4px;border-bottom:1px solid var(--hair)}
+.menu-panel a small{font-size:11px;font-weight:700;letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+.menu-panel .btn{margin-top:26px;justify-content:center;width:100%}
+
+/* ============ COVER (hero part 1) ============ */
+.cover{position:sticky;top:0;z-index:1;height:100svh;min-height:600px;display:flex;align-items:stretch;
+  padding:clamp(10px,2vh,22px) clamp(10px,2vw,24px)}
+.cover-sheet{position:relative;width:min(1180px,100%);margin:0 auto;background:var(--teal-tint);
+  border:1px solid rgba(33,182,182,.18);border-radius:20px;overflow:hidden;
+  box-shadow:0 30px 70px rgba(24,136,136,.20), 0 4px 14px rgba(33,37,41,.06);
+  display:flex;opacity:0;transform:translateY(20px) scale(.985);
+  transition:opacity .9s ease, transform 1.1s var(--ease-spring)}
+body.loaded .cover-sheet{opacity:1;transform:none}
+.spine{flex:0 0 46px;background:linear-gradient(180deg,var(--teal),var(--teal-deep));display:flex;align-items:center;justify-content:center}
+.spine span{writing-mode:vertical-rl;transform:rotate(180deg);color:#fff;font-size:10.5px;font-weight:700;letter-spacing:.34em;text-transform:uppercase;opacity:.92;white-space:nowrap}
+.cover-inner{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+  padding:72px clamp(20px,6vw,80px) clamp(120px,16vh,160px);position:relative}
+.cv{opacity:0;transform:translateY(16px);transition:opacity .8s ease, transform .9s var(--ease-spring)}
+body.loaded .cv{opacity:1;transform:var(--rest,none)}
+body.loaded .cv.clip-card:hover{transform:rotate(1deg) translateY(-4px)}
+body.loaded .cv:nth-of-type(1),body.loaded .d1{transition-delay:.15s}
+.d1{transition-delay:.15s}.d2{transition-delay:.28s}.d3{transition-delay:.40s}.d4{transition-delay:.52s}.d5{transition-delay:.64s}.d6{transition-delay:.76s}.d7{transition-delay:.88s}
+.cover-title{font-size:clamp(34px,7.2vw,88px);font-weight:900;color:var(--ink);letter-spacing:.10em;text-transform:uppercase;line-height:1.06;margin:18px 0 0}
+.rule-fleuron{display:flex;align-items:center;gap:14px;width:min(420px,72%);margin:26px 0 22px}
+.rule-fleuron i{flex:1;height:1px;background:var(--ink);opacity:.35}
+.rule-fleuron svg{width:12px;height:12px;flex:0 0 auto;color:var(--teal-deep)}
+.cover-sub{font-size:clamp(16px,2vw,21px);font-weight:600;color:var(--ink);font-style:italic}
+.cover-sub-en{font-size:clamp(13px,1.4vw,15.5px);color:var(--muted);max-width:520px;margin-top:12px;line-height:1.7}
+.cand{display:flex;align-items:baseline;gap:12px;margin-top:34px;width:min(430px,84%);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.cand i{flex:1;border-bottom:2px dotted rgba(107,114,128,.45)}
+.cand em{font-size:11.5px;font-weight:500;letter-spacing:.02em;text-transform:none;color:var(--muted);font-style:italic}
+.cover-cta{margin-top:36px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;justify-content:center}
+.cover-meta{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--teal-deep)}
+/* stamp on cover */
+.cover-stamp{position:absolute;top:34px;right:40px;width:132px;height:132px;color:var(--teal-deep);transform:rotate(9deg)}
+/* paper-clipped character card */
+.clip-card{position:absolute;right:clamp(18px,5vw,64px);bottom:clamp(20px,4vh,40px);width:clamp(130px,15vw,188px);
+  background:#fff;border:1px solid var(--hair);border-radius:8px;padding:14px 12px 10px;
+  box-shadow:0 14px 30px rgba(33,37,41,.12);--rest:rotate(3.5deg);transform:rotate(3.5deg);transition:transform .5s var(--ease-spring)}
+.clip-card:hover{transform:rotate(1deg) translateY(-4px)}
+.clip-card img{width:100%;height:auto}
+.clip-card figcaption{font-size:10.5px;font-weight:600;font-style:italic;color:var(--muted);text-align:center;margin-top:8px}
+.paperclip{position:absolute;top:-24px;left:16px;width:26px;height:58px;transform:rotate(8deg);color:#6b7280}
+.scroll-cue{position:absolute;left:50%;bottom:18px;transform:translateX(-50%);color:var(--teal-deep);opacity:.85}
+.scroll-cue svg{width:22px;height:22px;animation:cue 2.2s ease-in-out infinite}
+@keyframes cue{0%,100%{transform:translateY(0)}50%{transform:translateY(7px)}}
+
+/* ============ THE SHEET (all pages) ============ */
+.sheet{position:relative;z-index:2;width:min(1180px,100%);margin:0 auto;background:var(--paper);
+  border-radius:26px 26px 0 0;box-shadow:var(--shadow-sheet)}
+.running-head{display:flex;align-items:center;gap:18px;padding:26px clamp(20px,7vw,96px) 0;color:var(--muted)}
+.running-head i{flex:1;height:1px;background:var(--hair)}
+.running-head span{font-size:10.5px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;white-space:nowrap}
+
+/* pièces */
+.piece{position:relative;padding:0 clamp(20px,7vw,96px) clamp(64px,8vw,104px)}
+.piece-tab{position:sticky;top:var(--headH);z-index:20;display:flex;align-items:baseline;gap:14px;
+  background:rgba(255,255,255,.93);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  padding:16px 0 13px;border-bottom:1px solid var(--hair);margin-bottom:clamp(40px,5vw,60px)}
+.piece-tab .no{font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:#fff;
+  background:var(--teal);padding:5px 11px;border-radius:6px 6px 0 0;position:relative;top:1px}
+.piece-tab .fr-t{font-size:14px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--ink)}
+.piece-tab .en-t{font-size:11.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.piece-tab .pg{margin-left:auto;font-size:11px;font-weight:700;letter-spacing:.14em;color:var(--muted);font-variant-numeric:tabular-nums}
+/* printed margin rail (desktop) */
+.rail{position:absolute;left:30px;top:130px;bottom:60px;width:26px;display:none;flex-direction:column;align-items:center;justify-content:space-between}
+.rail .mark{writing-mode:vertical-rl;transform:rotate(180deg);font-size:9.5px;font-weight:700;letter-spacing:.34em;text-transform:uppercase;color:rgba(107,114,128,.55);white-space:nowrap}
+.rail .pgn{font-size:10px;font-weight:700;color:rgba(107,114,128,.55);font-variant-numeric:tabular-nums}
+@media(min-width:1160px){
+  .rail{display:flex}
+  .piece::before{content:"";position:absolute;left:72px;top:120px;bottom:48px;border-left:1px solid var(--hair)}
+}
+
+/* reveal-on-scroll (paper settle) */
+.reveal{opacity:0;transform:translateY(26px) rotate(.4deg);transition:opacity .8s ease,transform .95s var(--ease-spring)}
+.reveal.in{opacity:1;transform:var(--rest,none)}
+.rd1{transition-delay:.08s}.rd2{transition-delay:.16s}.rd3{transition-delay:.24s}.rd4{transition-delay:.32s}.rd5{transition-delay:.40s}
+
+/* ============ PIÈCE 01 — L'OBJET (hero page) ============ */
+.objet-grid{display:grid;grid-template-columns:1.25fr .85fr;gap:clamp(40px,5vw,72px);align-items:start}
+.objet-h1{font-size:clamp(34px,4.6vw,58px);font-weight:900;line-height:1.08;letter-spacing:-.015em;color:var(--ink);margin:10px 0 22px}
+.objet-h1 em{font-style:normal;color:var(--teal-deep)}
+.objet-cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:32px}
+/* fiche technique */
+.fiche{margin-top:44px;border-top:2px solid var(--ink);border-bottom:1px solid var(--hair);
+  display:grid;grid-template-columns:repeat(5,1fr)}
+.fiche div{padding:18px 14px 16px;border-left:1px solid var(--hair)}
+.fiche div:first-child{border-left:none}
+.fiche b{display:block;font-size:clamp(22px,2.2vw,30px);font-weight:800;color:var(--ink);font-variant-numeric:tabular-nums;line-height:1.1}
+.fiche b small{font-size:.55em;font-weight:800;color:var(--teal-deep)}
+.fiche span{display:block;font-size:10.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin-top:6px;line-height:1.5}
+/* sommaire */
+.sommaire{border:1px solid var(--hair);border-radius:14px;padding:30px 30px 24px;background:var(--paper-warm)}
+.sommaire h3{font-size:12px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--ink);margin-bottom:6px}
+.sommaire p{font-size:12px;color:var(--muted);margin-bottom:16px;font-style:italic}
+.sommaire a{display:flex;align-items:baseline;gap:10px;text-decoration:none;padding:9px 0;font-size:13.5px;font-weight:600;color:var(--body);transition:color .2s}
+.sommaire a:hover{color:var(--teal-deep)}
+.sommaire a i{flex:1;border-bottom:2px dotted var(--hair);transform:translateY(-3px)}
+.sommaire a b{font-weight:700;color:var(--muted);font-variant-numeric:tabular-nums;font-size:12px}
+.sommaire a:hover b{color:var(--teal-deep)}
+
+/* ============ PIÈCE 02 — LA CARTE (roadmap foldout) ============ */
+.carte-head{max-width:640px;margin-bottom:14px}
+.map-hint{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--teal-deep);
+  display:inline-flex;align-items:center;gap:8px;margin:8px 0 26px;transition:opacity .8s}
+.map-hint svg{width:15px;height:15px}
+.map.open ~ .map-hint,.map.open .map-hint{opacity:0}
+.map{perspective:1900px;border:1px solid var(--hair);border-radius:14px;overflow:hidden;background:var(--paper)}
+.map-row{display:grid;grid-template-columns:repeat(6,1fr);transform-style:preserve-3d}
+.panel{position:relative;padding:30px 18px 26px;border-right:1px solid var(--hair);min-height:280px;
+  background:var(--paper);opacity:0;
+  transition:transform 1s var(--ease-spring), opacity .7s ease}
+.panel:last-child{border-right:none}
+.panel:nth-child(odd){transform:rotateY(56deg);transform-origin:right center}
+.panel:nth-child(even){transform:rotateY(-56deg);transform-origin:left center;background:var(--paper-warm)}
+.map.open .panel{transform:rotateY(0);opacity:1}
+.map.open .panel:nth-child(1){transition-delay:.05s}
+.map.open .panel:nth-child(2){transition-delay:.15s}
+.map.open .panel:nth-child(3){transition-delay:.25s}
+.map.open .panel:nth-child(4){transition-delay:.35s}
+.map.open .panel:nth-child(5){transition-delay:.45s}
+.map.open .panel:nth-child(6){transition-delay:.55s}
+/* dotted route through the panels */
+.panel::before{content:"";position:absolute;left:0;right:0;top:47px;border-top:2px dotted var(--teal-mid)}
+.node{position:relative;z-index:1;width:36px;height:36px;border:2px solid var(--ink);border-radius:50%;
+  background:#fff;display:grid;place-items:center;font-weight:800;font-size:14px;color:var(--ink);margin:0 auto}
+.panel h3{font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);text-align:center;margin-top:16px}
+.cefr{display:inline-block;border:1.5px solid var(--teal-deep);color:var(--teal-deep);border-radius:5px;
+  font-size:10px;font-weight:800;letter-spacing:.08em;padding:2px 7px;margin:8px auto 0;font-variant-numeric:tabular-nums}
+.panel .cefr-wrap{text-align:center}
+.panel p{font-size:12.5px;line-height:1.6;color:var(--muted);text-align:center;margin-top:12px}
+.map-foot{display:flex;align-items:center;gap:16px;margin-top:18px;color:var(--muted)}
+.map-foot i{flex:1;height:1px;background:var(--hair)}
+.map-foot span{font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap}
+.journey-fig{margin-top:56px}
+.journey-fig img{width:min(760px,100%);margin:0 auto}
+.journey-fig figcaption{text-align:center;font-size:13px;color:var(--muted);font-style:italic;margin-top:18px}
+
+/* ============ PIÈCE 03 — LES FORMULES (plans) ============ */
+.formules-intro{max-width:620px}
+.included{margin:38px 0 44px;border:1px solid var(--hair);border-radius:14px;background:var(--teal-tint);padding:26px 30px}
+.included h3{font-size:11.5px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--teal-deep);margin-bottom:14px}
+.included ul{list-style:none;display:grid;grid-template-columns:repeat(2,1fr);gap:10px 28px}
+.included li{display:flex;gap:11px;align-items:flex-start;font-size:14.5px;font-weight:600;color:var(--ink)}
+.included li svg{width:18px;height:18px;flex:0 0 auto;color:var(--teal-deep);margin-top:3px}
+.plans{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,3vw,40px);align-items:stretch}
+.plan{position:relative;border:1px solid var(--hair);border-radius:16px;background:var(--paper);padding:38px 36px 34px;
+  --rest:rotate(-.45deg);transition:transform .5s var(--ease-spring), box-shadow .5s}
+.plan+.plan{--rest:rotate(.45deg)}
+.plan:hover{transform:rotate(0) translateY(-4px);box-shadow:0 22px 48px rgba(33,37,41,.09)}
+.plan.premium{border-color:var(--teal-mid);box-shadow:inset 4px 0 0 var(--teal)}
+.plan .smallcaps{color:var(--muted)}
+.plan h3{font-size:24px;font-weight:800;color:var(--ink);margin-top:8px}
+.price{display:flex;align-items:baseline;gap:8px;margin:16px 0 4px}
+.price b{font-size:46px;font-weight:800;color:var(--ink);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.price span{font-size:13px;font-weight:600;color:var(--muted)}
+.cap{font-size:13px;font-weight:700;color:var(--teal-deep);letter-spacing:.04em;margin-bottom:18px}
+.plan p{font-size:14.5px;line-height:1.7}
+.plan .best{margin-top:20px;padding-top:18px;border-top:1px dashed var(--hair);font-size:13.5px;color:var(--muted)}
+.plan .best b{color:var(--ink)}
+.plan-stamp{position:absolute;top:-26px;right:-14px;width:118px;height:118px;color:var(--rose)}
+
+/* ============ PIÈCE 04 — LES PARCOURS (paths) ============ */
+.folders{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(20px,2.6vw,32px);margin-top:8px}
+.folder{position:relative;border:1px solid var(--hair);border-radius:0 14px 14px 14px;background:var(--paper-warm);
+  padding:30px 28px 28px;transition:transform .5s var(--ease-spring), box-shadow .5s, border-color .3s}
+.folder::before{content:"";position:absolute;top:-15px;left:-1px;width:44%;height:16px;background:inherit;
+  border:1px solid var(--hair);border-bottom:none;border-radius:8px 10px 0 0}
+.folder:hover{transform:translateY(-5px);box-shadow:0 20px 44px rgba(33,37,41,.08);border-color:var(--teal-mid)}
+.folder .smallcaps{color:var(--teal-deep)}
+.folder h3{font-size:19px;font-weight:800;color:var(--ink);margin:8px 0 4px}
+.folder .fr-name{font-size:13px;font-style:italic;color:var(--muted);margin-bottom:14px}
+.folder p{font-size:14px;line-height:1.7}
+.folder svg{width:26px;height:26px;color:var(--teal-deep);margin-bottom:14px}
+.nb{display:flex;gap:14px;margin-top:40px;padding:20px 24px;border-left:3px solid var(--teal);background:var(--teal-tint);border-radius:0 12px 12px 0}
+.nb b{font-size:11px;font-weight:800;letter-spacing:.16em;color:var(--teal-deep);text-transform:uppercase;white-space:nowrap;margin-top:2px}
+.nb p{font-size:14px;color:var(--body)}
+
+/* ============ PIÈCE 05 — L'INVENTAIRE (features) ============ */
+.inv-grid{display:grid;grid-template-columns:1fr .8fr;gap:clamp(40px,5vw,72px);align-items:start}
+.inv-list{border-top:2px solid var(--ink)}
+.inv-item{display:grid;grid-template-columns:56px 44px 1fr;gap:16px;align-items:start;padding:24px 0 22px;border-bottom:1px solid var(--hair)}
+.inv-item .num{font-size:13px;font-weight:800;color:var(--muted);font-variant-numeric:tabular-nums;padding-top:6px}
+.inv-item .ic{width:44px;height:44px;border:1.5px solid var(--hair);border-radius:11px;display:grid;place-items:center;color:var(--teal-deep);background:var(--paper-warm)}
+.inv-item .ic svg{width:22px;height:22px}
+.inv-item h3{font-size:16.5px;font-weight:800;color:var(--ink);margin-bottom:5px}
+.inv-item p{font-size:14px;line-height:1.65;color:var(--muted)}
+.inv-fig{position:sticky;top:calc(var(--headH) + 76px);border:1px solid var(--hair);border-radius:16px;background:var(--teal-tint);padding:34px 30px 26px}
+.inv-fig img{width:100%;height:auto}
+.inv-fig figcaption{font-size:13px;color:var(--muted);font-style:italic;text-align:center;margin-top:16px}
+
+/* ============ PIÈCE 06 — L'ESSAI (free trial) ============ */
+.essai-grid{display:grid;grid-template-columns:1fr .95fr;gap:clamp(40px,5vw,72px);align-items:center}
+.steps{margin-top:34px;border-top:2px solid var(--ink)}
+.step{display:flex;gap:18px;align-items:baseline;padding:19px 0 17px;border-bottom:1px solid var(--hair)}
+.step .box{flex:0 0 auto;width:18px;height:18px;border:2px solid var(--teal-deep);border-radius:4px;position:relative;top:3px}
+.step b{font-size:13px;font-weight:800;color:var(--teal-deep);font-variant-numeric:tabular-nums;letter-spacing:.06em}
+.step div h3{font-size:15.5px;font-weight:700;color:var(--ink);display:inline}
+.step div p{font-size:13.5px;color:var(--muted);margin-top:3px}
+.essai-fig{border:1px solid var(--hair);border-radius:16px;background:var(--paper-warm);padding:34px 26px 24px}
+.essai-fig img{width:100%;height:auto}
+.essai-fig figcaption{font-size:13px;color:var(--muted);font-style:italic;text-align:center;margin-top:14px}
+.essai-cta{margin-top:34px;display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+.essai-honest{font-size:13.5px;color:var(--muted);font-style:italic;margin-top:18px}
+
+/* ============ PIÈCE 07 — LES LETTRES (testimonials) ============ */
+.lettres-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,3vw,38px)}
+.lettre{position:relative;border:1px solid var(--hair);border-radius:12px;background:var(--paper-warm);
+  padding:30px 30px 26px;--rest:rotate(-.5deg);transition:transform .5s var(--ease-spring), box-shadow .5s}
+.lettre:nth-child(even){--rest:rotate(.45deg)}
+.lettre:hover{transform:rotate(0) translateY(-4px);box-shadow:0 18px 42px rgba(33,37,41,.08)}
+.lettre-head{display:flex;justify-content:space-between;align-items:flex-start;gap:18px;margin-bottom:16px}
+.lettre-head .smallcaps{color:var(--muted);letter-spacing:.14em;padding-top:8px}
+.mount{position:relative;flex:0 0 92px;width:92px;background:var(--teal-tint);border:1px solid var(--hair);padding:9px}
+.mount img{width:100%;height:72px;object-fit:contain}
+.mount i{position:absolute;width:20px;height:20px}
+.mount i:nth-child(1){top:-5px;left:-5px;background:linear-gradient(135deg,var(--teal-mid) 50%,transparent 50%)}
+.mount i:nth-child(2){top:-5px;right:-5px;background:linear-gradient(225deg,var(--teal-mid) 50%,transparent 50%)}
+.mount i:nth-child(3){bottom:-5px;left:-5px;background:linear-gradient(45deg,var(--teal-mid) 50%,transparent 50%)}
+.mount i:nth-child(4){bottom:-5px;right:-5px;background:linear-gradient(315deg,var(--teal-mid) 50%,transparent 50%)}
+.lettre blockquote{font-size:16px;font-weight:500;font-style:italic;line-height:1.75;color:var(--ink)}
+.lettre blockquote span{color:var(--teal-deep)}
+.lettre footer{margin-top:20px;padding-top:16px;border-top:1px dashed var(--hair);display:flex;flex-direction:column;gap:3px}
+.lettre footer b{font-size:14.5px;font-weight:800;color:var(--ink)}
+.lettre footer span{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+
+/* ============ PIÈCE 08 — LES TARIFS (pricing) ============ */
+.tarif-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(40px,5vw,72px);align-items:start}
+.tarif-sheet{border:1px solid var(--hair);border-radius:14px;padding:34px 34px 28px;background:var(--paper)}
+.tarif-sheet h3{font-size:11.5px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--ink);margin-bottom:8px}
+.tarif-sheet .note{margin-bottom:18px}
+.trow{display:flex;align-items:baseline;gap:12px;padding:15px 0;border-bottom:1px solid var(--hair)}
+.trow:last-of-type{border-bottom:none}
+.trow .lbl{font-size:14.5px;font-weight:700;color:var(--ink)}
+.trow .sub{display:block;font-size:12px;font-weight:500;color:var(--muted);margin-top:2px}
+.trow i{flex:1;border-bottom:2px dotted var(--hair);transform:translateY(-4px)}
+.trow .amt{font-size:22px;font-weight:800;color:var(--ink);font-variant-numeric:tabular-nums;white-space:nowrap}
+.trow .amt small{font-size:12px;font-weight:600;color:var(--muted)}
+.trow.save .amt{color:var(--teal-deep)}
+.tarif-notes{margin-top:20px;padding-top:18px;border-top:2px solid var(--ink);display:flex;flex-direction:column;gap:9px}
+.tarif-notes p{font-size:13px;color:var(--muted);display:flex;gap:10px}
+.tarif-notes p b{color:var(--teal-deep);font-weight:800;white-space:nowrap}
+.tarif-side{position:sticky;top:calc(var(--headH) + 76px)}
+.tarif-fig{border:1px solid var(--hair);border-radius:16px;background:var(--teal-tint);padding:30px 28px 22px}
+.tarif-fig img{width:100%;height:auto}
+.tarif-fig figcaption{font-size:13px;color:var(--muted);font-style:italic;text-align:center;margin-top:14px}
+.tarif-side .btn{margin-top:24px;width:100%;justify-content:center}
+
+/* ============ ANNEXE A — FAQ ============ */
+.faq-wrap{max-width:780px}
+.faq{border-top:2px solid var(--ink)}
+.faq details{border-bottom:1px solid var(--hair)}
+.faq summary{list-style:none;cursor:pointer;display:flex;align-items:baseline;gap:18px;padding:22px 4px;
+  font-size:16.5px;font-weight:700;color:var(--ink);transition:color .25s}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary:hover{color:var(--teal-deep)}
+.faq summary .qno{font-size:12px;font-weight:800;color:var(--muted);font-variant-numeric:tabular-nums;flex:0 0 34px}
+.faq summary .plus{margin-left:auto;flex:0 0 auto;width:26px;height:26px;border:1.5px solid var(--hair);border-radius:50%;display:grid;place-items:center;transition:transform .45s var(--ease-spring), background .3s, border-color .3s}
+.faq summary .plus svg{width:12px;height:12px;color:var(--ink);transition:transform .45s var(--ease-spring)}
+.faq details[open] .plus{background:var(--teal);border-color:var(--teal)}
+.faq details[open] .plus svg{transform:rotate(45deg);color:#fff}
+.faq .answer{padding:0 4px 26px 52px;font-size:14.5px;line-height:1.75;color:var(--body);max-width:640px}
+.faq .answer .honest-inline{display:flex;gap:22px;align-items:flex-start}
+.faq .answer .stamp-sm{flex:0 0 104px;width:104px;height:104px;color:var(--rose);margin-top:-6px}
+
+/* ============ PIÈCE 09 — LES SIGNATURES (policies) ============ */
+.clauses{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,3vw,40px) clamp(32px,4vw,56px);margin-bottom:56px}
+.clause h3{display:flex;gap:12px;align-items:baseline;font-size:16.5px;font-weight:800;color:var(--ink);margin-bottom:9px}
+.clause h3 b{font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--teal-deep);white-space:nowrap}
+.clause p{font-size:14.5px;line-height:1.7;color:var(--body)}
+.sig-block{position:relative;border:1px solid var(--hair);border-radius:16px;background:var(--paper-warm);
+  padding:42px clamp(28px,5vw,64px) 46px;display:flex;align-items:flex-end;justify-content:space-between;gap:32px;flex-wrap:wrap}
+.sig-left .smallcaps{color:var(--muted);display:block;margin-bottom:20px}
+.sig-name{font-size:clamp(34px,4vw,46px);font-weight:600;font-style:italic;color:var(--ink);letter-spacing:.01em;line-height:1}
+.sig-flourish{display:block;width:210px;height:22px;color:var(--teal-deep);margin-top:6px}
+.sig-date{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:18px}
+.sig-stamp{width:148px;height:148px;color:var(--rose);flex:0 0 auto}
+
+/* stamps (shared) */
+.stamp{opacity:0;mix-blend-mode:multiply;transform:rotate(-8deg) scale(1.14);transition:opacity .7s ease, transform .8s var(--ease-spring)}
+.stamp.in,body.loaded .cover-stamp.stamp{opacity:.85;transform:rotate(-8deg) scale(1)}
+.cover-stamp.stamp{transform:rotate(9deg) scale(1.14);transition-delay:.9s}
+body.loaded .cover-stamp.stamp{transform:rotate(9deg) scale(1)}
+.stamp text{font-family:'Montserrat',sans-serif}
+
+/* ============ FOOTER ============ */
+.colophon{position:relative;z-index:2;width:min(1180px,100%);margin:0 auto;background:var(--ink);color:#e5e7eb;
+  padding:64px clamp(20px,7vw,96px) 40px}
+.colophon .logo{color:#fff;font-size:26px}
+.colophon .top{display:flex;justify-content:space-between;align-items:flex-start;gap:32px;flex-wrap:wrap;padding-bottom:38px;border-bottom:1px solid rgba(229,231,235,.16)}
+.colophon nav{display:flex;gap:8px 26px;flex-wrap:wrap}
+.colophon nav a{color:#e5e7eb;text-decoration:none;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;opacity:.75;transition:opacity .25s,color .25s}
+.colophon nav a:hover{opacity:1;color:var(--teal)}
+.colophon .base{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;padding-top:26px}
+.colophon .base p{font-size:12px;color:#9ca3af}
+.colophon .base p.fr{font-style:italic}
+
+/* ============ RESPONSIVE ============ */
+@media(max-width:1024px){
+  .tabs-nav{display:none}
+  .head-cta{margin-left:auto}
+  .burger{display:grid;place-items:center;width:42px;height:42px;border:1px solid var(--hair);border-radius:10px;background:rgba(255,255,255,.85);cursor:pointer;margin-left:14px}
+  .burger span{display:block;width:18px;height:2px;background:var(--ink);position:relative;transition:transform .35s,background .25s}
+  .burger span::before,.burger span::after{content:"";position:absolute;left:0;width:18px;height:2px;background:var(--ink);transition:transform .35s,top .35s}
+  .burger span::before{top:-6px}
+  .burger span::after{top:6px}
+  #menu:checked ~ .site-head .burger span{background:transparent}
+  #menu:checked ~ .site-head .burger span::before{top:0;transform:rotate(45deg)}
+  #menu:checked ~ .site-head .burger span::after{top:0;transform:rotate(-45deg)}
+  .objet-grid,.inv-grid,.essai-grid,.tarif-grid{grid-template-columns:1fr}
+  .inv-fig,.tarif-side{position:static}
+  .map-row{grid-template-columns:repeat(3,1fr)}
+  .panel:nth-child(3){border-right:none}
+  .panel:nth-child(n+4){border-top:1px solid var(--hair)}
+  .panel{min-height:250px}
+}
+@media(max-width:768px){
+  :root{--headH:58px}
+  .plans,.lettres-grid,.clauses{grid-template-columns:1fr}
+  .folders{grid-template-columns:1fr;gap:30px}
+  .included ul{grid-template-columns:1fr}
+  .fiche{grid-template-columns:repeat(2,1fr);border-top-width:2px}
+  .fiche div{border-left:none;border-top:1px solid var(--hair)}
+  .fiche div:nth-child(-n+2){border-top:none}
+  .fiche div:nth-child(even){border-left:1px solid var(--hair)}
+  .cover-stamp{width:96px;height:96px;top:20px;right:18px}
+  .piece-tab .en-t{display:none}
+  .sig-block{padding:34px 24px 38px}
+}
+@media(max-width:520px){
+  .cover{padding:8px}
+  .cover-inner{padding:64px 18px 150px}
+  .spine{flex-basis:34px}
+  .clip-card{width:118px;right:14px;bottom:16px}
+  .paperclip{width:20px;height:46px;top:-19px}
+  .cand{display:none}
+  .cover-cta{margin-top:24px}
+  .cover-meta{display:none}
+  .rule-fleuron{margin:20px 0 16px}
+  /* mobile foldout: vertical accordion */
+  .map{perspective:1400px}
+  .map-row{grid-template-columns:1fr}
+  .panel,.panel:nth-child(3){border-right:none;border-top:1px solid var(--hair);min-height:0;padding:26px 22px 24px}
+  .panel:first-child{border-top:none}
+  .panel:nth-child(odd){transform:rotateX(-42deg);transform-origin:center top}
+  .panel:nth-child(even){transform:rotateX(-42deg);transform-origin:center top}
+  .map.open .panel{transform:rotateX(0)}
+  .panel::before{top:43px}
+  .step{gap:12px}
+  .lettre{padding:24px 20px 22px}
+  .faq .answer{padding-left:0}
+  .faq .answer .honest-inline{flex-direction:column;gap:10px}
+  .trow .amt{font-size:18px}
+  .tarif-sheet{padding:24px 18px 20px}
+  .sig-stamp{width:120px;height:120px}
+  .map-foot span{white-space:normal;text-align:center}
+}
+
+/* ============ REDUCED MOTION ============ */
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  .cover-sheet,.cv,.reveal,.panel,.stamp{opacity:1!important;transform:none!important}
+  .cover-stamp.stamp{transform:rotate(9deg)!important;opacity:.85!important}
+  .stamp{transform:rotate(-8deg)!important;opacity:.85!important}
+  .plan,.plan+.plan,.lettre,.lettre:nth-child(even),.clip-card{transform:none!important}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#objet">Skip to content</a>
+<div class="grain" aria-hidden="true"></div>
+
+<!-- shared ink-roughening filter for stamps -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <filter id="inkRough" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.55" numOctaves="2" seed="7" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="2.4"/>
+    </filter>
+  </defs>
+</svg>
+
+<input type="checkbox" id="menu" aria-hidden="true">
+
+<!-- ============ HEADER ============ -->
+<header class="site-head" id="siteHead">
+  <a class="logo" href="#top">Passu<b>.</b></a>
+  <nav class="tabs-nav" aria-label="Main">
+    <a href="#carte" data-spy="carte">Passu Levels</a>
+    <a href="#formules" data-spy="formules">Core &amp; Premium</a>
+    <a href="#parcours" data-spy="parcours">Learning Paths</a>
+    <a href="#essai" data-spy="essai">Free Trial</a>
+    <a href="#tarifs" data-spy="tarifs">Pricing</a>
+    <a href="#annexe" data-spy="annexe">FAQ</a>
+  </nav>
+  <a class="head-cta" href="#essai">Essai gratuit</a>
+  <label class="burger" for="menu" aria-label="Open menu"><span></span></label>
+</header>
+
+<!-- mobile menu -->
+<div class="menu-panel">
+  <nav aria-label="Mobile">
+    <a href="#carte">Passu Levels <small>Pièce 02</small></a>
+    <a href="#formules">Core &amp; Premium <small>Pièce 03</small></a>
+    <a href="#parcours">Learning Paths <small>Pièce 04</small></a>
+    <a href="#essai">Free Trial <small>Pièce 06</small></a>
+    <a href="#tarifs">Pricing <small>Pièce 08</small></a>
+    <a href="#annexe">FAQ <small>Annexe A</small></a>
+  </nav>
+  <a class="btn" href="#essai">Réserver un cours d'essai gratuit</a>
+</div>
+
+<!-- ============ COVER ============ -->
+<section class="cover" id="top" aria-label="Dossier cover">
+  <div class="cover-sheet">
+    <div class="spine" aria-hidden="true"><span>Passu · Programme de français · Session 2026</span></div>
+    <div class="cover-inner">
+      <p class="cv d1 kicker">Passu · École de français en ligne</p>
+      <h1 class="cv d2 cover-title">Dossier<br>d'admission</h1>
+      <div class="cv d3 rule-fleuron" aria-hidden="true">
+        <i></i>
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 10-3 10-3-10z" transform="rotate(90 12 12)"/><path d="M12 2l3 10-3 10-3-10z"/></svg>
+        <i></i>
+      </div>
+      <p class="cv d4 cover-sub">Parcours de douze mois vers le niveau B2</p>
+      <p class="cv d4 cover-sub-en">Your complete 12-month path toward B2 — six connected Passu Levels, three live classes every week, one honest roadmap.</p>
+      <div class="cv d5 cand"><span>Candidat·e</span><i></i><em>à compléter en classe d'essai</em></div>
+      <div class="cv d6 cover-cta">
+        <a class="btn" href="#objet">Ouvrir le dossier
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+        </a>
+        <span class="cover-meta">Pièces jointes : 9 · Annexe : 1</span>
+      </div>
+
+      <!-- cover stamp -->
+      <svg class="cover-stamp stamp" viewBox="0 0 160 160" aria-hidden="true">
+        <defs><path id="stc1" d="M80,80 m-57,0 a57,57 0 1,1 114,0 a57,57 0 1,1 -114,0"/></defs>
+        <g filter="url(#inkRough)">
+          <circle cx="80" cy="80" r="76" fill="none" stroke="currentColor" stroke-width="3.5"/>
+          <circle cx="80" cy="80" r="69" fill="none" stroke="currentColor" stroke-width="1.5"/>
+          <circle cx="80" cy="80" r="42" fill="none" stroke="currentColor" stroke-width="1.5"/>
+          <text font-size="12" font-weight="700" letter-spacing="2.6" fill="currentColor">
+            <textPath href="#stc1">SESSION 2026 · ADMISSIONS OUVERTES ·</textPath>
+          </text>
+          <text x="80" y="76" text-anchor="middle" font-size="15" font-weight="800" letter-spacing="2" fill="currentColor">PASSU</text>
+          <text x="80" y="94" text-anchor="middle" font-size="10" font-weight="700" letter-spacing="1.6" fill="currentColor">A1 – B2</text>
+        </g>
+      </svg>
+
+      <!-- paper-clipped character -->
+      <figure class="cv d7 clip-card">
+        <svg class="paperclip" viewBox="0 0 60 140" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round" aria-hidden="true">
+          <path d="M22 122 L22 34 A13 13 0 0 1 48 34 L48 100 A21 21 0 0 1 6 100 L6 46"/>
+        </svg>
+        <img src="assets/girl-books-waving.svg" alt="Illustration of a student sitting on a stack of books, waving">
+        <figcaption>On vous attend en classe.</figcaption>
+      </figure>
+
+      <div class="scroll-cue" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ THE SHEET ============ -->
+<main class="sheet" id="sheet">
+  <div class="running-head" aria-hidden="true"><i></i><span>Passu — Dossier d'admission — 2026</span><i></i></div>
+
+  <!-- PIÈCE 01 · L'OBJET -->
+  <section class="piece" id="objet" data-spy-target>
+    <div class="rail" aria-hidden="true"><span class="mark">Pièce 01 · L'objet</span><span class="pgn">p. 01</span></div>
+    <div class="piece-tab"><span class="no">Pièce 01</span><span class="fr-t">L'objet</span><span class="en-t">Purpose of the programme</span><span class="pg">p. 01</span></div>
+    <div class="objet-grid">
+      <div>
+        <p class="reveal kicker">Objet de la demande</p>
+        <h2 class="reveal rd1 objet-h1">Your complete <span style="white-space:nowrap">12-month</span> path toward <em>B2</em>.</h2>
+        <p class="reveal rd2 lead">Six connected Passu Levels, taught in live classes three times a week. Every session is the real thing — two full hours with an instructor and your cohort, never a video playlist wearing a classroom costume.</p>
+        <div class="reveal rd3 objet-cta">
+          <a class="btn" href="#essai">Réserver un cours d'essai gratuit</a>
+          <a class="btn-ghost" href="#tarifs">Voir les tarifs</a>
+        </div>
+        <div class="reveal rd4 fiche" role="list" aria-label="Programme facts">
+          <div role="listitem"><b>3<small>×</small></b><span>Live classes weekly</span></div>
+          <div role="listitem"><b>2<small>hrs</small></b><span>Each session</span></div>
+          <div role="listitem"><b>6</b><span>Passu Levels</span></div>
+          <div role="listitem"><b>2</b><span>Exams per level</span></div>
+          <div role="listitem"><b>90<small>min</small></b><span>Optional Speaking Club</span></div>
+        </div>
+      </div>
+      <nav class="reveal rd2 sommaire" aria-label="Table of contents">
+        <h3>Sommaire</h3>
+        <p>Le présent dossier contient les pièces suivantes.</p>
+        <a href="#carte"><span>La carte des niveaux</span><i></i><b>p. 02</b></a>
+        <a href="#formules"><span>Les formules</span><i></i><b>p. 03</b></a>
+        <a href="#parcours"><span>Les parcours</span><i></i><b>p. 04</b></a>
+        <a href="#inventaire"><span>L'inventaire des outils</span><i></i><b>p. 05</b></a>
+        <a href="#essai"><span>L'essai gratuit</span><i></i><b>p. 06</b></a>
+        <a href="#lettres"><span>Les lettres</span><i></i><b>p. 07</b></a>
+        <a href="#tarifs"><span>Les tarifs</span><i></i><b>p. 08</b></a>
+        <a href="#annexe"><span>Annexe A — Questions</span><i></i><b>p. A</b></a>
+        <a href="#signatures"><span>Les signatures</span><i></i><b>p. 09</b></a>
+      </nav>
+    </div>
+  </section>
+
+  <!-- PIÈCE 02 · LA CARTE -->
+  <section class="piece" id="carte" data-spy-target>
+    <div class="rail" aria-hidden="true"><span class="mark">Pièce 02 · La carte</span><span class="pgn">p. 02</span></div>
+    <div class="piece-tab"><span class="no">Pièce 02</span><span class="fr-t">La carte des niveaux</span><span class="en-t">The roadmap</span><span class="pg">p. 02</span></div>
+    <div class="carte-head">
+      <p class="reveal kicker">Carte dépliante</p>
+      <h2 class="reveal rd1 h2">One roadmap. Six connected levels.</h2>
+      <p class="reveal rd2 lead" style="margin-top:14px">The whole programme prints on a single map — each level hands you to the next, from your first bonjour to your chosen specialization.</p>
+    </div>
+    <p class="reveal rd3 map-hint" id="mapHint">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 19V5l6 3 6-3 6 3v14l-6-3-6 3z"/><path d="M9 8v14M15 5v14"/></svg>
+      Dépliez la carte — the map unfolds
+    </p>
+    <div class="reveal map" id="map" aria-label="The six Passu Levels">
+      <div class="map-row">
+        <article class="panel">
+          <div class="node">1</div>
+          <h3>Passu Level 1</h3>
+          <p class="cefr-wrap"><span class="cefr">A1.1</span></p>
+          <p>Build the essential foundations for everyday French.</p>
+        </article>
+        <article class="panel">
+          <div class="node">2</div>
+          <h3>Passu Level 2</h3>
+          <p class="cefr-wrap"><span class="cefr">A1.2</span></p>
+          <p>Expand practical vocabulary and sentence control.</p>
+        </article>
+        <article class="panel">
+          <div class="node">3</div>
+          <h3>Passu Level 3</h3>
+          <p class="cefr-wrap"><span class="cefr">A2</span></p>
+          <p>Move from basic exchanges into longer communication.</p>
+        </article>
+        <article class="panel">
+          <div class="node">4</div>
+          <h3>Passu Level 4</h3>
+          <p class="cefr-wrap"><span class="cefr">B1</span></p>
+          <p>Develop confidence, accuracy and independent expression.</p>
+        </article>
+        <article class="panel">
+          <div class="node">5</div>
+          <h3>Passu Level 5</h3>
+          <p class="cefr-wrap"><span class="cefr">B2.1</span></p>
+          <p>Begin your selected Path — Social, Business or Exam.</p>
+        </article>
+        <article class="panel">
+          <div class="node">6</div>
+          <h3>Passu Level 6</h3>
+          <p class="cefr-wrap"><span class="cefr">B2.2</span></p>
+          <p>Complete the advanced stage of your chosen specialization.</p>
+        </article>
+      </div>
+    </div>
+    <div class="reveal map-foot" aria-hidden="true"><i></i><span>Chaque niveau : examen mi-parcours + examen final</span><i></i></div>
+    <figure class="reveal journey-fig">
+      <img src="assets/learning-journey.svg" alt="Four illustrated learners sitting on ascending staircase steps — texting, taking notes, listening and reading" loading="lazy">
+      <figcaption>Two exams per level — a midterm and a final — so progress is measured, never assumed.</figcaption>
+    </figure>
+  </section>
+
+  <!-- PIÈCE 03 · LES FORMULES -->
+  <section class="piece" id="formules" data-spy-target>
+    <div class="rail" aria-hidden="true"><span class="mark">Pièce 03 · Les formules</span><span class="pgn">p. 03</span></div>
+    <div class="piece-tab"><span class="no">Pièce 03</span><span class="fr-t">Les formules</span><span class="en-t">Core &amp; Premium</span><span class="pg">p. 03</span></div>
+    <div class="formules-intro">
+      <p class="reveal kicker">Deux formules, un seul programme</p>
+      <h2 class="reveal rd1 h2">Same journey. Two class experiences.</h2>
+    </div>
+    <div class="reveal rd2 included">
+      <h3>Ce que les deux formules comprennent</h3>
+      <ul>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>3 live classes weekly, 2 hours each</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Full platform access + every class recording</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Midterm &amp; final exam at every level</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Optional weekend Speaking Club, 90 minutes</li>
+      </ul>
+    </div>
+    <div class="plans">
+      <article class="reveal rd2 plan">
+        <span class="smallcaps">Formule n° 1</span>
+        <h3>Core</h3>
+        <div class="price"><b>$99</b><span>/ month</span></div>
+        <p class="cap">Up to 14 students per class</p>
+        <p>The complete programme in a full, lively classroom. Every lesson, every exam, every recording — nothing held back.</p>
+        <p class="best"><b>Best for:</b> structure, community, and the strongest value on the tariff sheet.</p>
+      </article>
+      <article class="reveal rd3 plan premium">
+        <svg class="plan-stamp stamp" viewBox="0 0 160 160" aria-hidden="true">
+          <defs><path id="stc2" d="M80,80 m-57,0 a57,57 0 1,1 114,0 a57,57 0 1,1 -114,0"/></defs>
+          <g filter="url(#inkRough)">
+            <circle cx="80" cy="80" r="76" fill="none" stroke="currentColor" stroke-width="3.5"/>
+            <circle cx="80" cy="80" r="69" fill="none" stroke="currentColor" stroke-width="1.5"/>
+            <circle cx="80" cy="80" r="42" fill="none" stroke="currentColor" stroke-width="1.5"/>
+            <text font-size="12" font-weight="700" letter-spacing="2.4" fill="currentColor">
+              <textPath href="#stc2">PROMESSE HONNÊTE · PASSU ·</textPath>
+            </text>
+            <text x="80" y="77" text-anchor="middle" font-size="11.5" font-weight="800" letter-spacing="1.4" fill="currentColor">SANS</text>
+            <text x="80" y="92" text-anchor="middle" font-size="11.5" font-weight="800" letter-spacing="1.4" fill="currentColor">DÉTOUR</text>
+          </g>
+        </svg>
+        <span class="smallcaps">Formule n° 2</span>
+        <h3>Premium</h3>
+        <div class="price"><b>$200</b><span>/ month</span></div>
+        <p class="cap">Up to 7 students per class</p>
+        <p>The same journey with half the classroom. We won't promise magic — a smaller group simply means the microphone reaches you more often.</p>
+        <p class="best"><b>The truthful promise:</b> fewer classmates, more speaking turns. That is the whole difference, and it matters.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- PIÈCE 04 · LES PARCOURS -->
+  <section class="piece" id="parcours" data-spy-target>
+    <div class="rail" aria-hidden="true"><span class="mark">Pièce 04 · Les parcours</span><span class="pgn">p. 04</span></div>
+    <div class="piece-tab"><span class="no">Pièce 04</span><span class="fr-t">Les parcours</span><span class="en-t">Learning paths</span><span class="pg">p. 04</span></div>
+    <p class="reveal kicker">Trois spécialisations</p>
+    <h2 class="reveal rd1 h2" style="max-width:560px;margin-bottom:44px">Choose your path from the beginning.</h2>
+    <div class="folders">
+      <article class="reveal rd1 folder">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8h1a4 4 0 110 8h-1"/><path d="M3 8h14v9a4 4 0 01-4 4H7a4 4 0 01-4-4z" transform="translate(0 -3)"/><path d="M6 2v2M10 2v2M14 2v2"/></svg>
+        <span class="smallcaps">Parcours 01</span>
+        <h3>Social French</h3>
+        <p class="fr-name">Le français au quotidien</p>
+        <p>Everyday conversation, travel, relationships and culture — the French that carries dinners, friendships and daily life.</p>
+      </article>
+      <article class="reveal rd2 folder">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg>
+        <span class="smallcaps">Parcours 02</span>
+        <h3>Business French</h3>
+        <p class="fr-name">Le français des affaires</p>
+        <p>Professional communication with confidence — meetings, presentations, email and the vocabulary of working life.</p>
+      </article>
+      <article class="reveal rd3 folder">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        <span class="smallcaps">Parcours 03</span>
+        <h3>Exam Preparation</h3>
+        <p class="fr-name">La préparation aux examens</p>
+        <p>Test strategies, timed practice and structured feedback for the exam that stands between you and your goal.</p>
+      </article>
+    </div>
+    <div class="reveal rd3 nb">
+      <b>N.B.</b>
+      <p>All paths share the same trunk and separate at Passu Levels 5–6. When a cohort is small, paths may be combined — we tell you before you enrol, not after.</p>
+    </div>
+  </section>
+
+  <!-- PIÈCE 05 · L'INVENTAIRE -->
+  <section class="piece" id="inventaire" data-spy-target>
+    <div class="rail" aria-hidden="true"><span class="mark">Pièce 05 · L'inventaire</span><span class="pgn">p. 05</span></div>
+    <div class="piece-tab"><span class="no">Pièce 05</span><span class="fr-t">L'inventaire des outils</span><span class="en-t">Platform features</span><span class="pg">p. 05</span></div>
+    <p class="reveal kicker">Inventaire</p>
+    <h2 class="reveal rd1 h2" style="max-width:640px;margin-bottom:44px">A serious program tells students what happens next.</h2>
+    <div class="inv-grid">
+      <div class="reveal rd2 inv-list">
+        <div class="inv-item">
+          <span class="num">5.1</span>
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg></span>
+          <div>
+            <h3>Smart word references</h3>
+            <p>Every word remembers where you met it. See which lesson introduced it — and jump back to that exact moment of class.</p>
+          </div>
+        </div>
+        <div class="inv-item">
+          <span class="num">5.2</span>
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg></span>
+          <div>
+            <h3>Integrated dictionary</h3>
+            <p>Look a word up without leaving the lesson — definitions, examples and pronunciation, one tap away.</p>
+          </div>
+        </div>
+        <div class="inv-item">
+          <span class="num">5.3</span>
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 013 3L7 19l-4 1 1-4z"/></svg></span>
+          <div>
+            <h3>Verb conjugator</h3>
+            <p>Every tense of every verb you meet, laid out cleanly — because guessing at conjugation is not a study method.</p>
+          </div>
+        </div>
+        <div class="inv-item">
+          <span class="num">5.4</span>
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.8L20 10l-6.1 1.2L12 17l-1.9-5.8L4 10l6.1-1.2z"/><path d="M19 15l.9 2.6L22 18l-2.1.9L19 21l-.9-2.1L16 18l2.1-.4z"/></svg></span>
+          <div>
+            <h3>AI flashcards &amp; weekly plans</h3>
+            <p>Cards built from what your class actually covered, sequenced into a weekly plan that tells you exactly what to review.</p>
+          </div>
+        </div>
+        <div class="inv-item">
+          <span class="num">5.5</span>
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="14" height="14" rx="2"/><path d="M22 7l-6 5 6 5z"/></svg></span>
+          <div>
+            <h3>Class recordings</h3>
+            <p>Every session recorded and shelved in your library the same day. Miss a class; never miss the class.</p>
+          </div>
+        </div>
+      </div>
+      <figure class="reveal rd3 inv-fig">
+        <img src="assets/girl-searching.svg" alt="Illustration of a student with a magnifying glass following a trail of footprints" loading="lazy">
+        <figcaption>Retrouvez le moment exact où chaque mot est apparu.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- PIÈCE 06 · L'ESSAI -->
+  <section class="piece" id="essai" data-spy-target>
+    <div class="rail" aria-hidden="true"><span class="mark">Pièce 06 · L'essai</span><span class="pgn">p. 06</span></div>
+    <div class="piece-tab"><span class="no">Pièce 06</span><span class="fr-t">L'essai gratuit</span><span class="en-t">Free trial</span><span class="pg">p. 06</span></div>
+    <div class="essai-grid">
+      <div>
+        <p class="reveal kicker">Procédure d'essai</p>
+        <h2 class="reveal rd1 h2">Try a real class before choosing Core or Premium.</h2>
+        <div class="reveal rd2 steps">
+          <div class="step"><span class="box" aria-hidden="true"></span><b>01</b><div><h3>Reserve a seat</h3><p>Pick a date; we hold a chair in a live cohort.</p></div></div>
+          <div class="step"><span class="box" aria-hidden="true"></span><b>02</b><div><h3>Attend a 2-hour class</h3><p>The full session, with current students — not a rehearsed demo.</p></div></div>
+          <div class="step"><span class="box" aria-hidden="true"></span><b>03</b><div><h3>Explore the platform</h3><p>Recordings, dictionary, flashcards, weekly plans — try everything.</p></div></div>
+          <div class="step"><span class="box" aria-hidden="true"></span><b>04</b><div><h3>Choose how to continue</h3><p>Core, Premium — or not at all. The choice stays entirely yours.</p></div></div>
+        </div>
+        <div class="reveal rd3 essai-cta">
+          <a class="btn" href="#tarifs">Réserver ma place</a>
+          <a class="btn-ghost" href="#annexe">Questions fréquentes</a>
+        </div>
+        <p class="reveal rd4 essai-honest">L'essai est un vrai cours — the trial is a real class, because that is what you are deciding about.</p>
+      </div>
+      <figure class="reveal rd2 essai-fig">
+        <img src="assets/try-desktop.svg" alt="Illustration of a student waving from a laptop screen during an online class" loading="lazy">
+        <figcaption>Votre première classe vous attend déjà.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- PIÈCE 07 · LES LETTRES -->
+  <section class="piece" id="lettres" data-spy-target>
+    <div class="rail" aria-hidden="true"><span class="mark">Pièce 07 · Les lettres</span><span class="pgn">p. 07</span></div>
+    <div class="piece-tab"><span class="no">Pièce 07</span><span class="fr-t">Les lettres</span><span class="en-t">From our students</span><span class="pg">p. 07</span></div>
+    <p class="reveal kicker">Correspondance</p>
+    <h2 class="reveal rd1 h2" style="margin-bottom:10px">Letters from the classroom.</h2>
+    <p class="reveal rd2 note" style="margin-bottom:44px;font-style:italic">Reproduites avec l'accord de leurs auteurs.</p>
+    <div class="lettres-grid">
+      <article class="reveal rd1 lettre">
+        <div class="lettre-head">
+          <span class="smallcaps">Lettre n° 1</span>
+          <span class="mount"><i></i><i></i><i></i><i></i><img src="assets/girl-listening.svg" alt="Illustration of a student with headphones listening on her phone" loading="lazy"></span>
+        </div>
+        <blockquote>Three classes a week sounded like a lot. It turned out to be the reason I stayed consistent — <span>je ne rate plus un seul cours.</span></blockquote>
+        <footer><b>Amélie Rousseau</b><span>Passu Level 4 (B1) · Social Path</span></footer>
+      </article>
+      <article class="reveal rd2 lettre">
+        <div class="lettre-head">
+          <span class="smallcaps">Lettre n° 2</span>
+          <span class="mount"><i></i><i></i><i></i><i></i><img src="assets/boy-notebook.svg" alt="Illustration of a student writing in a notebook" loading="lazy"></span>
+        </div>
+        <blockquote>In Premium there are seven of us sharing the floor. That means real speaking time in every single class — <span>on parle, vraiment.</span></blockquote>
+        <footer><b>David Okonkwo</b><span>Passu Level 5 (B2.1) · Business Path</span></footer>
+      </article>
+      <article class="reveal rd2 lettre">
+        <div class="lettre-head">
+          <span class="smallcaps">Lettre n° 3</span>
+          <span class="mount"><i></i><i></i><i></i><i></i><img src="assets/girl-phone.svg" alt="Illustration of a student sitting on the floor looking at her phone" loading="lazy"></span>
+        </div>
+        <blockquote>The recordings plus the AI flashcards changed how I revise. My notes finally have a memory better than mine.</blockquote>
+        <footer><b>Sofia Martín</b><span>Passu Level 6 (B2.2) · Exam Path</span></footer>
+      </article>
+      <article class="reveal rd3 lettre">
+        <div class="lettre-head">
+          <span class="smallcaps">Lettre n° 4</span>
+          <span class="mount"><i></i><i></i><i></i><i></i><img src="assets/boy-reading.svg" alt="Illustration of a student sitting cross-legged reading a book" loading="lazy"></span>
+        </div>
+        <blockquote>Jumping to the exact moment a word was taught still feels like a small magic trick. <span>Un petit tour de magie, honnêtement.</span></blockquote>
+        <footer><b>Liam Bennett</b><span>Passu Level 3 (A2) · Social Path</span></footer>
+      </article>
+    </div>
+  </section>
+
+  <!-- PIÈCE 08 · LES TARIFS -->
+  <section class="piece" id="tarifs" data-spy-target>
+    <div class="rail" aria-hidden="true"><span class="mark">Pièce 08 · Les tarifs</span><span class="pgn">p. 08</span></div>
+    <div class="piece-tab"><span class="no">Pièce 08</span><span class="fr-t">Les tarifs</span><span class="en-t">Pricing</span><span class="pg">p. 08</span></div>
+    <p class="reveal kicker">Feuille de tarifs</p>
+    <h2 class="reveal rd1 h2" style="max-width:620px;margin-bottom:44px">Start monthly. Save when you commit to the full journey.</h2>
+    <div class="tarif-grid">
+      <div class="reveal rd2 tarif-sheet">
+        <h3>Tarifs — Session 2026</h3>
+        <p class="note">All prices in Canadian dollars, billed monthly unless stated.</p>
+        <div class="trow">
+          <span><span class="lbl">Formule Core</span><span class="sub">Up to 14 students · month to month</span></span>
+          <i></i><span class="amt">$99 <small>/ mo</small></span>
+        </div>
+        <div class="trow">
+          <span><span class="lbl">Formule Premium</span><span class="sub">Up to 7 students · month to month</span></span>
+          <i></i><span class="amt">$200 <small>/ mo</small></span>
+        </div>
+        <div class="trow save">
+          <span><span class="lbl">Full journey, paid upfront</span><span class="sub">All 12 months of your formule, one payment</span></span>
+          <i></i><span class="amt">−5%</span>
+        </div>
+        <div class="trow">
+          <span><span class="lbl">Speaking Club</span><span class="sub">90 minutes · weekends · optional</span></span>
+          <i></i><span class="amt">Included</span>
+        </div>
+        <div class="tarif-notes">
+          <p><b>Note 1.</b><span>The Social Path runs at the standard rate shown above.</span></p>
+          <p><b>Note 2.</b><span>Any path-specific pricing for Business or Exam is confirmed with you before Levels 5–6 begin — never mid-level.</span></p>
+        </div>
+      </div>
+      <div class="reveal rd3 tarif-side">
+        <figure class="tarif-fig">
+          <img src="assets/investment.svg" alt="Illustration of a student holding a coin beside a rising chart" loading="lazy">
+          <figcaption>Un investissement mesurable, mois après mois.</figcaption>
+        </figure>
+        <a class="btn" href="#essai">Commencer par l'essai gratuit</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ANNEXE A · FAQ -->
+  <section class="piece" id="annexe" data-spy-target>
+    <div class="rail" aria-hidden="true"><span class="mark">Annexe A · Questions</span><span class="pgn">p. A</span></div>
+    <div class="piece-tab"><span class="no">Annexe A</span><span class="fr-t">Questions</span><span class="en-t">Frequently asked</span><span class="pg">p. A</span></div>
+    <div class="faq-wrap">
+      <p class="reveal kicker">Annexe</p>
+      <h2 class="reveal rd1 h2" style="margin-bottom:40px">Asked before signing, answered before signing.</h2>
+      <div class="reveal rd2 faq">
+        <details>
+          <summary><span class="qno">A.1</span>Do I need previous French knowledge?<span class="plus"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+          <div class="answer">No. Passu Level 1 starts from absolute zero — the alphabet, the first greetings, the essential foundations. If you already have some French, the trial class helps us place you at the right level instead of guessing.</div>
+        </details>
+        <details>
+          <summary><span class="qno">A.2</span>Can I change from Core to Premium later?<span class="plus"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+          <div class="answer">Yes, at any monthly boundary, in either direction. Your progress, recordings and flashcards travel with you — only the size of the classroom changes.</div>
+        </details>
+        <details>
+          <summary><span class="qno">A.3</span>When do the learning paths separate?<span class="plus"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+          <div class="answer">At Passu Levels 5–6. Levels 1–4 build one shared trunk; the Social, Business and Exam paths branch for the final two levels. Small cohorts may be combined — and we tell you if that happens.</div>
+        </details>
+        <details>
+          <summary><span class="qno">A.4</span>Is the free trial a real class?<span class="plus"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+          <div class="answer">Yes — a scheduled two-hour session with a live instructor and current students. You are deciding whether to spend a year with us; a rehearsed demo would tell you nothing worth knowing.</div>
+        </details>
+        <details>
+          <summary><span class="qno">A.5</span>Is B2 guaranteed after 12 months?<span class="plus"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+          <div class="answer">
+            <div class="honest-inline">
+              <svg class="stamp-sm stamp" viewBox="0 0 160 160" aria-hidden="true">
+                <defs><path id="stc3" d="M80,80 m-57,0 a57,57 0 1,1 114,0 a57,57 0 1,1 -114,0"/></defs>
+                <g filter="url(#inkRough)">
+                  <circle cx="80" cy="80" r="76" fill="none" stroke="currentColor" stroke-width="3.5"/>
+                  <circle cx="80" cy="80" r="69" fill="none" stroke="currentColor" stroke-width="1.5"/>
+                  <circle cx="80" cy="80" r="42" fill="none" stroke="currentColor" stroke-width="1.5"/>
+                  <text font-size="12" font-weight="700" letter-spacing="2.4" fill="currentColor"><textPath href="#stc3">PROMESSE HONNÊTE · PASSU ·</textPath></text>
+                  <text x="80" y="77" text-anchor="middle" font-size="10.5" font-weight="800" letter-spacing="1" fill="currentColor">AUCUNE</text>
+                  <text x="80" y="92" text-anchor="middle" font-size="10.5" font-weight="800" letter-spacing="1" fill="currentColor">GARANTIE</text>
+                </g>
+              </svg>
+              <span>Honestly — no, and be wary of anyone who says otherwise. What we promise is the roadmap, three real classes a week, and every tool on the inventory. Students who attend consistently give themselves the strongest possible chance at B2; the work is still yours to do.</span>
+            </div>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- PIÈCE 09 · LES SIGNATURES -->
+  <section class="piece" id="signatures" data-spy-target>
+    <div class="rail" aria-hidden="true"><span class="mark">Pièce 09 · Les signatures</span><span class="pgn">p. 09</span></div>
+    <div class="piece-tab"><span class="no">Pièce 09</span><span class="fr-t">Les signatures</span><span class="en-t">Our policies</span><span class="pg">p. 09</span></div>
+    <p class="reveal kicker">Engagements</p>
+    <h2 class="reveal rd1 h2" style="max-width:560px;margin-bottom:48px">What we sign our name to.</h2>
+    <div class="clauses">
+      <div class="reveal rd1 clause">
+        <h3><b>Art. 1</b>Attendance &amp; recordings</h3>
+        <p>Every class is recorded and available the same day. Life happens; the roadmap doesn't stop for it, and neither does your access.</p>
+      </div>
+      <div class="reveal rd2 clause">
+        <h3><b>Art. 2</b>Flexible plan changes</h3>
+        <p>Switch between Core and Premium at any monthly boundary, in either direction, without penalties or awkward conversations.</p>
+      </div>
+      <div class="reveal rd2 clause">
+        <h3><b>Art. 3</b>Fair refund policy</h3>
+        <p>A clear refund window on every plan. Asking for your money back is a form, not a fight — if Passu isn't right, we part fairly.</p>
+      </div>
+      <div class="reveal rd3 clause">
+        <h3><b>Art. 4</b>Honest promises</h3>
+        <p>No guaranteed B2, no "fluent in three months." We promise the classes, the roadmap and the tools; you bring the attendance.</p>
+      </div>
+    </div>
+    <div class="reveal rd3 sig-block">
+      <div class="sig-left">
+        <span class="smallcaps">Lu et approuvé</span>
+        <span class="sig-name">— Passu</span>
+        <svg class="sig-flourish" viewBox="0 0 210 22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <path d="M4 14 C 40 4, 80 20, 120 10 S 190 6, 206 12"/>
+        </svg>
+        <span class="sig-date">Fait en ligne · Session 2026</span>
+      </div>
+      <svg class="sig-stamp stamp" viewBox="0 0 160 160" aria-hidden="true">
+        <defs><path id="stc4" d="M80,80 m-57,0 a57,57 0 1,1 114,0 a57,57 0 1,1 -114,0"/></defs>
+        <g filter="url(#inkRough)">
+          <circle cx="80" cy="80" r="76" fill="none" stroke="currentColor" stroke-width="3.5"/>
+          <circle cx="80" cy="80" r="69" fill="none" stroke="currentColor" stroke-width="1.5"/>
+          <circle cx="80" cy="80" r="42" fill="none" stroke="currentColor" stroke-width="1.5"/>
+          <text font-size="11.5" font-weight="700" letter-spacing="2.2" fill="currentColor"><textPath href="#stc4">LU ET APPROUVÉ · PASSU · 2026 ·</textPath></text>
+          <text x="80" y="86" text-anchor="middle" font-size="17" font-weight="800" letter-spacing="2.4" fill="currentColor">2026</text>
+        </g>
+      </svg>
+    </div>
+  </section>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="colophon">
+  <div class="top">
+    <div>
+      <a class="logo" href="#top">Passu<b>.</b></a>
+      <p style="font-size:13px;color:#9ca3af;margin-top:14px;max-width:300px;line-height:1.7">Six connected levels, three live classes a week, and a roadmap that tells you what happens next.</p>
+    </div>
+    <nav aria-label="Footer">
+      <a href="#carte">Passu Levels</a>
+      <a href="#formules">Core &amp; Premium</a>
+      <a href="#parcours">Learning Paths</a>
+      <a href="#essai">Free Trial</a>
+      <a href="#tarifs">Pricing</a>
+      <a href="#annexe">FAQ</a>
+    </nav>
+  </div>
+  <div class="base">
+    <p>© 2026 Passu. All rights reserved.</p>
+    <p class="fr">Dossier composé en Montserrat, sur papier blanc teinté.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var prm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var debug = /debug/.test(location.search);
+
+  /* cover entrance */
+  function boot(){ document.body.classList.add('loaded'); }
+  if (document.readyState === 'complete') boot();
+  else window.addEventListener('load', boot);
+  setTimeout(boot, 900); /* safety if fonts stall */
+
+  /* header state + gentle cover recede */
+  var head = document.getElementById('siteHead');
+  var coverSheet = document.querySelector('.cover-sheet');
+  var vh = window.innerHeight, ticking = false;
+  window.addEventListener('resize', function(){ vh = window.innerHeight; });
+  function onScroll(){
+    if (ticking) return; ticking = true;
+    requestAnimationFrame(function(){
+      var y = window.scrollY;
+      head.classList.toggle('scrolled', y > 40);
+      if (!prm && coverSheet && y < vh * 1.2){
+        var p = Math.min(y / vh, 1);
+        coverSheet.style.transform = 'translateY(' + (p * 34) + 'px) scale(' + (1 - p * .045) + ')';
+        coverSheet.style.opacity = String(1 - p * .35);
+      }
+      ticking = false;
+    });
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  /* paper-settle reveals + stamps */
+  var reveals = document.querySelectorAll('.reveal, .stamp:not(.cover-stamp)');
+  if (debug || !('IntersectionObserver' in window)){
+    reveals.forEach(function(el){ el.classList.add('in'); });
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, {threshold:.12, rootMargin:'0px 0px -5% 0px'});
+    reveals.forEach(function(el){ io.observe(el); });
+  }
+
+  /* fold-out map */
+  var map = document.getElementById('map');
+  var hint = document.getElementById('mapHint');
+  function openMap(){ map.classList.add('open'); if (hint) hint.style.opacity = 0; }
+  if (debug || prm || !('IntersectionObserver' in window)){ openMap(); }
+  else {
+    var mio = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting){ openMap(); mio.disconnect(); }
+      });
+    }, {threshold:.3});
+    mio.observe(map);
+  }
+
+  /* scrollspy on the binder tabs */
+  var links = document.querySelectorAll('.tabs-nav a[data-spy]');
+  var targets = document.querySelectorAll('[data-spy-target]');
+  if (links.length && 'IntersectionObserver' in window){
+    var spy = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting){
+          links.forEach(function(l){ l.classList.toggle('active', l.dataset.spy === e.target.id); });
+        }
+      });
+    }, {rootMargin:'-35% 0px -55% 0px'});
+    targets.forEach(function(t){ spy.observe(t); });
+  }
+
+  /* close mobile menu on link tap */
+  var menu = document.getElementById('menu');
+  document.querySelectorAll('.menu-panel a').forEach(function(a){
+    a.addEventListener('click', function(){ menu.checked = false; });
+  });
+
+  if (debug){
+    document.body.classList.add('loaded');
+    document.querySelectorAll('.faq details').forEach(function(d){ d.setAttribute('open',''); });
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Passu Landing — Mockup Gallery</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --teal:#21b6b6; --teal-deep:#188888; --teal-soft:#e7f7f7; --rose:#e11d48;
+  --ink:#212529; --muted:#6b7280; --line:#e5e7eb; --bg:#f6f7f9; --card:#fff;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Montserrat',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.55}
+.wrap{max-width:1080px;margin:0 auto;padding:40px 20px 80px}
+.kicker{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--teal-deep);margin:0 0 10px}
+h1{font-size:clamp(28px,5vw,40px);font-weight:800;letter-spacing:-.02em;margin:0 0 10px}
+.lede{color:var(--muted);font-weight:500;max-width:64ch;margin:0 0 28px;font-size:15px}
+.lede strong{color:var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;text-decoration:none;color:inherit;
+  display:flex;flex-direction:column;gap:8px;box-shadow:0 1px 3px rgba(20,30,40,.05);transition:transform .15s ease, box-shadow .15s ease}
+.card:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(20,60,60,.12)}
+.tag{align-self:flex-start;font-size:10px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--teal-deep);background:var(--teal-soft);border-radius:999px;padding:4px 10px}
+.tag.base{color:#7c5a00;background:#fdf3d7}
+.card h2{font-size:18px;font-weight:800;margin:2px 0 0;letter-spacing:-.01em}
+.card p{margin:0;font-size:13px;color:var(--muted);font-weight:500}
+.meter{display:flex;align-items:center;gap:8px;margin-top:auto;padding-top:10px}
+.meter .rail{position:relative;flex:1;height:4px;border-radius:2px;background:var(--teal-soft)}
+.meter .rail i{position:absolute;top:50%;translate:-50% -50%;left:var(--p);width:12px;height:12px;border-radius:50%;
+  background:var(--teal);border:2.5px solid #fff;box-shadow:0 0 0 1px var(--line)}
+.meter span{font-size:9.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.open{margin-top:6px;font-size:12.5px;font-weight:700;color:var(--teal-deep)}
+.card:hover .open{color:var(--teal)}
+footer{margin-top:36px;font-size:12.5px;color:var(--muted);font-weight:500}
+footer code{background:#eef2f2;border-radius:5px;padding:2px 6px;font-size:11.5px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="kicker">Passu · Marketing site</p>
+  <h1>Landing page — 6 mockups</h1>
+  <p class="lede">Five new art directions (<strong>safe → radical</strong>) plus a faithful HTML recreation of
+  <strong>Shorouk's original Figma design</strong> as the baseline. Every mockup covers the same 12 sections,
+  real pricing ($99 Core / $200 Premium), Passu Level + CEFR badges, the honesty-first voice, and
+  3 breakpoints (desktop / 768 / 393). Open each full-screen; resize to test responsiveness.</p>
+
+  <div class="grid">
+    <a class="card" href="shorouk-original.html">
+      <span class="tag base">Baseline · Figma recreation</span>
+      <h2>Shorouk's Original</h2>
+      <p>Faithful recreation of the current Figma design — copy verbatim, layout and palette matched to the 1099/559/393 frames.</p>
+      <span class="open">Open mockup →</span>
+    </a>
+    <a class="card" href="concept-1-clean-slate.html">
+      <span class="tag">Lingoda-grade</span>
+      <h2>1 · Clean Slate</h2>
+      <p>Airy white, huge Montserrat headlines, illustration spots, horizontal level stepper, clean compare table. Zero risk, maximum polish.</p>
+      <div class="meter"><span>Safe</span><div class="rail"><i style="--p:8%"></i></div><span>Radical</span></div>
+      <span class="open">Open mockup →</span>
+    </a>
+    <a class="card" href="concept-2-journey-map.html">
+      <span class="tag">Product-native</span>
+      <h2>2 · Journey Map</h2>
+      <p>The dots-serpentine journey as the page spine — the landing previews the product's own UI. Road forks into 3 paths at Level 5.</p>
+      <div class="meter"><span>Safe</span><div class="rail"><i style="--p:30%"></i></div><span>Radical</span></div>
+      <span class="open">Open mockup →</span>
+    </a>
+    <a class="card" href="concept-3-split.html">
+      <span class="tag">GlobalExam-style</span>
+      <h2>3 · Split Personality</h2>
+      <p>Built around the Core-vs-Premium choice: split hero (14 vs 7), shared roadmap spine, honest compare table + "which fits you?" quiz.</p>
+      <div class="meter"><span>Safe</span><div class="rail"><i style="--p:52%"></i></div><span>Radical</span></div>
+      <span class="open">Open mockup →</span>
+    </a>
+    <a class="card" href="concept-4-classroom-live.html">
+      <span class="tag">Duolingo-energy</span>
+      <h2>4 · Classroom Live</h2>
+      <p>A live class in motion: French chat bubbles, waveform speaking turns, session timer, chat-thread testimonials, booking-card trial.</p>
+      <div class="meter"><span>Safe</span><div class="rail"><i style="--p:74%"></i></div><span>Radical</span></div>
+      <span class="open">Open mockup →</span>
+    </a>
+    <a class="card" href="concept-5-editorial.html">
+      <span class="tag">Unlike any competitor</span>
+      <h2>5 · Editorial Honest</h2>
+      <p>A magazine manifesto: oversized type ("No B2 guarantee."), numbered chapters, rate-card pricing, policies as the signed finale.</p>
+      <div class="meter"><span>Safe</span><div class="rail"><i style="--p:95%"></i></div><span>Radical</span></div>
+      <span class="open">Open mockup →</span>
+    </a>
+    <a class="card" href="concept-6-cinematique.html">
+      <span class="tag">Série 2 · Scroll cinema</span>
+      <h2>6 · Cinématique</h2>
+      <p>Apple-launch storytelling: pinned full-viewport scenes, parallax illustration layers, word-by-word hero build, month counter roadmap.</p>
+      <span class="open">Open mockup →</span>
+    </a>
+    <a class="card" href="concept-7-ligne-b2.html">
+      <span class="tag">Série 2 · Métro</span>
+      <h2>7 · Ligne B2</h2>
+      <p>The program as a Paris métro line: split-flap departure board, transit-diagram roadmap with a scroll-linked train, fork at Level 5, validated trial ticket.</p>
+      <span class="open">Open mockup →</span>
+    </a>
+    <a class="card" href="concept-8-dossier.html">
+      <span class="tag">Série 2 · Print craft</span>
+      <h2>8 · Le Dossier</h2>
+      <p>An exquisitely typeset admission dossier: binder tabs, foldout roadmap, "PROMESSE HONNÊTE" ink stamps, signed policies page.</p>
+      <span class="open">Open mockup →</span>
+    </a>
+    <a class="card" href="concept-9-immersion.html">
+      <span class="tag">Série 2 · Motion polish</span>
+      <h2>9 · Immersion</h2>
+      <p>Stripe/Linear-grade craft: living teal gradient mesh, glass cards, magnetic CTA, choreographed reveals, 3D-flipping CEFR badges.</p>
+      <span class="open">Open mockup →</span>
+    </a>
+    <a class="card" href="concept-10-tete-a-tete.html">
+      <span class="tag">Série 2 · Kinetic type</span>
+      <h2>10 · Tête-à-tête</h2>
+      <p>The page is a French conversation: giant questions answering themselves bilingually — "C'est garanti ? Non. Et c'est pour ça que vous pouvez nous croire."</p>
+      <span class="open">Open mockup →</span>
+    </a>
+  </div>
+
+  <footer>Serve locally: <code>cd mockups/landing &amp;&amp; python3 -m http.server 8878</code> → open <code>http://localhost:8878/</code>. Decision trail in <code>RESUME.md</code>.</footer>
+</div>
+</body>
+</html>
