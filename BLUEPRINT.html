@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Concept 11 · La Ligne — section blueprint</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --teal:#21b6b6; --teal-deep:#188888; --teal-soft:#e7f7f7; --teal-tint:#f2fbfb; --teal-mid:#cdeeee;
+  --rose:#e11d48; --ink:#212529; --muted:#6b7280; --muted2:#374151; --line:#e5e7eb; --bg:#f6f7f9;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Montserrat',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+.wrap{max-width:1000px;margin:0 auto;padding:44px 22px 90px}
+.kicker{font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--teal-deep);margin-bottom:10px}
+h1{font-size:clamp(26px,4.6vw,38px);font-weight:900;letter-spacing:-.028em;margin-bottom:12px}
+.lede{color:var(--muted2);font-size:15px;max-width:70ch;margin-bottom:14px}
+h2{font-size:20px;font-weight:900;letter-spacing:-.02em;margin:46px 0 6px}
+h2 + .note{color:var(--muted);font-size:13.5px;font-weight:500;margin-bottom:20px;max-width:70ch}
+a{color:var(--teal-deep);font-weight:700}
+
+table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+th,td{text-align:left;padding:12px 14px;font-size:13.5px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:10.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);background:var(--teal-tint)}
+tr:last-child td{border-bottom:0}
+td.sec{font-weight:800;white-space:nowrap}
+.pill{display:inline-block;font-size:11px;font-weight:800;padding:3px 9px;border-radius:999px;background:var(--teal-soft);color:var(--teal-deep);white-space:nowrap}
+.pill.alt{background:#fdeef2;color:var(--rose)}
+.pill.base{background:#fdf3d7;color:#7c5a00}
+.was{color:var(--muted);font-size:12.5px}
+
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:8px}
+.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px 22px}
+.card.bad{border-color:#f6c9d3}
+.card.good{border-color:var(--teal-mid)}
+.card h3{font-size:13px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px}
+.card.bad h3{color:var(--rose)}
+.card.good h3{color:var(--teal-deep)}
+.card p{font-size:13px;color:var(--muted2);margin-top:14px}
+pre{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px;line-height:1.65;color:var(--ink);white-space:pre;overflow-x:auto}
+
+.decisions{display:grid;gap:14px}
+.dec{background:#fff;border:1px solid var(--line);border-left:4px solid var(--teal);border-radius:12px;padding:16px 20px}
+.dec b{display:block;font-size:14px;margin-bottom:5px}
+.dec p{font-size:13.5px;color:var(--muted2)}
+footer{margin-top:52px;padding-top:20px;border-top:1px solid var(--line);font-size:12.5px;color:var(--muted)}
+code{background:#eef2f2;border-radius:5px;padding:2px 6px;font-size:12px}
+@media(max-width:720px){ .cards{grid-template-columns:1fr} table{font-size:12.5px} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="kicker">Passu · Landing page</p>
+  <h1>Concept 11 · La Ligne</h1>
+  <p class="lede">Shorouk picked section by section instead of picking one concept. This is what got built
+  from those picks, and the two judgment calls made along the way.</p>
+  <p class="lede"><a href="concept-11-la-ligne.html">Open the mockup →</a></p>
+
+  <h2>Where each section came from</h2>
+  <p class="note">Her picks govern the layout. Where she left a choice open ("1 or 9", "1 or 6"), it was
+  resolved toward the Série-2 donor, because concept 1 is the batch that had already been judged
+  not convincing.</p>
+  <table>
+    <thead><tr><th>Section</th><th>Her pick</th><th>Built from</th><th>What it is</th></tr></thead>
+    <tbody>
+      <tr><td class="sec">1 · Hero</td><td class="was">1 or 9</td><td><span class="pill">9</span></td>
+        <td>Gradient mesh, three-line kinetic headline, magnetic CTA, glass float-cards</td></tr>
+      <tr><td class="sec">2 · Numbers</td><td class="was">2</td><td><span class="pill">2</span> <span class="pill alt">re-skinned</span></td>
+        <td>Her standing signposts, given métro platform signage as the sign face</td></tr>
+      <tr><td class="sec">3 · Roadmap</td><td class="was">7 + "paths continue"</td><td><span class="pill">7</span> <span class="pill alt">fixed</span></td>
+        <td>The line, with all three paths running through their own Level 6 — see below</td></tr>
+      <tr><td class="sec">4 · Pricing</td><td class="was">1 or 6</td><td><span class="pill">6</span></td>
+        <td>Pinned scene, circle-wipe reveal of Core $99 / Premium $200</td></tr>
+      <tr><td class="sec">5 · Paths</td><td class="was">simple, like 1 / 4</td><td><span class="pill base">1 / 4</span></td>
+        <td>Three calm cards, roundels colour-matched to the roadmap branches</td></tr>
+      <tr><td class="sec">6 · Features</td><td class="was">2</td><td><span class="pill">2</span></td>
+        <td>Intro + illustration left, five features right</td></tr>
+      <tr><td class="sec">7 · Try a session</td><td class="was">4</td><td><span class="pill">4</span></td>
+        <td>Week calendar, bookable days, time chips, then steps 01–04</td></tr>
+      <tr><td class="sec">8 · Testimonials</td><td class="was">1</td><td><span class="pill base">1</span></td>
+        <td>Four quote cards, lifted to glass</td></tr>
+      <tr><td class="sec">9 · Start &amp; save</td><td class="was">1 or 4</td><td><span class="pill base">1</span></td>
+        <td>Monthly recap, 5% full-journey discount, path pricing note</td></tr>
+      <tr><td class="sec">10 · FAQs</td><td class="was">1</td><td><span class="pill base">1</span></td>
+        <td>Five honest answers, including no B2 guarantee</td></tr>
+      <tr><td class="sec">11 · Policies</td><td class="was">1</td><td><span class="pill base">1</span></td>
+        <td>Four cards</td></tr>
+    </tbody>
+  </table>
+
+  <h2>The roadmap fix</h2>
+  <p class="note">This is the change Shorouk asked for, and it was a real error in concept 7 rather than a
+  styling preference: the line split into three branches and then quietly merged back into one Level 6.
+  That contradicts the programme — each path has its own Level 6.</p>
+  <div class="cards">
+    <div class="card bad">
+      <h3>Before · concept 7</h3>
+<pre>        ●  Level 4
+        │
+        ◉  Level 5   correspondance
+       ╱│╲
+      S B E          three branches
+       ╲│╱
+        ●  Level 6   ONE terminus
+</pre>
+      <p>The three paths appear, then disappear. A visitor reads it as "you specialize for a moment,
+      then everyone converges again."</p>
+    </div>
+    <div class="card good">
+      <h3>After · concept 11</h3>
+<pre>        ●  Level 4
+        │
+        ◉  Level 5   correspondance
+       ╱│╲
+      ╱ │ ╲
+     S  B  E
+     6  6  6         Level 6 · B2.2 each
+     │  │  │
+     ▬  ▬  ▬         three termini
+</pre>
+      <p>The trunk ends at the interchange. Each branch keeps its own colour and runs its own
+      Level 6 to its own terminus — Social, Business, Exam.</p>
+    </div>
+  </div>
+
+  <h2>Two judgment calls</h2>
+  <div class="decisions">
+    <div class="dec">
+      <b>Her list governs layout; Série 2 governs craft.</b>
+      <p>Six of her eleven picks are concept 1 — the batch that had been rejected as not convincing.
+      Building the list literally would have rebuilt that feel. So the structure is entirely hers, and
+      the execution level is concept 9/6: living mesh, glass, choreographed reveals, one signature
+      motion per section and no more.</p>
+    </div>
+    <div class="dec">
+      <b>The numbers band became platform signage, not roadside signs.</b>
+      <p>Concept 2's signposts stand on a <em>road</em>; concept 7's roadmap is a <em>métro line</em>. Back to
+      back that is two transit metaphors in a row. The standing-sign silhouette she liked is kept
+      exactly — pill, post, base — but the sign face is now concept 7's enamel plaque and roundel, so
+      hero → information board → line map reads as one language.</p>
+    </div>
+  </div>
+
+  <h2>Unchanged throughout</h2>
+  <p class="note">Every fact and price from the brief: 12 sections, $99 Core (up to 14) / $200 Premium
+  (up to 7), 3 live 2-hour classes weekly, 2 exams per level, 90-minute optional Speaking Club, paths
+  separating at Levels 5–6, 5% full-journey discount, four testimonials, five FAQs, four policy cards.
+  Brand palette only, Montserrat, no emojis, SVG icons, illustrations from the design system only.
+  Checked at desktop 1280 and mobile 393, and on the reduced-motion path.</p>
+
+  <footer>Decision trail: <code>RESUME.md</code> · shared spec: <code>BRIEF.md</code> and
+  <code>BRIEF-SERIES-2.md</code> · gallery: <code>index.html</code></footer>
+</div>
+</body>
+</html>
